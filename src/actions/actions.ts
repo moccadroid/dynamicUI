@@ -1,7 +1,7 @@
 // actions.ts
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import type { ComponentConfig } from '@/interfaces/components/ComponentConfig';
-import type { ActionParams, Actions, UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
+import type { ActionParams, Actions, SubmitFormParams, UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
 import { ActionNames } from '@/interfaces/actions/ActionConfig';
 import { setValueToState } from '@/state/setValueToState';
 
@@ -15,7 +15,7 @@ export const actions: Actions = {
     };
     setValueToState(params);
   },
-  submitForm: (formData: any) => () => {
+  submitForm: ({ formData }: SubmitFormParams) => () => {
     console.log('Form submission logic goes here', formData);
   },
   refreshData: () => {
@@ -39,7 +39,7 @@ export const getAction = (properties: ComponentConfig['properties'], actionParam
       return actions[actionName](actionParams as UpdateFieldParams);
     }
     if (actionName === ActionNames.submitForm) {
-      return actions[actionName](actionParams);
+      return actions[actionName](actionParams as SubmitFormParams);
     }
     if (actionName === ActionNames.refreshData) {
       return actions[actionName];

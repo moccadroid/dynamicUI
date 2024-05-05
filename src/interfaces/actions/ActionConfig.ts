@@ -4,6 +4,10 @@ export interface ActionParams {
 
 }
 
+export interface SubmitFormParams extends ActionParams {
+  formData: any;
+}
+
 export interface UpdateFieldParams extends ActionParams {
   setState: Dispatch<SetStateAction<any>>;
   fieldName: string;

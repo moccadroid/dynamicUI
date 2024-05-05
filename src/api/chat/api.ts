@@ -30,6 +30,7 @@ export async function POSTChatRequest({ promptParams }: POSTChatRequestParams) {
       content: prompt
     }],
     response_format: { type: 'json_object' },
+    //model: 'gpt-4-turbo',
     model: 'gpt-3.5-turbo-0125',
   });
   return chatCompletion;

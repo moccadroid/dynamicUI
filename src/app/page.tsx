@@ -7,7 +7,7 @@ import { useStateContext } from '@/state/Provider';
 
 export default function HomePage() {
   const { state } = useStateContext();
-  console.log(state);
+
   return (
     <div>
       <Navbar />

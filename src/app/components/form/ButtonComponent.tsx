@@ -5,10 +5,10 @@ import { useStateContext } from '@/state/Provider';
 import { getAction } from '@/actions/actions';
 
 const ButtonComponent: FC<{ properties: ButtonProperties }> = ({ properties }) => {
-  const { state, setState } = useStateContext();
+  const { state } = useStateContext();
   const { text } = properties;
-  const actionProps = { state, setState };
-  return <Button onClick={getAction(properties, actionProps)}>{text}</Button>;
+  const actionParams = { formData: state.data };
+  return <Button onClick={getAction(properties, actionParams)}>{text}</Button>;
 };
 
 export default ButtonComponent;

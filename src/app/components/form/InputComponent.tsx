@@ -8,7 +8,7 @@ import type { UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
 
 const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => {
   const { state, setState } = useStateContext();
-  const { label, fieldName, ...props } = properties;
+  const { label, fieldName, placeholder } = properties;
   const value = getValueFromState<string | number>(
     { state, path: fieldName, defaultValue: '' }
   );
@@ -20,7 +20,7 @@ const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => 
   return (
     <FormControl variant="floating">
       {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-      <Input {...props} value={value} onChange={getAction(properties, actionParams)}/>
+      <Input placeholder={placeholder} value={value} onChange={getAction(properties, actionParams)}/>
       <FormLabel>{label}</FormLabel>
     </FormControl>
   );
