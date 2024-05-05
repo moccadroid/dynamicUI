@@ -1,4 +1,4 @@
-import type { InputProperties } from '@/interfaces/config/ComponentConfig';
+import type { InputProperties } from '@/interfaces/components/ComponentConfig';
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import type { FC } from 'react';
 import { getAction } from '@/actions/actions';
@@ -9,7 +9,9 @@ import type { UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
 const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => {
   const { state, setState } = useStateContext();
   const { label, fieldName, ...props } = properties;
-  const value = getValueFromState<string | number>(state, fieldName, '');
+  const value = getValueFromState<string | number>(
+    { state, path: fieldName, defaultValue: '' }
+  );
   const actionParams: UpdateFieldParams = {
     setState,
     fieldName,

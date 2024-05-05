@@ -1,4 +1,4 @@
-import type { TextareaProperties } from '@/interfaces/config/ComponentConfig';
+import type { TextareaProperties } from '@/interfaces/components/ComponentConfig';
 import type { FC } from 'react';
 import { FormControl, FormLabel, Textarea } from '@chakra-ui/react';
 import { useStateContext } from '@/state/Provider';

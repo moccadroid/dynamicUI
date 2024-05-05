@@ -5,11 +5,12 @@ export interface SetValueParams {
   path: string;
   value: any;
   defaultValue?: any;
+  prefix?: string;
 }
 
-export const setValueToState = ({ setState, path, value, defaultValue = null }: SetValueParams): void => {
+export const setValueToState = ({ setState, path, value, defaultValue = null, prefix = 'data' }: SetValueParams): void => {
   setState((currentState: any) => {
-    const keys = path.split('.');
+    const keys = (prefix + '.' + path).split('.');
     const newState = { ...currentState };
     let current = newState;
 

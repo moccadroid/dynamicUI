@@ -1,6 +1,6 @@
 // actions.ts
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import type { ComponentConfig } from '@/interfaces/config/ComponentConfig';
+import type { ComponentConfig } from '@/interfaces/components/ComponentConfig';
 import type { ActionParams, Actions, UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
 import { ActionNames } from '@/interfaces/actions/ActionConfig';
 import { setValueToState } from '@/state/setValueToState';

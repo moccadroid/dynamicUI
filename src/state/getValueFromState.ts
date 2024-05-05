@@ -1,7 +1,16 @@
+import type { State } from '@/state/Provider';
+
 type Primitive = string | number | boolean;
 
-export const getValueFromState = <T extends Primitive>(state: any, path: string, defaultValue: T): T => {
-  const keys = path.split('.');
+export interface GetValueParams<T> {
+  state: State,
+  path: string,
+  defaultValue: T,
+  prefix?: string,
+}
+
+export const getValueFromState = <T extends Primitive>({ state, path, defaultValue, prefix = 'data' }: GetValueParams<T>): T => {
+  const keys = (prefix + '.' + path).split('.');
   let result: any = state;
 
   for (const key of keys) {

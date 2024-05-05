@@ -1,4 +1,4 @@
-import type { HeadlineProperties } from '@/interfaces/config/ComponentConfig';
+import type { HeadlineProperties } from '@/interfaces/components/ComponentConfig';
 import type { FC } from 'react';
 import { Heading } from '@chakra-ui/react';
 

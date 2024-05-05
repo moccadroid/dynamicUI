@@ -1,18 +1,21 @@
 import type {
-  ButtonProperties,
+  ButtonProperties, CardLayoutProperties,
   ComponentConfig, FlexLayoutProperties,
   HeadlineProperties, ImageProperties,
-  InputProperties,
-  TextareaProperties
-} from '@/interfaces/config/ComponentConfig';
-import HeadlineComponent from '@/app/components/HeadlineComponent';
+  InputProperties, LabeledTextProperties,
+  TextareaProperties, TextProperties
+} from '@/interfaces/components/ComponentConfig';
+import HeadlineComponent from '@/app/components/data/HeadlineComponent';
 import InputComponent from '@/app/components/form/InputComponent';
 import TextareaComponent from '@/app/components/form/TextareaComponent';
 import ButtonComponent from '@/app/components/form/ButtonComponent';
-import FlexLayout from '@/app/components/layout/FlexLayout';
+import FlexLayoutComponent from '@/app/components/layout/FlexLayoutComponent';
 import type { FC } from 'react';
 import ParsedLayout from '@/parser/ParsedLayout';
 import ImageComponent from '@/app/components/media/ImageComponent';
+import CardLayoutComponent from '@/app/components/layout/CardLayoutComponent';
+import TextComponent from '@/app/components/data/TextComponent';
+import LabeledTextComponent from '@/app/components/data/LabeledTextComponent';
 
 const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
 
@@ -29,12 +32,22 @@ const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
       return <ButtonComponent properties={properties as ButtonProperties} />;
     case 'FlexLayout':
       return (
-        <FlexLayout properties={properties as FlexLayoutProperties}>
+        <FlexLayoutComponent properties={properties as FlexLayoutProperties}>
           <ParsedLayout config={properties as FlexLayoutProperties} />
-        </FlexLayout>
+        </FlexLayoutComponent>
       );
     case 'Image':
       return <ImageComponent properties={properties as ImageProperties} />;
+    case 'CardLayout':
+      return (
+        <CardLayoutComponent properties={properties as CardLayoutProperties}>
+          <ParsedLayout config={properties as CardLayoutProperties} />
+        </CardLayoutComponent>
+      );
+    case 'Text':
+      return <TextComponent properties={properties as TextProperties} />;
+    case 'LabeledText':
+      return <LabeledTextComponent properties={properties as LabeledTextProperties} />;
     default:
       return type;
   }
