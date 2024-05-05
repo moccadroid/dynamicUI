@@ -105,7 +105,6 @@ export interface LayoutConfig { // the root of the components
 
 export const generatePrompt = (params: POSTChatRequestParams['promptParams']) => {
 
-  //const data = await GETData();
   let prompt = `
     // SYSTEM
     ${systemInstructions.message}
