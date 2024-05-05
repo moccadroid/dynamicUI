@@ -37,7 +37,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   };
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer isOpen={isOpen} onClose={onClose} size="lg">
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
