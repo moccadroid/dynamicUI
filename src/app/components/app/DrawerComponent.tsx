@@ -1,17 +1,17 @@
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Text, Select, Box, Stack, Textarea, Button,
+  Text, Stack, Textarea, Button,
 } from '@chakra-ui/react';
 import Instructions from '@/app/components/app/Instructions';
 import LayoutSelect from '@/app/components/app/LayoutSelect';
 import type { State } from '@/state/Provider';
 import { useStateContext } from '@/state/Provider';
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 export interface DrawerProps {
@@ -23,7 +23,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   const { state, setState } = useStateContext();
   const [data, setData] = useState(JSON.stringify(state.data));
 
-  const handleDataChange = (event: any) => {
+  const handleDataChange = () => {
     console.log(data);
     setState((prevState: State) => {
       const newState = { ...prevState };
@@ -32,7 +32,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
     });
   };
 
-  const handleSetData = (event: any) => {
+  const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setData(event.target.value);
   };
 

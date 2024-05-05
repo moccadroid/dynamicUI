@@ -2,8 +2,8 @@
 import { userData } from '@/api/db/dataAndLayouts';
 import fs from 'fs';
 import path from 'path';
-import { useStateContext } from '@/state/Provider';
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export async function GETData() {
   'use server';
 
@@ -11,6 +11,7 @@ export async function GETData() {
   return userData.data;
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export async function GETComponentConfig() {
   'use server';
 

@@ -12,7 +12,7 @@ const ParsedLayout: FC<{ config: LayoutConfig}> = ({ config }) => {
         return <ParsedComponent key={getUUIDv4()} config={componentConfig}/>;
       });
     } else {
-      console.log(`illegal config ${config}`);
+      console.log('illegal config', config);
     }
   }, [config]);
 };

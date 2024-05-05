@@ -2,7 +2,6 @@
 
 import Navbar from '@/app/components/app/Navbar';
 import DynamicComponents from '@/app/components/DynamicComponents';
-import OpenAI from 'openai';
 import { useStateContext } from '@/state/Provider';
 
 

@@ -43,5 +43,8 @@ export const useStateContext = () => {
   if (context === undefined) {
     throw new Error('useStateValue must be used within a StateProvider');
   }
-  return context;
+  return {
+    ...context,
+    state: context.state as State,
+  };
 };

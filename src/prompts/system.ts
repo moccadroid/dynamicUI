@@ -1,4 +1,4 @@
-import { GETComponentConfig, GETData } from '@/api/db/api';
+import { GETComponentConfig } from '@/api/db/api';
 import type { POSTChatRequestParams } from '@/api/chat/api';
 
 export const systemInstructions = {

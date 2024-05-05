@@ -1,7 +1,6 @@
 import { Select, Stack, Text } from '@chakra-ui/react';
 import type { State } from '@/state/Provider';
 import { useStateContext } from '@/state/Provider';
-import { setValueToState } from '@/state/setValueToState';
 import { userData } from '@/api/db/dataAndLayouts';
 
 const LayoutSelect = () => {
@@ -15,7 +14,8 @@ const LayoutSelect = () => {
 
       setState((prevState: State) => {
         const newState = { ...prevState };
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         newState.layout = selectedLayout[key];
         return newState;
       });
@@ -27,6 +27,7 @@ const LayoutSelect = () => {
       <Text as="b">Select a fixed Layout</Text>
       <Select onChange={handleSelect}>
         {userData.layouts.map((layout: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           const key = Object.keys(layout)[0];
           return <option key={key} value={key}>{key}</option>;
         })}

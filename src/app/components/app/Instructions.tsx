@@ -2,15 +2,11 @@ import { Text, Button, Spinner, Stack, Textarea } from '@chakra-ui/react';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { POSTChatRequest } from '@/api/chat/api';
-import OpenAI from 'openai';
 import { type State, useStateContext } from '@/state/Provider';
-
-export interface InstructionsProps {
-}
 
 const Instructions = () => {
   const { state, setState } = useStateContext();
-  const [userPrompt, setUserPrompt] = useState(state.app.currentPrompt);
+  const [userPrompt, setUserPrompt] = useState<string>(state.app.currentPrompt);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -57,6 +53,7 @@ const Instructions = () => {
       </Stack>
       <Text as="b">Instructions:</Text>
       <Textarea value={userPrompt} onChange={handleChange}/>
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <Button onClick={handleOnClick}>{isLoading ? <Spinner /> : 'Send Instructions' }</Button>
     </Stack>
   );
