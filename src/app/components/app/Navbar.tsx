@@ -1,9 +1,7 @@
-import { Box, Flex, Text, Button, Select, Spinner, Stack } from '@chakra-ui/react';
-import type { ChangeEvent, FC } from 'react';
+'use client';
+
+import { Box, Flex, Text, Button, Spinner, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
-import Instructions from '@/app/components/app/Instructions';
-import OpenAI from 'openai';
-import ChatCompletion = OpenAI.ChatCompletion;
 import { POSTChatRequest } from '@/api/chat/api';
 import DrawerComponent from '@/app/components/app/DrawerComponent';
 import type { State } from '@/state/Provider';
@@ -57,6 +55,7 @@ const Navbar = () => {
         </Stack>
       </Flex>
       <Flex direction='row'>
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <Button onClick={handleRandomize}>{isLoading ? <Spinner /> : 'Randomize' }</Button>
       </Flex>
       <Box display="flex" width="auto" alignItems="center">
