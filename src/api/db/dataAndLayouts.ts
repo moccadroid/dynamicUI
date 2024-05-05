@@ -1575,6 +1575,318 @@ export const userData = {
     },
     {
       withInstructions: { 'components':[{ 'type':'CardLayout','properties':{ 'title':'User Information','components':[{ 'type':'FlexLayout','properties':{ 'direction':'column','components':[{ 'type':'CardLayout','properties':{ 'title':'Personal Information','components':[{ 'type':'FlexLayout','properties':{ 'direction':'row','components':[{ 'type':'Image','properties':{ 'fieldName':'picture.large','alt':'Profile Picture' } },{ 'type':'FlexLayout','properties':{ 'direction':'column','components':[{ 'type':'Input','properties':{ 'label':'Title','fieldName':'name.title','action':'updateField' } },{ 'type':'Input','properties':{ 'label':'First Name','fieldName':'name.first','action':'updateField' } },{ 'type':'Input','properties':{ 'label':'Last Name','fieldName':'name.last','action':'updateField' } },{ 'type':'Input','properties':{ 'label':'Gender','fieldName':'gender','action':'updateField' } },{ 'type':'Input','properties':{ 'label':'Age','fieldName':'dob.age','action':'updateField' } },{ 'type':'Button','properties':{ 'text':'Save','action':'submitForm' } }] } }] } }] } },{ 'type':'CardLayout','properties':{ 'title':'Contact Information','components':[{ 'type':'LabeledText','properties':{ 'fieldName':'email','label':'Email','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'phone','label':'Phone','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'cell','label':'Cell','separator':':','fontSize':'lg' } }] } },{ 'type':'CardLayout','properties':{ 'title':'Location Information','components':[{ 'type':'LabeledText','properties':{ 'fieldName':'location.street.name','label':'Street','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'location.city','label':'City','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'location.state','label':'State','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'location.country','label':'Country','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'location.postcode','label':'Postcode','separator':':','fontSize':'lg' } }] } },{ 'type':'CardLayout','properties':{ 'title':'Login Information','components':[{ 'type':'LabeledText','properties':{ 'fieldName':'login.username','label':'Username','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'login.password','label':'Password','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'login.uuid','label':'UUID','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'login.salt','label':'Salt','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'login.md5','label':'MD5','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'login.sha1','label':'SHA1','separator':':','fontSize':'lg' } },{ 'type':'LabeledText','properties':{ 'fieldName':'login.sha256','label':'SHA256','separator':':','fontSize':'lg' } }] } }] } }] } }] }
+    },
+    {
+      mixtral8x7b: {
+        'components': [
+          {
+            'type': 'CardLayout',
+            'properties': {
+              'title': 'User Information',
+              'components': [
+                {
+                  'type': 'FlexLayout',
+                  'properties': {
+                    'direction': 'row',
+                    'components': [
+                      {
+                        'type': 'Image',
+                        'properties': {
+                          'fieldName': 'picture.large',
+                          'alt': 'User Profile Picture'
+                        }
+                      },
+                      {
+                        'type': 'FlexLayout',
+                        'properties': {
+                          'direction': 'column',
+                          'components': [
+                            {
+                              'type': 'LabeledText',
+                              'properties': {
+                                'fieldName': 'name.title',
+                                'label': 'Title',
+                                'separator': ':',
+                                'fontSize': 'md'
+                              }
+                            },
+                            {
+                              'type': 'LabeledText',
+                              'properties': {
+                                'fieldName': 'name.first',
+                                'label': 'First Name',
+                                'separator': ':',
+                                'fontSize': 'md'
+                              }
+                            },
+                            {
+                              'type': 'LabeledText',
+                              'properties': {
+                                'fieldName': 'name.last',
+                                'label': 'Last Name',
+                                'separator': ':',
+                                'fontSize': 'md'
+                              }
+                            },
+                            {
+                              'type': 'LabeledText',
+                              'properties': {
+                                'fieldName': 'gender',
+                                'label': 'Gender',
+                                'separator': ':',
+                                'fontSize': 'md'
+                              }
+                            },
+                            {
+                              'type': 'LabeledText',
+                              'properties': {
+                                'fieldName': 'email',
+                                'label': 'Email',
+                                'separator': ':',
+                                'fontSize': 'md'
+                              }
+                            },
+                            {
+                              'type': 'LabeledText',
+                              'properties': {
+                                'fieldName': 'phone',
+                                'label': 'Phone Number',
+                                'separator': ':',
+                                'fontSize': 'md'
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            'type': 'CardLayout',
+            'properties': {
+              'title': 'Location',
+              'components': [
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.street.name',
+                    'label': 'Street Name',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.street.number',
+                    'label': 'Street Number',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.city',
+                    'label': 'City',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.state',
+                    'label': 'State',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.country',
+                    'label': 'Country',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.postcode',
+                    'label': 'Postcode',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.coordinates.latitude',
+                    'label': 'Latitude',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.coordinates.longitude',
+                    'label': 'Longitude',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.timezone.offset',
+                    'label': 'Timezone Offset',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'location.timezone.description',
+                    'label': 'Timezone Description',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                }
+              ]
+            }
+          },
+          {
+            'type': 'CardLayout',
+            'properties': {
+              'title': 'Registration and DOB',
+              'components': [
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'registered.date',
+                    'label': 'Registration Date',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'dob.date',
+                    'label': 'Date of Birth',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                }
+              ]
+            }
+          },
+          {
+            'type': 'CardLayout',
+            'properties': {
+              'title': 'Authentication',
+              'components': [
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.uuid',
+                    'label': 'UUID',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.username',
+                    'label': 'Username',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.password',
+                    'label': 'Password',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.salt',
+                    'label': 'Salt',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.md5',
+                    'label': 'MD5',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.sha1',
+                    'label': 'SHA1',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'login.sha256',
+                    'label': 'SHA256',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                }
+              ]
+            }
+          },
+          {
+            'type': 'CardLayout',
+            'properties': {
+              'title': 'Identifier',
+              'components': [
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'id.name',
+                    'label': 'Identifier Name',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                },
+                {
+                  'type': 'LabeledText',
+                  'properties': {
+                    'fieldName': 'id.value',
+                    'label': 'Identifier Value',
+                    'separator': ':',
+                    'fontSize': 'md'
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   ],
 };

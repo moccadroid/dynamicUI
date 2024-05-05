@@ -22,6 +22,15 @@ export interface DrawerProps {
 const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   const { state, setState } = useStateContext();
   const [data, setData] = useState(JSON.stringify(state.data));
+  const [layout, setLayout] = useState(JSON.stringify(state.layout));
+
+  const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setData(event.target.value);
+  };
+
+  const handleSetLayout = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setLayout(event.target.value);
+  };
 
   const handleDataChange = () => {
     console.log(data);
@@ -32,8 +41,12 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
     });
   };
 
-  const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setData(event.target.value);
+  const handleLayoutChange = () => {
+    setState((prevState: State) => {
+      const newState = { ...prevState };
+      newState.layout = JSON.parse(layout);
+      return newState;
+    });
   };
 
   return (
@@ -50,7 +63,8 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
             <Instructions />
             <Stack>
               <Text as="b">Current Layout</Text>
-              <Textarea value={JSON.stringify(state.layout)} onChange={() => {}} />
+              <Textarea value={layout} onChange={handleSetLayout} />
+              <Button onClick={handleLayoutChange}>Set new Layout</Button>
             </Stack>
             <Stack>
               <Text as="b">Current Data</Text>

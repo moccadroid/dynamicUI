@@ -6,7 +6,9 @@ export const systemInstructions = {
 
 export const defaultInstructions = {
   message: `Please construct a JSON that will use the typescript interfaces to construct a GUI that displays all the data. 
-  Make sure to show ALL of the data. Use the different components to structure the data visually.`
+  Make sure to show ALL of the data. Use the different components to structure the data visually. 
+  
+  `
 };
 
 export const actionInstructions = {
@@ -19,9 +21,11 @@ export const detailedInstructions = {
 
 export const interfaceInstructions = {
   message: `
-  The root is LayoutConfig. 
+  The root is LayoutConfig {components: []}. 
   You can nest Layouts within each other to create more complex layouts. 
-  Use Cards to group data that belongs together
+  Use Cards to group data that belongs together.
+  Create a User Information card with image and information. 
+  Use nested Layouts (vertical/horizontal) in cards to make more interesting Cards Layouts. 
   .`
 };
 
