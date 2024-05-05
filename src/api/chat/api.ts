@@ -21,7 +21,7 @@ export async function POSTChatRequest({ promptParams }: POSTChatRequestParams) {
   'use server';
 
   console.log('POSTChatRequest');
-  const prompt = await generatePrompt(promptParams);
+  const prompt = generatePrompt(promptParams);
   //console.log(prompt);
 
   const chatCompletion = await openai.chat.completions.create({
