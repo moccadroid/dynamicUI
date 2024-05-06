@@ -23,7 +23,8 @@ export interface State {
     inputToken: number;
     outputToken: number;
     totalToken: number;
-  }
+  },
+  [key: string]: any;
 }
 
 // Create a provider component

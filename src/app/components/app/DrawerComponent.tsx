@@ -12,7 +12,9 @@ import LayoutSelect from '@/app/components/app/LayoutSelect';
 import type { State } from '@/state/Provider';
 import { useStateContext } from '@/state/Provider';
 import type { ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import FetchUrl from '@/app/components/app/FetchUrl';
 
 export interface DrawerProps {
   isOpen: boolean;
@@ -24,6 +26,11 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   const [data, setData] = useState(JSON.stringify(state.data));
   const [layout, setLayout] = useState(JSON.stringify(state.layout));
 
+  useEffect(() => {
+    setLayout(JSON.stringify(state.layout));
+    setData(JSON.stringify(state.data));
+  }, [state.data, state.layout]);
+
   const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setData(event.target.value);
   };
@@ -33,7 +40,6 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   };
 
   const handleDataChange = () => {
-    console.log(data);
     setState((prevState: State) => {
       const newState = { ...prevState };
       newState.data = JSON.parse(data);
@@ -71,6 +77,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
               <Textarea value={data} onChange={handleSetData}/>
               <Button onClick={handleDataChange}>Set new data</Button>
             </Stack>
+            <FetchUrl />
           </Stack>
         </DrawerBody>
       </DrawerContent>

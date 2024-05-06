@@ -21,7 +21,6 @@ const DynamicComponents: FC<{ config?: LayoutConfig}> = () => {
 
   return (
     <Container maxW="container.md" marginBottom={50}>
-
       <Stack spacing={5}>
         { layout }
       </Stack>

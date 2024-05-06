@@ -104,47 +104,34 @@ export interface ComponentConfig { // describes the above components
 export interface LayoutConfig { // the root of the components
     components: ComponentConfig[];
 }
-
 `;
 
 export const generatePrompt = (params: POSTChatRequestParams['promptParams']) => {
 
-  let prompt = `
-    // SYSTEM
-    ${systemInstructions.message}
-    
+  const systemPrompt = `
+    You're a UI/UX Designer who creates beautiful designs based on the data using the provided interfaces. 
+    Use all the components that are relevant to display the data. 
+    Layouts can be nested. Cards can be used to visually group data. 
+    Represent all the data faithfully.
+    Return only valid JSON.
+  `;
+
+  const userPrompt = `
     // DATA
-    ${dataInstructions.message}
     ${JSON.stringify(params.data)}
-    
     // INTERFACES
-    ${interfaceInstructions.message}
     ${componentConfig}
-    
     // ACTIONS
-    ${actionInstructions.message}
     ${actions}
+    
+    ${params.layout ? `
+      // CURRENT LAYOUT
+      ${JSON.stringify(params.layout)}` : ''}
+
+    ${params.userMessage ? `
+      // INSTRUCTIONS
+      ${params.userMessage}` : ''}
   `;
 
-  if (params?.layout) {
-    prompt += `
-    // CURRENT LAYOUT
-    ${JSON.stringify(params.layout)}
-    `;
-  }
-
-  prompt += `
-    // INSTRUCTIONS
-    ${defaultInstructions.message}
-  `;
-
-  if (params?.userMessage) {
-    prompt += `
-    // USER MESSAGE
-    ${params.promptHistory?.length ? params.promptHistory?.join('\n') : ''}
-    ${params.userMessage}
-    `;
-  }
-
-  return prompt;
+  return { userPrompt, systemPrompt };
 };

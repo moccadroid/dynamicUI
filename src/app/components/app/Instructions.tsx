@@ -1,13 +1,19 @@
+'use client';
+
 import { Text, Button, Spinner, Stack, Textarea } from '@chakra-ui/react';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import { POSTChatRequest } from '@/api/chat/api';
-import { type State, useStateContext } from '@/state/Provider';
+import { useStateContext } from '@/state/Provider';
+import useCompletions from '@/state/useCompletions';
+import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
+import OpenAI from 'openai';
+import ChatCompletion = OpenAI.ChatCompletion;
 
 const Instructions = () => {
-  const { state, setState } = useStateContext();
+  const { state } = useStateContext();
   const [userPrompt, setUserPrompt] = useState<string>(state.app.currentPrompt);
   const [isLoading, setIsLoading] = useState(false);
+  const { handleCompletion } = useCompletions();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setUserPrompt(e.target.value);
@@ -22,27 +28,11 @@ const Instructions = () => {
     };
 
     setIsLoading(true);
-    const completion = await POSTChatRequest({ promptParams });
+    const layoutAgent = LayoutAgentFactory.create({ params: promptParams });
+    await layoutAgent.run();
+    const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
+    handleCompletion({ completion, additionalFields: { userPrompt } });
     setIsLoading(false);
-    const content = completion.choices[0].message.content;
-    if (content) {
-      const chatLayout = JSON.parse(content);
-      console.log('chatLayout', chatLayout);
-
-      setState((prevState: State) => {
-        const newState = { ...prevState };
-        newState.layout = chatLayout;
-        newState.app.promptHistory.push(userPrompt);
-        newState.app.currentPrompt = userPrompt;
-        newState.app.completion = completion;
-        newState.stats.inputToken += completion && completion.usage ? completion.usage.prompt_tokens : 0;
-        newState.stats.outputToken += completion && completion.usage ? completion.usage.completion_tokens : 0;
-        newState.stats.totalToken += completion && completion.usage ? completion.usage.total_tokens : 0;
-        return newState;
-      });
-    } else {
-      console.log('no content?');
-    }
   };
 
   return (
