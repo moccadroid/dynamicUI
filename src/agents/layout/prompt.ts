@@ -1,4 +1,7 @@
-import type { POSTChatRequestParams } from '@/api/chat/api';
+import type { LayoutPromptParams } from '@/agents/layout/api';
+import { getDefinitions } from '@/dynamicUI/ai/definitions/getDefinitions';
+import { textFormatters } from '@/dynamicUI/actions/format';
+
 
 export const systemInstructions = {
   message: ''
@@ -35,94 +38,70 @@ export const dataInstructions = {
   `
 };
 
-const actions = `
-export enum ActionNames {
-  updateField = 'updateField', // used to update the state of fields (use on form elements)
-  submitForm = 'submitForm', // used to submit state (use on buttons)
-  refreshData = 'refreshData' // use on buttons
-}`;
+const example = {
+  components: [{
+    type: 'FlexLayout',
+    properties: {
+      direction: 'column',
+      components: [{
+        type: 'Input',
+        properties: {
+          // input properties
+        }
+      }],
+    }
+  }]
+};
 
-const componentConfig = `
-import type { ActionNames } from '@/interfaces/actions/ActionConfig';
+const getTextFormatters = () => {
+  return Object.keys(textFormatters).join(', ');
+};
 
-export interface TextareaProperties {
-    label: string;
-    placeholder?: string;
-    fieldName: string; // binds the field to the data. must include the path to the data. example: user.name.firstName
-    action: ActionNames; // String identifier for the action
-}
+export const generatePrompt = (params: LayoutPromptParams) => {
 
-export interface ButtonProperties {
-    text: string;
-    action: ActionNames;
-}
-
-export interface HeadlineProperties {
-    text: string;
-    level: 1 | 2 | 3 | 4 | 5 | 6;
-}
-
-export interface InputProperties { // used for editable data
-    label: string;
-    placeholder?: string;
-    fieldName: string;
-    action: ActionNames;
-}
-
-export interface ImageProperties {
-    fieldName: string; // path to src in the data
-    alt: string;
-}
-
-export interface TextProperties { // used for plain text
-    fieldName: string;
-    fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-}
-
-export interface LabeledTextProperties {
-    fieldName: string;
-    label: string // the label of the value
-    separator: ':' // label : text
-    fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-}
-
-export interface FlexLayoutProperties extends LayoutConfig{ // can be nested
-    direction: 'row' | 'column';
-    components: ComponentConfig[];
-}
-
-export interface CardLayoutProperties extends LayoutConfig{ // can be nested
-    title: string; // the title of the card
-    components: ComponentConfig[]; // the body of the card
-}
-
-export interface ComponentConfig { // describes the above components
-    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout' | 'Image' | 'Text' | 'LabeledText';
-    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties;
-}
-
-export interface LayoutConfig { // the root of the components
-    components: ComponentConfig[];
-}
-`;
-
-export const generatePrompt = (params: POSTChatRequestParams['promptParams']) => {
-
+  /*
   const systemPrompt = `
-    You're a UI/UX Designer who creates beautiful designs based on the data using the provided interfaces. 
-    Use all the components that are relevant to display the data. 
-    Layouts can be nested. Cards can be used to visually group data. 
+    You're a UI/UX Designer who creates beautiful designs based on the data using the provided interfaces.
+    You're building the template for a website builder. All components will be rendered from your output.
+    Use all the components that are relevant to display the data.
+    It is important that you use a List Component to display ANY array in the data.
+    It is VERY important that you only include a layout for the FIRST entry. All others will be rendered with that template.
+    LayoutConfig is the root of your JSON.
     Represent all the data faithfully.
     Return only valid JSON.
   `;
+  */
+  const systemPrompt = `
+    You're job is to create a JSON representation of the supplied DATA by following the rules in INTERFACES.
+    Always start the JSON with { components: []}.
+    ARRAYS:
+    If you encounter an array, ALWAYS use List component: { type: "List", layout: LayoutConfig }
+    If the array has more than one entry, only create a layout for the first entry. This is the template for the rest of the array.
+    If the array is at the top level, fieldName is an empty string.
+    LAYOUTS:
+    Layouts can be nested to create more complex visual representations. Child objects go into the "components" field.
+    Use Layouts and Cards to group data that belongs together.
+    Use a Headline in the first layout to explain the data.
+    Represent all the data according to the rules in INTERFACES.
+    COMPONENTS:
+    Every component has "type" and "properties" at its root. The properties are described in INTERFACES.
+    fieldName always points to the key in the data. If it doesn't exist or is wrong, no data will be displayed.
+    Property fields like direction, fieldName, label, etc. always have to be in properties.
+    For Links always make sure to put the href into the fieldName.
+    FORMATTER:
+    For components that have a format field, you can use the textformatters as described. 
+    Let's think step by step to make sure you get this right, and stick closely to the rules.
+  `;
 
   const userPrompt = `
-    // DATA
-    ${JSON.stringify(params.data)}
+    // DATA EXAMPLE
+    ${JSON.stringify(params.exampleData)}
+    
     // INTERFACES
-    ${componentConfig}
-    // ACTIONS
-    ${actions}
+    ${getDefinitions(params.definitions)}
+    
+    // FORMATTERS
+    ${getTextFormatters()}
     
     ${params.layout ? `
       // CURRENT LAYOUT
@@ -134,4 +113,7 @@ export const generatePrompt = (params: POSTChatRequestParams['promptParams']) =>
   `;
 
   return { userPrompt, systemPrompt };
+
 };
+
+

@@ -15,6 +15,7 @@ import type { ChangeEvent } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import FetchUrl from '@/app/components/app/FetchUrl';
+import InterfaceSelect from '@/app/components/app/InterfaceSelect';
 
 export interface DrawerProps {
   isOpen: boolean;
@@ -23,13 +24,13 @@ export interface DrawerProps {
 
 const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   const { state, setState } = useStateContext();
-  const [data, setData] = useState(JSON.stringify(state.data));
+  const [data, setData] = useState(JSON.stringify(state.exampleData));
   const [layout, setLayout] = useState(JSON.stringify(state.layout));
 
   useEffect(() => {
     setLayout(JSON.stringify(state.layout));
     setData(JSON.stringify(state.data));
-  }, [state.data, state.layout]);
+  }, [state.exampleData, state.layout]);
 
   const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setData(event.target.value);
@@ -42,7 +43,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   const handleDataChange = () => {
     setState((prevState: State) => {
       const newState = { ...prevState };
-      newState.data = JSON.parse(data);
+      newState.exampleData = JSON.parse(data);
       return newState;
     });
   };
@@ -67,13 +68,14 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
           <Stack>
             <LayoutSelect />
             <Instructions />
+            <InterfaceSelect />
             <Stack>
               <Text as="b">Current Layout</Text>
               <Textarea value={layout} onChange={handleSetLayout} />
               <Button onClick={handleLayoutChange}>Set new Layout</Button>
             </Stack>
             <Stack>
-              <Text as="b">Current Data</Text>
+              <Text as="b">Example Data</Text>
               <Textarea value={data} onChange={handleSetData}/>
               <Button onClick={handleDataChange}>Set new data</Button>
             </Stack>

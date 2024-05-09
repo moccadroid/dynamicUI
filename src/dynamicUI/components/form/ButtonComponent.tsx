@@ -1,4 +1,4 @@
-import type { ButtonProperties } from '@/interfaces/components/ComponentConfig';
+import type { ButtonProperties } from '@/dynamicUI/components/ComponentConfig';
 import { Button } from '@chakra-ui/react';
 import type { FC } from 'react';
 import { useStateContext } from '@/state/Provider';

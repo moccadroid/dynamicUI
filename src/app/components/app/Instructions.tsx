@@ -3,6 +3,7 @@
 import { Text, Button, Spinner, Stack, Textarea } from '@chakra-ui/react';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
+import type { State } from '@/state/Provider';
 import { useStateContext } from '@/state/Provider';
 import useCompletions from '@/state/useCompletions';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
@@ -10,7 +11,7 @@ import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
 
 const Instructions = () => {
-  const { state } = useStateContext();
+  const { state, setState } = useStateContext();
   const [userPrompt, setUserPrompt] = useState<string>(state.app.currentPrompt);
   const [isLoading, setIsLoading] = useState(false);
   const { handleCompletion } = useCompletions();
@@ -20,16 +21,25 @@ const Instructions = () => {
   };
 
   const handleOnClick = async () => {
+    if (userPrompt === '') return;
+
     const promptParams = {
       userMessage: userPrompt,
       sendAll: true,
       layout: state.layout,
-      data: state.data,
+      exampleData: state.exampleData,
+      definitions: state.app.selectedDefinitions,
     };
 
     setIsLoading(true);
     const layoutAgent = LayoutAgentFactory.create({ params: promptParams });
-    await layoutAgent.run();
+    const layout = await layoutAgent.run();
+    setState((prevState: State) => {
+      const newState = { ...prevState };
+      newState.layout = layout;
+      return newState;
+    });
+    console.log('layout', layout);
     const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
     handleCompletion({ completion, additionalFields: { userPrompt } });
     setIsLoading(false);

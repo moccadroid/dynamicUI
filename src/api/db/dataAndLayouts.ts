@@ -1,4 +1,4 @@
-import type { LayoutConfig } from '@/interfaces/components/ComponentConfig';
+import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 
 export const xkcd = {
   layout: {

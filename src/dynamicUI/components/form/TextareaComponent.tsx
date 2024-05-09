@@ -1,26 +1,28 @@
-import type { TextareaProperties } from '@/interfaces/components/ComponentConfig';
-import type { FC } from 'react';
+import type { TextareaProperties } from '@/dynamicUI/components/ComponentConfig';
+import type { ChangeEvent, FC } from 'react';
 import { FormControl, FormLabel, Textarea } from '@chakra-ui/react';
 import { useStateContext } from '@/state/Provider';
 import { getAction } from '@/actions/actions';
 import { getValueFromState } from '@/state/getValueFromState';
 import type { UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
+import { useFullPath } from '@/dynamicUI/state/PathProvider';
+import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 const TextareaComponent: FC<{ properties: TextareaProperties }> = ({ properties }) => {
-  const { state, setState } = useStateContext();
+
   const { label, fieldName, placeholder } = properties;
-  const value = getValueFromState<string | number>(
-    { state, path: fieldName, defaultValue: '' }
-  );
-  const actionParams: UpdateFieldParams = {
-    setState,
-    fieldName,
-    defaultValue: value,
+  const fullPath = useFullPath(fieldName);
+  const { getState, setState } = useSectionDataContext();
+  const value = getState<string>(fullPath);
+
+  const updateAction = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setState(fullPath, event.target.value);
   };
+
   return (
     <FormControl variant="floating">
       {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-      <Textarea placeholder={placeholder} value={value} onChange={getAction(properties, actionParams)}/>
+      <Textarea placeholder={placeholder} value={value} onChange={updateAction}/>
       <FormLabel>{label}</FormLabel>
     </FormControl>
   );

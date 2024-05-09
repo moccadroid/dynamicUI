@@ -1,7 +1,7 @@
 import type { Agent } from '@/agents/Agent';
 import type { LayoutPromptParams } from '@/agents/layout/api';
 import { POSTLayoutRequest } from '@/agents/layout/api';
-import type { LayoutConfig } from '@/interfaces/components/ComponentConfig';
+import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
 
@@ -36,7 +36,7 @@ const LayoutAgentFactory = {
     const run = async (): Promise<LayoutAgentResult> => {
       if (properties) {
         const completion = await POSTLayoutRequest({ promptParams: properties.params });
-        if (completion.choices[0].message.content) {
+        if (completion?.choices[0].message.content) {
           properties.lastCompletion = completion;
           return { layout: JSON.parse(completion.choices[0].message.content) };
         }

@@ -1,30 +1,22 @@
 'use server';
 
 import OpenAI from 'openai';
-import { generatePrompt } from '@/agents/layout/prompt';
+import { generatePrompt } from '@/agents/dataCleanup/prompt';
 
 const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
 });
 
-export interface LayoutPromptParams {
-  sendAll?: boolean;
-  userMessage?: string;
-  layout?: any;
-  promptHistory?: string[];
-  exampleData: any;
-  definitions: string[];
+export interface DataCleanupPromptParams {
+  data: any;
+  length?: number;
 }
 
-export interface POSTLayoutRequestParams {
-  promptParams: LayoutPromptParams
-}
-
-export async function POSTLayoutRequest({ promptParams }: POSTLayoutRequestParams) {
+export async function POSTDataCleanupRequest({ data, length }: DataCleanupPromptParams) {
   'use server';
 
-  console.log('POSTLayoutRequest');
-  const { userPrompt, systemPrompt } = generatePrompt(promptParams);
+  console.log('POSTDataCleanupRequest');
+  const { userPrompt, systemPrompt } = generatePrompt(data, length);
   console.log(systemPrompt);
   console.log(userPrompt);
 

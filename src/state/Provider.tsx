@@ -16,9 +16,11 @@ export interface State {
   app: {
     promptHistory: string[],
     currentPrompt: string;
-    completion?: ChatCompletion
+    completion?: ChatCompletion;
+    selectedDefinitions: string[];
   },
   data: any;
+  exampleData: any;
   stats: {
     inputToken: number;
     outputToken: number;

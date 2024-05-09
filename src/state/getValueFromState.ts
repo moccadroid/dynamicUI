@@ -1,6 +1,6 @@
 import type { State } from '@/state/Provider';
 
-type Primitive = string | number | boolean;
+type Primitive = string | number | boolean | [];
 
 export interface GetValueParams<T> {
   state: State,
@@ -21,7 +21,7 @@ export const getValueFromState = <T extends Primitive>({ state, path, defaultVal
     result = result[key];
   }
 
-  if (typeof result === 'string' || typeof result === 'number' || typeof result === 'boolean') {
+  if (typeof result === 'string' || typeof result === 'number' || typeof result === 'boolean' || Array.isArray(result)) {
     return result as T; // Return result with its actual type if it's a Primitive
   }
 

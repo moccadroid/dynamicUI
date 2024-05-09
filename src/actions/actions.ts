@@ -1,19 +1,12 @@
 // actions.ts
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import type { ComponentConfig } from '@/interfaces/components/ComponentConfig';
+import type { ComponentConfig } from '@/dynamicUI/components/ComponentConfig';
 import type { ActionParams, Actions, SubmitFormParams, UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
 import { ActionNames } from '@/interfaces/actions/ActionConfig';
-import { setValueToState } from '@/state/setValueToState';
 
 export const actions: Actions = {
-  updateField: ({ setState, fieldName, defaultValue }) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const params = {
-      path: fieldName,
-      setState,
-      value: event.target.value,
-      defaultValue
-    };
-    setValueToState(params);
+  updateField: () => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
   },
   submitForm: ({ formData }: SubmitFormParams) => () => {
     console.log('Form submission logic goes here', formData);

@@ -17,10 +17,11 @@ const Navbar = () => {
 
   const handleRandomize = async () => {
     const promptParams = {
-      data: state.data,
+      exampleData: state.exampleData,
+      definitions: state.app.selectedDefinitions
     };
     setIsLoading(true);
-    const layoutAgent = LayoutAgentFactory.create({ params: promptParams });
+    const layoutAgent = LayoutAgentFactory.create({ params: promptParams,  });
     await layoutAgent.run();
     const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
     handleCompletion({ completion });

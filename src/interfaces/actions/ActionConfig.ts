@@ -1,4 +1,4 @@
-import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import type { ChangeEvent } from 'react';
 
 export interface ActionParams {
 
@@ -9,9 +9,8 @@ export interface SubmitFormParams extends ActionParams {
 }
 
 export interface UpdateFieldParams extends ActionParams {
-  setState: Dispatch<SetStateAction<any>>;
-  fieldName: string;
-  defaultValue: any;
+  setState: (path: string, value: unknown) => void;
+  value: unknown;
 }
 
 export interface Actions {

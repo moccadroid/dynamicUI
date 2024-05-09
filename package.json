@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run extract && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "extract": "node src/dynamicUI/scripts/extractComponentConfig.js",
+    "collect:code": "node src/dynamicUI/scripts/collectCode.js"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.2.0",
@@ -14,6 +16,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "framer-motion": "^11.1.7",
+    "lodash": "^4.17.21",
     "next": "14.2.3",
     "openai": "^4.40.2",
     "react": "^18",
