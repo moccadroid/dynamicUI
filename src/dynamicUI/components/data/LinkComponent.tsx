@@ -6,11 +6,11 @@ import { useFullPath } from '@/dynamicUI/state/PathProvider';
 import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 const LinkComponent: FC<{ properties: LinkProperties }> = ({ properties }) => {
-  const fullPath = useFullPath(properties.fieldName);
+  const { fullPath } = useFullPath(properties.fieldName);
   const { getState } = useSectionDataContext();
   const href = getState<string>(fullPath);
   return (
-    <Link target="_blank" rel="noopener noreferrer" as={NextLink} href={href}>{href}</Link>
+    <Link target="_blank" rel="noopener noreferrer" as={NextLink} href={typeof href === 'string' ? href : ''}>{href}</Link>
   );
 };
 

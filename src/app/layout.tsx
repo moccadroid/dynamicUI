@@ -2,7 +2,7 @@
 
 import type { State } from '@/state/Provider';
 import { StateProvider } from '@/state/Provider';
-import { Providers } from './providers';
+import { ChakraProviders } from './providers';
 import type { ReactNode } from 'react';
 import { userData } from '@/api/db/dataAndLayouts';
 import componentConfig from '@/dynamicUI/ai/definitions/componentConfig.json';
@@ -31,11 +31,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
       <body>
-        <Providers>
+        <ChakraProviders>
           <StateProvider initialState={initialState}>
             {children}
           </StateProvider>
-        </Providers>
+        </ChakraProviders>
       </body>
     </html>
   );

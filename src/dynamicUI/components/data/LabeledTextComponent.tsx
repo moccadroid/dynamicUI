@@ -7,7 +7,7 @@ import useFormat from '@/dynamicUI/actions/format';
 
 const LabeledTextComponent: FC<{ properties: LabeledTextProperties }> = ({ properties }) => {
   const { getState } = useSectionDataContext();
-  const fullPath = useFullPath(properties.fieldName);
+  const { fullPath } = useFullPath(properties.fieldName);
   const textValue = getState<string>(fullPath) ?? '';
   const format = useFormat(properties.format);
 

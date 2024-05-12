@@ -35,7 +35,8 @@
             "List",
             "Link",
             "ConcatText",
-            "Form"
+            "Form",
+            "GridLayout"
           ]
         },
         "properties": {
@@ -78,6 +79,9 @@
             },
             {
               "$ref": "#/definitions/FormProperties"
+            },
+            {
+              "$ref": "#/definitions/GridLayoutProperties"
             }
           ]
         }
@@ -370,6 +374,44 @@
           "type": "string",
           "const": "list"
         },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "row",
+            "column"
+          ]
+        },
+        "as": {
+          "type": "string",
+          "const": "grid"
+        },
+        "gridSettings": {
+          "type": "object",
+          "properties": {
+            "templateRows": {
+              "type": "string"
+            },
+            "templateColumns": {
+              "type": "string"
+            },
+            "childSettings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rowSpan": {
+                    "type": "number"
+                  },
+                  "colSpan": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
         "fieldName": {
           "type": "string"
         },
@@ -478,6 +520,54 @@
         "formFields",
         "id",
         "validation"
+      ],
+      "additionalProperties": false
+    },
+    "GridLayoutProperties": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          }
+        },
+        "id": {
+          "type": "string",
+          "const": "grid"
+        },
+        "gridSettings": {
+          "type": "object",
+          "properties": {
+            "templateRows": {
+              "type": "string"
+            },
+            "templateColumns": {
+              "type": "string"
+            },
+            "childSettings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rowSpan": {
+                    "type": "number"
+                  },
+                  "colSpan": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "components",
+        "gridSettings",
+        "id"
       ],
       "additionalProperties": false
     }

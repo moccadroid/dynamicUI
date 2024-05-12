@@ -1,6 +1,12 @@
 type TextFormatter = 'UPPERCASE' | 'LOWERCASE' | 'CAPITALIZE' | 'REMOVE_UNDERSCORES';
 type ButtonType = 'submit';
 
+type GridSettings = { // standard html grid settings, use only the fields detailed here!
+    templateRows?: string; // this applies to the grid itself
+    templateColumns?: string; // same as above
+    childSettings?: { rowSpan?: number; colSpan?: number; }[]; // if set it should have an entry for each child in components. it will be applied to the child at index position
+}
+
 export interface TextareaProperties {
     id: 'textarea';
     label: string;
@@ -75,10 +81,19 @@ export interface FormProperties extends LayoutConfig { // wraps input components
     components: ComponentConfig[];
 }
 
-export interface ListProperties { // always used for arrays
+export interface ListProperties { // always used for arrays!!
     id: 'list';
+    direction?: 'row' | 'column';
+    as?: 'grid'; // uses a grid layout internally to layout the elements. use this if you want to show an array in a grid.
+    gridSettings?: GridSettings; // this has to be set if 'as': 'grid'!
     fieldName: string; // name of the field where the array can be found
     layout: LayoutConfig; // the layout of a list entry
+}
+
+export interface GridLayoutProperties extends LayoutConfig { // don't use this to display arrays or single lists!!
+    id: 'grid';
+    gridSettings: GridSettings;
+    components: ComponentConfig[];
 }
 
 export interface FlexLayoutProperties extends LayoutConfig { // can be nested
@@ -94,10 +109,10 @@ export interface CardLayoutProperties extends LayoutConfig { // can be nested
 
 export interface ComponentConfig { // describes the above components
     type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout'
-      | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form';
+      | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form' | 'GridLayout';
     properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties
       | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties
-      | ListProperties | LinkProperties | ConcatTextProperties | FormProperties;
+      | ListProperties | LinkProperties | ConcatTextProperties | FormProperties | GridLayoutProperties;
 }
 
 export interface LayoutConfig { // the root of the components

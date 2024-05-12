@@ -11,11 +11,13 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal';
 import { useLayout } from '@/state/useLayout';
+import { useData } from '@/state/useData';
 
-interface StorageLayout { name: string; layout: string }
+interface StorageLayout { name: string; layout: string, data: string }
 
 const ManageLayouts = () => {
   const { layout, setLayout, layoutName, setLayoutName } = useLayout();
+  const { data, setData } = useData();
   const [storageLayouts, setStorageLayouts] = useState<StorageLayout[]>([]);
   const [name, setName] = useState(layoutName);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,6 +30,9 @@ const ManageLayouts = () => {
     if (!layout && storageLayouts[0]) {
       setLayout(JSON.parse(storageLayouts[0].layout) as LayoutConfig);
       setLayoutName(storageLayouts[0].name);
+      if (storageLayouts[0].data) {
+        setData(JSON.parse(storageLayouts[0].data));
+      }
     }
   }, []);
 
@@ -58,6 +63,7 @@ const ManageLayouts = () => {
       setLayout(JSON.parse(selectedLayout.layout) as LayoutConfig);
       setLayoutName(selectedLayout.name);
       setName(selectedLayout.name);
+      setData(JSON.parse(selectedLayout.data));
       console.log(`Layout ${selectedLayout.name} selected`);
     }
   };
@@ -66,9 +72,9 @@ const ManageLayouts = () => {
     const storageLayouts = loadStorageLayouts();
     const index = storageLayouts.findIndex((item: StorageLayout) => item.name === name);
     if (index !== -1) {
-      storageLayouts[index] = { name, layout: JSON.stringify(layout) };
+      storageLayouts[index] = { data: JSON.stringify(data), name, layout: JSON.stringify(layout) };
     } else {
-      storageLayouts.push({ name, layout: JSON.stringify(layout) });
+      storageLayouts.push({ data: JSON.stringify(data), name, layout: JSON.stringify(layout) });
     }
     localStorage.setItem('layouts', JSON.stringify(storageLayouts));
     setStorageLayouts(storageLayouts);

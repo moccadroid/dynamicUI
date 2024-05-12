@@ -34,7 +34,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
 
   useEffect(() => {
     setLayout(JSON.stringify(state.layout));
-    setData(JSON.stringify(state.data));
+    setData(JSON.stringify(state.exampleData));
   }, [state.exampleData, state.layout]);
 
   const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -49,6 +49,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
     setState((prevState: State) => {
       const newState = { ...prevState };
       newState.exampleData = JSON.parse(data);
+      newState.data = JSON.parse(data);
       return newState;
     });
   };

@@ -49,6 +49,6 @@ const Section: FC<SectionT> = ({ layout, data }) => {
       }
     }
     return <Text>Please generate or select a layout</Text>;
-  }, [layout]);
+  }, [layout, data]);
 };
 export default Section;

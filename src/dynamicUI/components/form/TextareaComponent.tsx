@@ -1,17 +1,13 @@
 import type { TextareaProperties } from '@/dynamicUI/components/ComponentConfig';
 import type { ChangeEvent, FC } from 'react';
 import { FormControl, FormLabel, Textarea } from '@chakra-ui/react';
-import { useStateContext } from '@/state/Provider';
-import { getAction } from '@/actions/actions';
-import { getValueFromState } from '@/state/getValueFromState';
-import type { UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
 import { useFullPath } from '@/dynamicUI/state/PathProvider';
 import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 const TextareaComponent: FC<{ properties: TextareaProperties }> = ({ properties }) => {
 
   const { label, fieldName, placeholder } = properties;
-  const fullPath = useFullPath(fieldName);
+  const { fullPath } = useFullPath(fieldName);
   const { getState, setState } = useSectionDataContext();
   const value = getState<string>(fullPath);
 

@@ -7,10 +7,11 @@ import { createYupSchema } from '@/dynamicUI/parser/validation/createYupSchema';
 import type { SchemaSpec } from '@/dynamicUI/parser/validation/types';
 import { FormDataProvider } from '@/dynamicUI/state/FormDataProvider';
 import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
+import { Stack } from '@chakra-ui/react';
 
 const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = ({ children, properties }) => {
   const { fieldName, validation } = properties;
-  const fullPath = useFullPath(fieldName);
+  const { fullPath } = useFullPath(fieldName);
   const { getState } = useSectionDataContext();
 
   let validationSchema = null;
@@ -59,7 +60,9 @@ const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = (
           validationSchema={validationSchema}
         >
           <Form>
-            { children }
+            <Stack spacing={4}>
+              { children }
+            </Stack>
           </Form>
         </Formik>
       </FormDataProvider>

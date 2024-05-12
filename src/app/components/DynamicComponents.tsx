@@ -13,7 +13,7 @@ const DynamicComponents: FC<{ config?: LayoutConfig}> = () => {
   return (
     <Container maxW="container.md" marginBottom={50}>
       <Stack spacing={5}>
-        <Section layout={state.layout} data={state.data}/>
+        <Section layout={state.layout as LayoutConfig} data={state.data}/>
       </Stack>
     </Container>
   );

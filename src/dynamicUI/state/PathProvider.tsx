@@ -23,7 +23,15 @@ export const usePathContext = () => {
   return useContext(PathContext);
 };
 
-export const useFullPath = (fieldName: string): string => {
+export const useFullPath = (fieldName?: string) => {
   const parentPath = useContext(PathContext);
-  return parentPath ? `${parentPath}.${fieldName}` : fieldName;
+  const fullPath = fieldName
+    ? parentPath ? `${parentPath}.${fieldName}` : fieldName
+    : '';
+
+  const getFullPath = (fieldName: string) => {
+    return parentPath ? `${parentPath}.${fieldName}` : fieldName;
+  };
+
+  return { fullPath, getFullPath };
 };
