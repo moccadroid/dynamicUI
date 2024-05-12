@@ -5,13 +5,14 @@ import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 import { useFullPath } from '@/dynamicUI/state/PathProvider';
 
 const ImageComponent: FC<{properties: ImageProperties}> = ({ properties }) => {
+  const { fieldName, alt, size } = properties;
   const { getState } = useSectionDataContext();
-  const { fullPath } = useFullPath(properties.fieldName);
+  const { fullPath } = useFullPath(fieldName);
   const src = getState<string>(fullPath);
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    <Image objectFit='cover' src={String(src)} alt={properties.alt}/>
+    <Image boxSize={size} objectFit='cover' src={String(src)} alt={alt}/>
   );
 };
 

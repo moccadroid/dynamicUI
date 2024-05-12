@@ -1,5 +1,5 @@
-const path = require("path");
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
 function processContent(content) {
     // Remove import statements using regex
@@ -25,20 +25,21 @@ function processFiles(fileList) {
     });
 
     // Write concatenated content to new file
-    const outputFileName = path.resolve(__dirname, '../ai/definitions/code.txt');
+    const outputFileName = path.resolve(process.cwd(), './src/dynamicUI/ai/definitions/code.txt');
     fs.writeFileSync(outputFileName, concatenatedContent, 'utf8');
     console.log(`Concatenated files saved: ${outputFileName}`);
 }
 
 // List of TypeScript files to process
 const fileList = [
-    path.resolve(__dirname, '../components/ComponentConfig.ts'),
-    path.resolve(__dirname, '../components/Section.tsx'),
-    path.resolve(__dirname, '../parser/ParsedComponent.tsx'),
-    path.resolve(__dirname, '../parser/ParsedLayout.tsx'),
-    path.resolve(__dirname, '../state/SectionDataProvider.tsx'),
-    path.resolve(__dirname, '../state/PathProvider.tsx'),
-    path.resolve(__dirname, '../components/data/ListComponent.tsx')
+    path.resolve(process.cwd(), './src/dynamicUI/components/ComponentConfig.ts'),
+    path.resolve(process.cwd(), './src/dynamicUI/components/Section.tsx'),
+    path.resolve(process.cwd(), './src/dynamicUI/parser/ParsedComponent.tsx'),
+    path.resolve(process.cwd(), './src/dynamicUI/parser/ParsedLayout.tsx'),
+    path.resolve(process.cwd(), './src/dynamicUI/state/SectionDataProvider.tsx'),
+    path.resolve(process.cwd(), './src/dynamicUI/state/PathProvider.tsx'),
+    path.resolve(process.cwd(), './src/dynamicUI/components/data/ListComponent.tsx'),
+    path.resolve(process.cwd(), './src/dynamicUI/parser/validation/dictionary.ts')
     // Add more file paths as needed
 ];
 

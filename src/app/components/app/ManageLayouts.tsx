@@ -56,6 +56,12 @@ const ManageLayouts = () => {
     onOpen();
   };
 
+  const handleNew = () => {
+    setLayout(undefined);
+    setData(undefined);
+    setLayoutName(undefined);
+  };
+
   const handleSelect = (event: any) => {
     const selectedName = event.target.value;
     const selectedLayout = storageLayouts.find(sl => sl.name === selectedName);
@@ -120,6 +126,7 @@ const ManageLayouts = () => {
         <Button onClick={handleSave}>Save</Button>
         <Button onClick={handleSaveAs}>Save As...</Button>
         <Button colorScheme='red' onClick={handleDelete}>Delete</Button>
+        <Button colorScheme='green' onClick={handleNew}>New</Button>
       </Stack>
 
       <Modal isOpen={isOpen} onClose={onClose} size="lg">

@@ -21,7 +21,8 @@
       "type": "Link",
       "properties": {
         "id": "link",
-        "fieldName": "introduction.learnMoreLink"
+        "fieldName": "introduction.learnMoreLink",
+        "labelField": "introduction.learnMoreLinkText"
       }
     },
     {
@@ -196,7 +197,8 @@
                     "type": "Link",
                     "properties": {
                       "id": "link",
-                      "fieldName": "url"
+                      "fieldName": "url",
+                      "labelField": "text"
                     }
                   }
                 ]

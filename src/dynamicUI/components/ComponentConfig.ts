@@ -24,7 +24,8 @@ export interface ButtonProperties {
 
 export interface HeadlineProperties {
     id: 'headline';
-    text: string;
+    text?: string;
+    fieldName?: string; // either text or fieldName has to be set. It depends on the usage and data.
     level: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
@@ -40,10 +41,13 @@ export interface ImageProperties {
     id: 'image';
     fieldName: string; // path to src in the data
     alt: string;
+    size?: string; // size in px e.g. 100px
 }
 
 export interface LinkProperties {
     id: 'link';
+    label?: string; // if the data doesn't provide a label, use this to set a fixed label
+    labelField?: string; // if the data provides a label for the link
     fieldName: string; // path to the src in the data
 }
 
@@ -51,6 +55,7 @@ export interface TextProperties { // used for plain text
     id: 'text';
     fieldName: string;
     fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    align?: string;// text-align property;
     format?: TextFormatter[];
 }
 
@@ -99,6 +104,8 @@ export interface GridLayoutProperties extends LayoutConfig { // don't use this t
 export interface FlexLayoutProperties extends LayoutConfig { // can be nested
     id: 'flexLayout';
     direction: 'row' | 'column';
+    justify?: string; // justify-content property
+    align?: string; // align-items property
     components: ComponentConfig[];
 }
 

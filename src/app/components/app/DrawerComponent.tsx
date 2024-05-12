@@ -33,9 +33,17 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   const { goBack, goForward } = useLayoutHistory();
 
   useEffect(() => {
-    setLayout(JSON.stringify(state.layout));
-    setData(JSON.stringify(state.exampleData));
-  }, [state.exampleData, state.layout]);
+    if (state.layout) {
+      setLayout(JSON.stringify(state.layout));
+    } else {
+      setLayout('');
+    }
+    if (state.exampleData) {
+      setData(JSON.stringify(state.exampleData));
+    } else {
+      setData('');
+    }
+  }, [state.exampleData, state.layout, state.data]);
 
   const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setData(event.target.value);

@@ -1,0 +1,321 @@
+{
+  "components": [
+    {
+      "type": "FlexLayout",
+      "properties": {
+        "id": "flexLayout",
+        "direction": "column",
+        "components": [
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "Image",
+                  "properties": {
+                    "id": "image",
+                    "fieldName": "heroImage",
+                    "alt": "Dynamic UI Hero Image"
+                  }
+                },
+                {
+                  "type": "Headline",
+                  "properties": {
+                    "id": "headline",
+                    "text": "Craft Your UI with Pure JSON",
+                    "level": 3
+                  }
+                },
+                {
+                  "type": "Text",
+                  "properties": {
+                    "id": "text",
+                    "fieldName": "description",
+                    "fontSize": "md"
+                  }
+                },
+                {
+                  "type": "Link",
+                  "properties": {
+                    "id": "link",
+                    "label": "Dive Into the Docs",
+                    "fieldName": "/documentation"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "Headline",
+                  "properties": {
+                    "id": "headline",
+                    "text": "Utter Flexibility",
+                    "level": 3
+                  }
+                },
+                {
+                  "type": "FlexLayout",
+                  "properties": {
+                    "id": "flexLayout",
+                    "direction": "row",
+                    "components": [
+                      {
+                        "type": "Image",
+                        "properties": {
+                          "id": "image",
+                          "fieldName": "features[0].icon",
+                          "alt": "Utter Flexibility Icon",
+                          "size": "100px"
+                        }
+                      },
+                      {
+                        "type": "Text",
+                        "properties": {
+                          "id": "text",
+                          "fieldName": "features[0].description",
+                          "fontSize": "md"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "Headline",
+                  "properties": {
+                    "id": "headline",
+                    "text": "Rapid Development",
+                    "level": 3
+                  }
+                },
+                {
+                  "type": "FlexLayout",
+                  "properties": {
+                    "id": "flexLayout",
+                    "direction": "row",
+                    "components": [
+                      {
+                        "type": "Image",
+                        "properties": {
+                          "id": "image",
+                          "fieldName": "features[1].icon",
+                          "alt": "Rapid Development Icon",
+                          "size": "100px"
+                        }
+                      },
+                      {
+                        "type": "Text",
+                        "properties": {
+                          "id": "text",
+                          "fieldName": "features[1].description",
+                          "fontSize": "md"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "Headline",
+                  "properties": {
+                    "id": "headline",
+                    "text": "Broad Compatibility",
+                    "level": 3
+                  }
+                },
+                {
+                  "type": "FlexLayout",
+                  "properties": {
+                    "id": "flexLayout",
+                    "direction": "row",
+                    "components": [
+                      {
+                        "type": "Image",
+                        "properties": {
+                          "id": "image",
+                          "fieldName": "features[2].icon",
+                          "alt": "Broad Compatibility Icon",
+                          "size": "100px"
+                        }
+                      },
+                      {
+                        "type": "Text",
+                        "properties": {
+                          "id": "text",
+                          "fieldName": "features[2].description",
+                          "fontSize": "md"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "Text",
+                  "properties": {
+                    "id": "text",
+                    "fieldName": "testimonial.quote",
+                    "fontSize": "md"
+                  }
+                },
+                {
+                  "type": "LabeledText",
+                  "properties": {
+                    "id": "labeledText",
+                    "fieldName": "testimonial.author",
+                    "label": "Author",
+                    "separator": ":",
+                    "fontSize": "sm"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "GridLayout",
+                  "properties": {
+                    "id": "grid",
+                    "gridSettings": {
+                      "templateColumns": "repeat(2, 1fr)"
+                    },
+                    "components": [
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[0].url",
+                          "label": "Documentation"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[1].url",
+                          "label": "API Reference"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[2].url",
+                          "label": "Support"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[3].url",
+                          "label": "Privacy Policy"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "FlexLayout",
+                  "properties": {
+                    "id": "flexLayout",
+                    "direction": "row",
+                    "components": [
+                      {
+                        "type": "CardLayout",
+                        "properties": {
+                          "id": "cardLayout",
+                          "components": [
+                            {
+                              "type": "Image",
+                              "properties": {
+                                "id": "image",
+                                "fieldName": "gallery[0].src",
+                                "alt": "Complex UI Layout Preview"
+                              }
+                            },
+                            {
+                              "type": "Text",
+                              "properties": {
+                                "id": "text",
+                                "fieldName": "gallery[0].alt",
+                                "fontSize": "sm"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "CardLayout",
+                        "properties": {
+                          "id": "cardLayout",
+                          "components": [
+                            {
+                              "type": "Image",
+                              "properties": {
+                                "id": "image",
+                                "fieldName": "gallery[1].src",
+                                "alt": "Mobile and Desktop Responsive View"
+                              }
+                            },
+                            {
+                              "type": "Text",
+                              "properties": {
+                                "id": "text",
+                                "fieldName": "gallery[1].alt",
+                                "fontSize": "sm"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

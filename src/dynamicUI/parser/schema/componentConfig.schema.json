@@ -163,6 +163,9 @@
         "text": {
           "type": "string"
         },
+        "fieldName": {
+          "type": "string"
+        },
         "level": {
           "type": "number",
           "enum": [
@@ -177,7 +180,6 @@
       },
       "required": [
         "id",
-        "text",
         "level"
       ],
       "additionalProperties": false
@@ -228,6 +230,12 @@
             "row",
             "column"
           ]
+        },
+        "justify": {
+          "type": "string"
+        },
+        "align": {
+          "type": "string"
         }
       },
       "required": [
@@ -248,6 +256,9 @@
           "type": "string"
         },
         "alt": {
+          "type": "string"
+        },
+        "size": {
           "type": "string"
         }
       },
@@ -297,6 +308,9 @@
             "lg",
             "xl"
           ]
+        },
+        "align": {
+          "type": "string"
         },
         "format": {
           "type": "array",
@@ -432,6 +446,12 @@
         "id": {
           "type": "string",
           "const": "link"
+        },
+        "label": {
+          "type": "string"
+        },
+        "labelField": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"

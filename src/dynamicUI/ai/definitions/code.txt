@@ -1,56 +1,106 @@
 // File: ComponentConfig.ts
 
+type TextFormatter = 'UPPERCASE' | 'LOWERCASE' | 'CAPITALIZE' | 'REMOVE_UNDERSCORES';
+type ButtonType = 'submit';
+type GridSettings = { // standard html grid settings, use only the fields detailed here!
+    templateRows?: string; // this applies to the grid itself
+    templateColumns?: string; // same as above
+    childSettings?: { rowSpan?: number; colSpan?: number; }[]; // if set it should have an entry for each child in components. it will be applied to the child at index position
+}
 export interface TextareaProperties {
+    id: 'textarea';
     label: string;
     placeholder?: string;
     fieldName: string; // binds the field to the data. must include the path to the data. example: user.name.firstName
-    action: ActionNames; // String identifier for the action
+    action?: string; // String identifier for the action
 }
 export interface ButtonProperties {
+    id: 'button';
     text: string;
-    action: ActionNames;
+    type: ButtonType;
+    format?: TextFormatter[]; // Array of formatter keys
 }
 export interface HeadlineProperties {
-    text: string;
+    id: 'headline';
+    text?: string;
+    fieldName?: string; // either text or fieldName has to be set. It depends on the usage and data.
     level: 1 | 2 | 3 | 4 | 5 | 6;
 }
 export interface InputProperties { // used for editable data
+    id: 'input';
     label: string;
     placeholder?: string;
     fieldName: string;
-    action: ActionNames;
+    action?: string;
 }
 export interface ImageProperties {
+    id: 'image';
     fieldName: string; // path to src in the data
     alt: string;
 }
 export interface LinkProperties {
+    id: 'link';
+    label?: string; // if the data doesn't provide a label, use this to set a fixed label
+    labelField?: string; // if the data provides a label for the link
     fieldName: string; // path to the src in the data
 }
 export interface TextProperties { // used for plain text
+    id: 'text';
     fieldName: string;
     fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    format?: TextFormatter[];
 }
 export interface LabeledTextProperties {
+    id: 'labeledText';
     fieldName: string;
     label: string // the label of the value
     separator: ':' // label : text
     fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    format?: TextFormatter[];
 }
-export interface ListProperties { // always used for arrays
+export interface ConcatTextProperties { // used to concat multiple data fields into one text component
+    id: 'concatText';
+    fields: string[];  // Array of field paths
+    separator: string; // Separator for concatenation
+    fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    format?: TextFormatter[];
+}
+export interface FormProperties extends LayoutConfig { // wraps input components
+    id: 'form';
+    fieldName: string; // the root name of the object this form controls
+    formFields: string[]; // the field names that this form controls
+    //submitFormat: Record<string, any>;
+    validation: any; // don't fill this out yourself. always call createValidation function if the user asks for validation
+    components: ComponentConfig[];
+}
+export interface ListProperties { // always used for arrays!!
+    id: 'list';
+    direction?: 'row' | 'column';
+    as?: 'grid'; // uses a grid layout internally to layout the elements. use this if you want to show an array in a grid.
+    gridSettings?: GridSettings; // this has to be set if 'as': 'grid'!
     fieldName: string; // name of the field where the array can be found
     layout: LayoutConfig; // the layout of a list entry
 }
+export interface GridLayoutProperties extends LayoutConfig { // don't use this to display arrays or single lists!!
+    id: 'grid';
+    gridSettings: GridSettings;
+    components: ComponentConfig[];
+}
 export interface FlexLayoutProperties extends LayoutConfig { // can be nested
+    id: 'flexLayout';
     direction: 'row' | 'column';
     components: ComponentConfig[];
 }
 export interface CardLayoutProperties extends LayoutConfig { // can be nested
+    id: 'cardLayout';
     components: ComponentConfig[]; // the body of the card
 }
 export interface ComponentConfig { // describes the above components
-    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout' | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link';
-    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties | ListProperties | LinkProperties;
+    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout'
+      | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form' | 'GridLayout';
+    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties
+      | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties
+      | ListProperties | LinkProperties | ConcatTextProperties | FormProperties | GridLayoutProperties;
 }
 export interface LayoutConfig { // the root of the components
     components: ComponentConfig[];
@@ -66,16 +116,40 @@ export interface SectionT {
 const Section: FC<SectionT> = ({ layout, data }) => {
   return useMemo(() => {
     if (layout) {
-      return (
-        <SectionDataProvider initialData={data}>
-          <PathProvider>
-            <ParsedLayout config={layout}/>
-          </PathProvider>
-        </SectionDataProvider>
-      );
+      const errors = validateJson(layout, schema);
+      if (!errors) {
+        return (
+          <SectionDataProvider initialData={data}>
+            <PathProvider>
+              <ParsedLayout config={layout}/>
+            </PathProvider>
+          </SectionDataProvider>
+        );
+      } else {
+        return (
+          <Alert
+            status='error'
+            variant='subtle'
+            flexDirection='column'
+            alignItems='center'
+            justifyContent='center'
+          >
+            <AlertIcon boxSize='40px' />
+            <AlertTitle>Layout JSON is invalid!</AlertTitle>
+            <AlertDescription>
+              {errors.map((error: any, index: number) => {
+                return (
+                  <Box key={index}>
+                    <pre>{JSON.stringify(error, null, 4)}</pre>
+                  </Box>);
+              })}
+            </AlertDescription>
+          </Alert>
+        );
+      }
     }
     return <Text>Please generate or select a layout</Text>;
-  }, [layout]);
+  }, [layout, data]);
 };
 export default Section;
 
@@ -84,7 +158,7 @@ export default Section;
 
 import type {
   ButtonProperties, CardLayoutProperties,
-  ComponentConfig, FlexLayoutProperties,
+  ComponentConfig, ConcatTextProperties, FlexLayoutProperties, FormProperties, GridLayoutProperties,
   HeadlineProperties, ImageProperties,
   InputProperties, LabeledTextProperties, LinkProperties, ListProperties,
   TextareaProperties, TextProperties
@@ -118,6 +192,12 @@ const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
           <ParsedLayout config={properties as CardLayoutProperties} />
         </CardLayoutComponent>
       );
+    case 'GridLayout':
+      return (
+        <GridLayoutComponent properties={properties as GridLayoutProperties}>
+          <ParsedLayout config={properties as GridLayoutProperties} />
+        </GridLayoutComponent>
+      );
     case 'Text':
       return (
         <TextComponent properties={properties as TextProperties} />
@@ -133,6 +213,16 @@ const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
     case 'Link':
       return (
         <LinkComponent properties={properties as LinkProperties} />
+      );
+    case 'ConcatText':
+      return (
+        <ConcatTextComponent properties={properties as ConcatTextProperties} />
+      );
+    case 'Form':
+      return (
+        <FormComponent properties={properties as FormProperties}>
+          <ParsedLayout config={properties as FormProperties} />
+        </FormComponent>
       );
     default:
       return type;
@@ -248,26 +338,52 @@ export const PathProvider = ({ children, path = '' }: PathProviderProps) => {
 export const usePathContext = () => {
   return useContext(PathContext);
 };
-export const useFullPath = (fieldName: string): string => {
+export const useFullPath = (fieldName?: string) => {
   const parentPath = useContext(PathContext);
-  return parentPath ? `${parentPath}.${fieldName}` : fieldName;
+  const fullPath = fieldName
+    ? parentPath ? `${parentPath}.${fieldName}` : fieldName
+    : '';
+  const getFullPath = (fieldName: string) => {
+    return parentPath ? `${parentPath}.${fieldName}` : fieldName;
+  };
+  return { fullPath, getFullPath };
 };
 
 
 // File: ListComponent.tsx
 
 const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
+  const { fieldName, direction, layout, as, gridSettings } = properties;
   const { getState } = useSectionDataContext();
-  const fullPath = useFullPath(properties.fieldName);
+  const { fullPath } = useFullPath(fieldName);
   const list = getState<any[]>(fullPath) ?? [];
+  if (as === 'grid') {
+    console.log('IMAGES');
+    return useMemo(() => (
+      <Grid gap={5} templateRows={gridSettings?.templateRows} templateColumns={gridSettings?.templateColumns}>
+        { list.map((_, index) => {
+          const entryPath = `${fullPath}[${index}]`;
+          const rowSpan = gridSettings?.childSettings?.[index]?.rowSpan;
+          const colSpan = gridSettings?.childSettings?.[index]?.colSpan;
+          return (
+            <GridItem rowSpan={rowSpan} colSpan={colSpan} key={entryPath}>
+              <PathProvider path={entryPath}>
+                <ParsedLayout config={layout} />
+              </PathProvider>
+            </GridItem>
+          );
+        })}
+      </Grid>
+    ), [list]);
+  }
   return useMemo(() => (
     <List>
-      <Stack spacing={5}>
+      <Stack direction={direction} gap={5}>
         { list.map((_, index) => {
           const entryPath = `${fullPath}[${index}]`;
           return (
             <PathProvider path={entryPath} key={entryPath}>
-              <ParsedLayout config={properties.layout} />
+              <ParsedLayout config={layout} />
             </PathProvider>);
         })}
       </Stack>
@@ -275,3 +391,48 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
   ), [list]);
 };
 export default ListComponent;
+/*
+entry layout {"components":[{"type":"CardLayout","properties":{"title":"Metal Mario - Tennis","components":[{"type":"Image","properties":{"fieldName":"image","alt":"Metal Mario - Tennis"}},{"type":"LabeledText","properties":{"fieldName":"amiiboSeries","label":"Amiibo Series","separator":":","fontSize":"md"}},{"type":"LabeledText","properties":{"fieldName":"gameSeries","label":"Game Series","separator":":","fontSize":"md"}},{"type":"LabeledText","properties":{"fieldName":"release.na","label":"Release (NA)","separator":":","fontSize":"md"}}]}}]}
+ */
+
+
+// File: dictionary.ts
+
+export const validationsDictionary: { [key: string]: ValidationFunction } = {
+  required: (schema, args) => schema.required(args?.message),
+  email: (schema, args) => {
+    if (schema.type === 'string') {
+      return (schema as Yup.StringSchema).email(args?.message);
+    }
+    console.warn('Email validation applied to a non-string field');
+    return schema;
+  },
+  positive: (schema, args) => {
+    if (schema.type === 'number') {
+      return (schema as Yup.NumberSchema).positive(args?.message);
+    }
+    return schema;
+  },
+  equalTo: (schema, args) => {
+    if (args && 'referenceField' in args) {
+      schema.oneOf([Yup.ref(args.referenceField as string), null], args.message);
+    }
+    return schema;
+  },
+  matches: (schema, args) => {
+    if (schema.type === 'string') {
+      return (schema as Yup.StringSchema).matches(new RegExp(args?.regex as string), args?.message);
+    }
+    console.warn('Matches validation applied to a non-string field');
+    return schema;
+  }
+};
+export const conditionalTestsDictionary: Record<string, ConditionFunction> = {
+  equals: (context, value, args, ) => value === context.parent[args.referenceField],
+  notEquals: (context, value, args) => value !== context.parent[args.referenceField],
+  greaterThan: (context, value, args) => value > context.parent[args.referenceField],
+  exists: (context, value, args) => !!value && !!context.parent[args.referenceField],
+  // Add more condition functions as needed
+};
+
+

@@ -6,16 +6,15 @@ import { useFullPath } from '@/dynamicUI/state/PathProvider';
 import useFormat from '@/dynamicUI/actions/format';
 
 const TextComponent: FC<{ properties: TextProperties }> = ({ properties }) => {
+  const { fieldName, format: formats, fontSize, align } = properties;
   const { getState } = useSectionDataContext();
-  const { fullPath } = useFullPath(properties.fieldName);
-  console.log(fullPath);
+  const { fullPath } = useFullPath(fieldName);
 
   const textValue = getState<string>(fullPath) ?? '';
-  console.log(textValue);
-  const format = useFormat(properties.format);
+  const format = useFormat(formats);
 
   return (
-    <Text fontSize={properties.fontSize}>{format(textValue)}</Text>
+    <Text fontSize={fontSize}>{format(textValue)}</Text>
   );
 };
 
