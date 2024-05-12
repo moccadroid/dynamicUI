@@ -1,0 +1,50 @@
+{
+    "Introduction": {
+      "title": "Dynamic UI Documentation",
+      "headline": "Introduction to Dynamic UI",
+      "description": "Dynamic UI is a React-based library that translates JSON configurations into interactive UI components dynamically. This documentation provides a comprehensive overview of how to harness the power of Dynamic UI to build reactive interfaces with minimal code."
+    },
+    "GettingStarted": {
+      "headline": "Getting Started",
+      "description": "Learn how to set up Dynamic UI in your React project. This section covers the basics of installation and initial configuration.",
+      "installationCode": "npm install dynamic-ui-react",
+      "initialSetupCode": "import { DynamicUIRenderer } from 'dynamic-ui-react';"
+    },
+    "FeatureComponentsRendering": {
+      "headline": "Components Rendering",
+      "description": "Understand how Dynamic UI renders different components based on JSON definitions. This section explores the flexibility of defining UI components like buttons, inputs, and forms.",
+      "examples": {
+        "Button": {
+          "json": "{ 'type': 'Button', 'properties': { 'text': 'Click Me', 'action': 'logAction' } }",
+          "description": "Defines a simple button that logs an action on click."
+        },
+        "InputField": {
+          "json": "{ 'type': 'Input', 'properties': { 'label': 'Your Name', 'fieldName': 'user.name' } }",
+          "description": "Creates an input field bound to the user's name property."
+        }
+      }
+    },
+    "FeatureLayoutFlexibility": {
+      "headline": "Layout Flexibility",
+      "description": "Dynamic UI supports various layout configurations, including Flex and Grid layouts, to build responsive and structured interfaces.",
+      "exampleFlexLayout": {
+        "json": "{ 'type': 'FlexLayout', 'properties': { 'direction': 'row', 'components': [/* components here */] } }",
+        "description": "Configures a row-oriented flex layout with nested components."
+      },
+      "exampleGridLayout": {
+        "json": "{ 'type': 'GridLayout', 'properties': { 'gridSettings': { 'templateColumns': '1fr 2fr', 'templateRows': 'auto' }, 'components': [/* components here */] } }",
+        "description": "Sets up a grid layout with specified column and row settings."
+      }
+    },
+    "AdvancedInteractivity": {
+      "headline": "Advanced Interactivity",
+      "description": "Explore how to add interactivity to your UI components using Dynamic UI. This includes handling user inputs, actions, and state management within the JSON configuration.",
+      "codeExample": "{ 'type': 'Form', 'properties': { 'formFields': ['username', 'password'], 'validation': { 'fields': { 'username': { 'type': 'string', 'validations': [ { 'type': 'required', 'args': { 'message': 'Username is required' } } ] }, 'password': { 'type': 'string', 'validations': [ { 'type': 'required', 'args': { 'message': 'Password is required' } } ] } } } } }"
+    },
+    "InteractiveExamples": {
+      "headline": "Interactive Examples",
+      "description": "Try out live examples that demonstrate the dynamic rendering capabilities of Dynamic UI. These examples allow you to edit JSON configurations and see real-time changes.",
+      "interactiveLink": "/demo/pages/examples"
+    }
+
+}

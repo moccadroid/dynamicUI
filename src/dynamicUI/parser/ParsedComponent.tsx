@@ -1,5 +1,5 @@
 import type {
-  ButtonProperties, CardLayoutProperties,
+  ButtonProperties, CardLayoutProperties, CodeProperties,
   ComponentConfig, ConcatTextProperties, FlexLayoutProperties, FormProperties, GridLayoutProperties,
   HeadlineProperties, ImageProperties,
   InputProperties, LabeledTextProperties, LinkProperties, ListProperties,
@@ -21,6 +21,7 @@ import LinkComponent from '@/dynamicUI/components/data/LinkComponent';
 import ConcatTextComponent from '@/dynamicUI/components/data/ConcatTextComponent';
 import FormComponent from '@/dynamicUI/components/form/FormComponent';
 import GridLayoutComponent from '@/dynamicUI/components/layout/GridLayoutComponent';
+import CodeComponent from '@/dynamicUI/components/data/CodeComponent';
 
 const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
 
@@ -29,6 +30,8 @@ const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
   switch (type) {
     case 'Headline':
       return <HeadlineComponent properties={properties as HeadlineProperties} />;
+    case 'Code':
+      return <CodeComponent properties={properties as CodeProperties} />;
     case 'Input':
       return (
         <InputComponent properties={properties as InputProperties} />

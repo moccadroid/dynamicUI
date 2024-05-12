@@ -93,6 +93,6 @@ export async function POSTLayoutRequest({ promptParams }: POSTLayoutRequestParam
     completion = await ask(messages);
     console.log('final layout message', JSON.stringify(completion.choices[0].message));
   }
-
+  console.log('completion finished', message.content);
   return completion;
 }

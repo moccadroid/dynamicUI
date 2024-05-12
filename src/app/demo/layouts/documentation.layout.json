@@ -1,0 +1,402 @@
+{
+  "Introduction": {
+    "components": [
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "fieldName": "title",
+          "level": 3
+        }
+      },
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "fieldName": "headline",
+          "level": 5
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "description",
+          "fontSize": "md",
+          "format": []
+        }
+      }
+    ]
+  },
+  "GettingStarted": {
+    "components": [
+      {
+        "type": "CardLayout",
+        "properties": {
+          "id": "cardLayout",
+          "components": [
+            {
+              "type": "FlexLayout",
+              "properties": {
+                "id": "flexLayout",
+                "direction": "column",
+                "components": [
+                  {
+                    "type": "Headline",
+                    "properties": {
+                      "id": "headline",
+                      "text": "Description",
+                      "level": 5,
+                      "fieldName": "headline"
+                    }
+                  },
+                  {
+                    "type": "Text",
+                    "properties": {
+                      "id": "text",
+                      "fieldName": "description",
+                      "fontSize": "md"
+                    }
+                  },
+                  {
+                    "type": "Headline",
+                    "properties": {
+                      "id": "headline",
+                      "text": "Installation Code",
+                      "level": 6
+                    }
+                  },
+                  {
+                    "type": "Code",
+                    "properties": {
+                      "id": "code",
+                      "fieldName": "installationCode"
+                    }
+                  },
+                  {
+                    "type": "Headline",
+                    "properties": {
+                      "id": "headline",
+                      "text": "Initial Setup Code",
+                      "level": 6
+                    }
+                  },
+                  {
+                    "type": "Code",
+                    "properties": {
+                      "id": "code",
+                      "fieldName": "initialSetupCode"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "FeatureComponentsRendering": {
+    "components": [
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Components Rendering",
+          "level": 3
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "description",
+          "fontSize": "md"
+        }
+      },
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Example: Button",
+          "level": 5
+        }
+      },
+      {
+        "type": "FlexLayout",
+        "properties": {
+          "id": "flexLayout",
+          "direction": "row",
+          "components": [
+            {
+              "type": "Code",
+              "properties": {
+                "id": "code",
+                "fieldName": "examples.Button.json"
+              }
+            },
+            {
+              "type": "Button",
+              "properties": {
+                "id": "button",
+                "text": "Click Me",
+                "type": "submit",
+                "format": []
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "examples.Button.description",
+          "fontSize": "md"
+        }
+      },
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Example: InputField",
+          "level": 5
+        }
+      },
+      {
+        "type": "FlexLayout",
+        "properties": {
+          "id": "flexLayout",
+          "direction": "row",
+          "components": [
+            {
+              "type": "Code",
+              "properties": {
+                "id": "code",
+                "fieldName": "examples.InputField.json"
+              }
+            },
+            {
+              "type": "Form",
+              "properties": {
+                "id": "form",
+                "fieldName": "user.name",
+                "formFields": [
+                  "user.name"
+                ],
+                "validation": {
+                  "prompt": "",
+                  "data": ""
+                },
+                "components": [
+                  {
+                    "type": "Input",
+                    "properties": {
+                      "id": "input",
+                      "label": "Your Name",
+                      "fieldName": "user.name",
+                      "action": "",
+                      "placeholder": ""
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "examples.InputField.description",
+          "fontSize": "md"
+        }
+      }
+    ]
+  },
+  "FeatureLayoutFlexibility": {
+    "components": [
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Layout Flexibility",
+          "level": 3
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "description",
+          "fontSize": "md"
+        }
+      },
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Example Flex Layout",
+          "level": 5
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "exampleFlexLayout.description",
+          "fontSize": "sm"
+        }
+      },
+      {
+        "type": "Code",
+        "properties": {
+          "id": "code",
+          "fieldName": "exampleFlexLayout.json"
+        }
+      },
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Example Grid Layout",
+          "level": 5
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "exampleGridLayout.description",
+          "fontSize": "sm"
+        }
+      },
+      {
+        "type": "Code",
+        "properties": {
+          "id": "code",
+          "fieldName": "exampleGridLayout.json"
+        }
+      }
+    ]
+  },
+  "AdvancedInteractivity": {
+    "components": [
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Advanced Interactivity",
+          "level": 3
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "description",
+          "fontSize": "md"
+        }
+      },
+      {
+        "type": "Code",
+        "properties": {
+          "id": "code",
+          "fieldName": "codeExample"
+        }
+      },
+      {
+        "type": "Form",
+        "properties": {
+          "id": "form",
+          "fieldName": "",
+          "formFields": [
+            "username",
+            "password"
+          ],
+          "validation": {
+            "fields": {
+              "username": {
+                "type": "string",
+                "validations": [
+                  {
+                    "type": "required",
+                    "args": {
+                      "message": "Username is required"
+                    }
+                  }
+                ]
+              },
+              "password": {
+                "type": "string",
+                "validations": [
+                  {
+                    "type": "required",
+                    "args": {
+                      "message": "Password is required"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "components": [
+            {
+              "type": "Input",
+              "properties": {
+                "id": "input",
+                "label": "Username",
+                "fieldName": "username"
+              }
+            },
+            {
+              "type": "Input",
+              "properties": {
+                "id": "input",
+                "label": "Password",
+                "fieldName": "password"
+              }
+            },
+            {
+              "type": "Button",
+              "properties": {
+                "id": "button",
+                "text": "Submit",
+                "type": "submit"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "InteractiveExamples": {
+    "components": [
+      {
+        "type": "Headline",
+        "properties": {
+          "id": "headline",
+          "text": "Interactive Examples",
+          "level": 3
+        }
+      },
+      {
+        "type": "Text",
+        "properties": {
+          "id": "text",
+          "fieldName": "description",
+          "fontSize": "md"
+        }
+      },
+      {
+        "type": "Link",
+        "properties": {
+          "id": "link",
+          "fieldName": "interactiveLink",
+          "label": "Go to Interactive Examples"
+        }
+      }
+    ]
+  }
+}

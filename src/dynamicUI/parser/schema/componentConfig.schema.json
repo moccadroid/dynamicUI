@@ -29,6 +29,7 @@
             "Textarea",
             "FlexLayout",
             "CardLayout",
+            "Code",
             "Image",
             "Text",
             "LabeledText",
@@ -58,6 +59,9 @@
             },
             {
               "$ref": "#/definitions/CardLayoutProperties"
+            },
+            {
+              "$ref": "#/definitions/CodeProperties"
             },
             {
               "$ref": "#/definitions/ImageProperties"
@@ -207,6 +211,23 @@
       "required": [
         "id",
         "label",
+        "fieldName"
+      ],
+      "additionalProperties": false
+    },
+    "CodeProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "code"
+        },
+        "fieldName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
         "fieldName"
       ],
       "additionalProperties": false

@@ -68,6 +68,11 @@ export interface LabeledTextProperties {
     format?: TextFormatter[];
 }
 
+export interface CodeProperties { // use this to display code related content
+    id: 'code';
+    fieldName: string;
+}
+
 export interface ConcatTextProperties { // used to concat multiple data fields into one text component
     id: 'concatText';
     fields: string[];  // Array of field paths
@@ -115,9 +120,9 @@ export interface CardLayoutProperties extends LayoutConfig { // can be nested
 }
 
 export interface ComponentConfig { // describes the above components
-    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout'
+    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout' | 'Code'
       | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form' | 'GridLayout';
-    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties
+    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties | CodeProperties
       | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties
       | ListProperties | LinkProperties | ConcatTextProperties | FormProperties | GridLayoutProperties;
 }

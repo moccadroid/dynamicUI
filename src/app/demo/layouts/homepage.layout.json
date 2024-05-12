@@ -5,7 +5,7 @@
       "properties": {
         "id": "headline",
         "text": "Welcome to Our Library Demo",
-        "level": 1
+        "level": 3
       }
     },
     {
@@ -35,7 +35,7 @@
             "properties": {
               "id": "headline",
               "text": "Check Out Our Gallery",
-              "level": 2
+              "level": 5
             }
           },
           {
@@ -84,7 +84,7 @@
             "properties": {
               "id": "headline",
               "text": "Key Features",
-              "level": 2
+              "level": 5
             }
           },
           {
@@ -141,7 +141,7 @@
             "properties": {
               "id": "headline",
               "text": "What Our Users Say",
-              "level": 2
+              "level": 5
             }
           },
           {

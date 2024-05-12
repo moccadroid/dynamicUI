@@ -2,7 +2,7 @@
   "headline": "Welcome to Our Library Demo",
   "introduction": {
     "text": "Explore the features of our comprehensive library through this interactive demonstration. Dive into a seamless experience as you navigate through various functionalities and resources offered.",
-    "learnMoreLink": "/demo/about",
+    "learnMoreLink": "/demo/pages/documentation",
     "learnMoreLinkText": "Learn More"
   },
   "imageSection": {
