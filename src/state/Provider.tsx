@@ -2,6 +2,7 @@ import type { FC, ReactNode } from 'react';
 import React, { createContext, useContext, useState } from 'react';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
+import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 
 // Create a context
 const StateContext = createContext<StateContextType | undefined>(undefined);
@@ -12,8 +13,11 @@ interface StateContextType {
 }
 
 export interface State {
-  layout: any;
+  layout: LayoutConfig | undefined;
+  layoutName: string | undefined;
   app: {
+    layoutHistory: LayoutConfig[];
+    layoutHistoryIndex: number;
     promptHistory: string[],
     currentPrompt: string;
     completion?: ChatCompletion;

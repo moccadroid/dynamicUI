@@ -1,6 +1,9 @@
-const ts = require('typescript');
-const fs = require('fs');
-const path = require('path');
+//const ts = require('typescript');
+import ts from 'typescript';
+//const fs = require('fs');
+import fs from 'fs';
+import path from 'path';
+//const path = require('path');
 
 function extractInterfaces(sourceFilePath) {
     const fileContents = fs.readFileSync(sourceFilePath, 'utf8');
@@ -23,10 +26,11 @@ function writeInterfacesToFile(interfaces, outputPath) {
         fs.mkdirSync(outputDir, { recursive: true });
     }
     fs.writeFileSync(outputPath, JSON.stringify(interfaces, null, 2), 'utf8');
+    console.log(`componentConfig written to ${outputPath}`);
 }
 
-const inputPath = path.resolve(__dirname, '../components/ComponentConfig.ts');
-const outputPath = path.resolve(__dirname, '../ai/definitions/componentConfig.json');
+const inputPath = path.resolve(process.cwd(), './src/dynamicUI/components/ComponentConfig.ts');
+const outputPath = path.resolve(process.cwd(), './src/dynamicUI/ai/definitions/componentConfig.json');
 
 const interfaces = extractInterfaces(inputPath);
 writeInterfacesToFile(interfaces, outputPath);

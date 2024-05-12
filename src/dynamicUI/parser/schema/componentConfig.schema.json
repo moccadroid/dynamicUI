@@ -1,0 +1,485 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/LayoutConfig",
+  "definitions": {
+    "LayoutConfig": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          }
+        }
+      },
+      "required": [
+        "components"
+      ],
+      "additionalProperties": false
+    },
+    "ComponentConfig": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Input",
+            "Button",
+            "Headline",
+            "Textarea",
+            "FlexLayout",
+            "CardLayout",
+            "Image",
+            "Text",
+            "LabeledText",
+            "List",
+            "Link",
+            "ConcatText",
+            "Form"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/InputProperties"
+            },
+            {
+              "$ref": "#/definitions/ButtonProperties"
+            },
+            {
+              "$ref": "#/definitions/HeadlineProperties"
+            },
+            {
+              "$ref": "#/definitions/TextareaProperties"
+            },
+            {
+              "$ref": "#/definitions/FlexLayoutProperties"
+            },
+            {
+              "$ref": "#/definitions/CardLayoutProperties"
+            },
+            {
+              "$ref": "#/definitions/ImageProperties"
+            },
+            {
+              "$ref": "#/definitions/TextProperties"
+            },
+            {
+              "$ref": "#/definitions/LabeledTextProperties"
+            },
+            {
+              "$ref": "#/definitions/ListProperties"
+            },
+            {
+              "$ref": "#/definitions/LinkProperties"
+            },
+            {
+              "$ref": "#/definitions/ConcatTextProperties"
+            },
+            {
+              "$ref": "#/definitions/FormProperties"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "InputProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "input"
+        },
+        "label": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "fieldName"
+      ],
+      "additionalProperties": false
+    },
+    "ButtonProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "button"
+        },
+        "text": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "submit"
+        },
+        "format": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UPPERCASE",
+              "LOWERCASE",
+              "CAPITALIZE",
+              "REMOVE_UNDERSCORES"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "HeadlineProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "headline"
+        },
+        "text": {
+          "type": "string"
+        },
+        "level": {
+          "type": "number",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "level"
+      ],
+      "additionalProperties": false
+    },
+    "TextareaProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "textarea"
+        },
+        "label": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "fieldName"
+      ],
+      "additionalProperties": false
+    },
+    "FlexLayoutProperties": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          }
+        },
+        "id": {
+          "type": "string",
+          "const": "flexLayout"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "row",
+            "column"
+          ]
+        }
+      },
+      "required": [
+        "components",
+        "direction",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "ImageProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "image"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "alt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "fieldName",
+        "alt"
+      ],
+      "additionalProperties": false
+    },
+    "CardLayoutProperties": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          }
+        },
+        "id": {
+          "type": "string",
+          "const": "cardLayout"
+        }
+      },
+      "required": [
+        "components",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "TextProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "text"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "fontSize": {
+          "type": "string",
+          "enum": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        },
+        "format": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UPPERCASE",
+              "LOWERCASE",
+              "CAPITALIZE",
+              "REMOVE_UNDERSCORES"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "fieldName",
+        "fontSize"
+      ],
+      "additionalProperties": false
+    },
+    "LabeledTextProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "labeledText"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "separator": {
+          "type": "string",
+          "const": ":"
+        },
+        "fontSize": {
+          "type": "string",
+          "enum": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        },
+        "format": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UPPERCASE",
+              "LOWERCASE",
+              "CAPITALIZE",
+              "REMOVE_UNDERSCORES"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "fieldName",
+        "label",
+        "separator",
+        "fontSize"
+      ],
+      "additionalProperties": false
+    },
+    "ListProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "list"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "layout": {
+          "$ref": "#/definitions/LayoutConfig"
+        }
+      },
+      "required": [
+        "id",
+        "fieldName",
+        "layout"
+      ],
+      "additionalProperties": false
+    },
+    "LinkProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "link"
+        },
+        "fieldName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "fieldName"
+      ],
+      "additionalProperties": false
+    },
+    "ConcatTextProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "concatText"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "separator": {
+          "type": "string"
+        },
+        "fontSize": {
+          "type": "string",
+          "enum": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        },
+        "format": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UPPERCASE",
+              "LOWERCASE",
+              "CAPITALIZE",
+              "REMOVE_UNDERSCORES"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "fields",
+        "separator",
+        "fontSize"
+      ],
+      "additionalProperties": false
+    },
+    "FormProperties": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          }
+        },
+        "id": {
+          "type": "string",
+          "const": "form"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "formFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation": {}
+      },
+      "required": [
+        "components",
+        "fieldName",
+        "formFields",
+        "id",
+        "validation"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

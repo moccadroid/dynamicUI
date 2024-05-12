@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "fields": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["string", "number", "boolean", "date"]
+          },
+          "validations": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": ["required", "email", "positive", "equalTo", "matches"]
+                    },
+                    "args": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "regex": {
+                          "type": "string"
+                        },
+                        "referenceField": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["message"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["type"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "conditional"
+                    },
+                    "args": {
+                      "type": "object",
+                      "properties": {
+                        "condition": {
+                          "type": "object",
+                          "properties": {
+                            "test": {
+                              "type": "string",
+                              "enum": ["equals", "notEquals", "greaterThan", "exists"]
+                            },
+                            "referenceField": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["test", "referenceField"]
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["condition", "message"]
+                    }
+                  },
+                  "required": ["type", "args"]
+                }
+              ]
+            }
+          }
+        },
+        "required": ["type", "validations"]
+      }
+    }
+  },
+  "required": ["fields"]
+}

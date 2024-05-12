@@ -11,11 +11,11 @@ const ConcatTextComponent: FC<{ properties: ConcatTextProperties }> = ({ propert
   const format = useFormat(properties.format);
 
   const concatenatedValue = useMemo(() => {
-    return fields.map(field => getState<string>(field)).filter(Boolean).join(separator);
+    return fields.map(field => format(getState<string>(field) ?? '')).filter(Boolean).join(separator);
   }, [fields, separator]);
 
 
-  return <Text size={fontSize}>{format(concatenatedValue)}</Text>;
+  return <Text size={fontSize}>{concatenatedValue}</Text>;
 };
 
 export default ConcatTextComponent;

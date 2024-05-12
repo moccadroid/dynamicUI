@@ -8,12 +8,14 @@ import useCompletions from '@/state/useCompletions';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
+import { useLayout } from '@/state/useLayout';
 
 const Navbar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { handleCompletion } = useCompletions();
   const { state } = useStateContext();
+  const { setLayout } = useLayout();
 
   const handleRandomize = async () => {
     const promptParams = {
@@ -22,7 +24,8 @@ const Navbar = () => {
     };
     setIsLoading(true);
     const layoutAgent = LayoutAgentFactory.create({ params: promptParams,  });
-    await layoutAgent.run();
+    const { layout } = await layoutAgent.run();
+    setLayout(layout);
     const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
     handleCompletion({ completion });
     setIsLoading(false);
@@ -33,7 +36,7 @@ const Navbar = () => {
   };
 
   return (
-    <Flex as="nav" align="center" justify="space-between" wrap="wrap" padding="1.5rem" bg="teal.500">
+    <Flex as="nav" align="center" justify="space-between" wrap="wrap" padding="1.5rem" bg="#778899">
       <Flex align="center" mr={5}>
         <Stack direction={'row'}>
           <Text fontSize="lg" fontWeight="bold">dynamicUI</Text>
@@ -46,7 +49,7 @@ const Navbar = () => {
       </Flex>
       <Flex direction='row'>
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-        <Button onClick={handleRandomize}>{isLoading ? <Spinner /> : 'Randomize' }</Button>
+        <Button onClick={handleRandomize}>{isLoading ? <Spinner /> : 'Try your luck' }</Button>
       </Flex>
       <Box display="flex" width="auto" alignItems="center">
         <Button onClick={handleOpenDrawer} variant="outline" _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}>Sidebar</Button>

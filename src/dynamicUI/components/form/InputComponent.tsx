@@ -1,30 +1,26 @@
 import type { InputProperties } from '@/dynamicUI/components/ComponentConfig';
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import type { ChangeEvent, FC } from 'react';
-import { getAction } from '@/actions/actions';
-import { useStateContext } from '@/state/Provider';
-import { getValueFromState } from '@/state/getValueFromState';
-import type { UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
-import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
-import { useFullPath } from '@/dynamicUI/state/PathProvider';
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
+import type { FC } from 'react';
+import type { FieldInputProps, FormikProps } from 'formik';
+import { Field } from 'formik';
 
 const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => {
   const { label, fieldName, placeholder } = properties;
-  const fullPath = useFullPath(fieldName);
-  const { getState, setState } = useSectionDataContext();
-  const value = getState<string>(properties.fieldName) ?? '';
-
-  const updateAction = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setState(fullPath, event.target.value);
-  };
-
   return (
-    <FormControl variant="floating">
-      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-      <Input placeholder={placeholder} value={value} onChange={updateAction}/>
-      <FormLabel>{label}</FormLabel>
-    </FormControl>
+    <Field name={fieldName} placeholder={placeholder} label={label} component={InternalInput} />
   );
 };
+
+const InternalInput: FC<InputProperties & { field: FieldInputProps<any>, form: FormikProps<any> }> =
+  ({ field, form, label, placeholder }) => {
+    return (
+      <FormControl variant="floating" isInvalid={!!(form.errors[field.name] && form.touched[field.name])}>
+        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+        <Input placeholder={placeholder} {...field} id={field.name}/>
+        <FormLabel>{label}</FormLabel>
+        <FormErrorMessage>{form.errors[field.name] as any}</FormErrorMessage>
+      </FormControl>
+    );
+  };
 
 export default InputComponent;

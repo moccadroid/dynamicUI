@@ -1,6 +1,6 @@
 import type {
   ButtonProperties, CardLayoutProperties,
-  ComponentConfig, ConcatTextProperties, FlexLayoutProperties,
+  ComponentConfig, ConcatTextProperties, FlexLayoutProperties, FormProperties,
   HeadlineProperties, ImageProperties,
   InputProperties, LabeledTextProperties, LinkProperties, ListProperties,
   TextareaProperties, TextProperties
@@ -19,6 +19,7 @@ import LabeledTextComponent from '@/dynamicUI/components/data/LabeledTextCompone
 import ListComponent from '@/dynamicUI/components/data/ListComponent';
 import LinkComponent from '@/dynamicUI/components/data/LinkComponent';
 import ConcatTextComponent from '@/dynamicUI/components/data/ConcatTextComponent';
+import FormComponent from '@/dynamicUI/components/form/FormComponent';
 
 const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
 
@@ -70,6 +71,12 @@ const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
     case 'ConcatText':
       return (
         <ConcatTextComponent properties={properties as ConcatTextProperties} />
+      );
+    case 'Form':
+      return (
+        <FormComponent properties={properties as FormProperties}>
+          <ParsedLayout config={properties as FormProperties} />
+        </FormComponent>
       );
     default:
       return type;

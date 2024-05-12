@@ -1,22 +1,27 @@
 'use server';
 
 import OpenAI from 'openai';
-import { generateDataCleanupPrompt } from '@/agents/dataCleanup/prompt';
+import { generateValidationPrompt } from '@/agents/validation/prompt';
 
 const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
 });
 
-export interface DataCleanupPromptParams {
+export interface ValidationPromptParams {
   data: any;
-  length?: number;
+  schema: any;
+  prompt: string;
 }
 
-export async function POSTDataCleanupRequest({ data, length }: DataCleanupPromptParams) {
+export interface POSTValidationRequestParams {
+  promptParams: ValidationPromptParams
+}
+
+export async function POSTValidationRequest({ promptParams }: POSTValidationRequestParams) {
   'use server';
 
-  console.log('POSTDataCleanupRequest');
-  const { userPrompt, systemPrompt } = generateDataCleanupPrompt(data, length);
+  console.log('POSTValidationRequest');
+  const { userPrompt, systemPrompt } = generateValidationPrompt(promptParams);
   console.log(systemPrompt);
   console.log(userPrompt);
 

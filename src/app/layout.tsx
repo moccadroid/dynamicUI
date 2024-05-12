@@ -9,11 +9,14 @@ import componentConfig from '@/dynamicUI/ai/definitions/componentConfig.json';
 
 const initialState: State = {
   app: {
+    layoutHistory: [],
+    layoutHistoryIndex: -1,
     promptHistory: [],
     currentPrompt: '',
     selectedDefinitions: Object.keys(componentConfig),
   },
   layout: undefined,
+  layoutName: undefined,
   exampleData: userData.data,
   data: userData.data,
   stats: {

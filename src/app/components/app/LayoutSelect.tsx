@@ -1,24 +1,18 @@
 import { Select, Stack, Text } from '@chakra-ui/react';
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
 import { userData } from '@/api/db/dataAndLayouts';
+import { useLayout } from '@/state/useLayout';
+import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 
 const LayoutSelect = () => {
-  const { setState } = useStateContext();
-
+  const { setLayout } = useLayout();
 
   const handleSelect = (event: any) => {
     const key: any = String(event.target.value);
     const selectedLayout = userData.layouts.find((layout) => key in layout);
     if (selectedLayout && key in selectedLayout) {
-
-      setState((prevState: State) => {
-        const newState = { ...prevState };
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        newState.layout = selectedLayout[key];
-        return newState;
-      });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      setLayout(selectedLayout[key] as LayoutConfig);
     }
   };
 

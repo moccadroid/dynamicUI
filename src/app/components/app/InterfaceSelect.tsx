@@ -18,6 +18,8 @@ const InterfaceSelect = () => {
 
   useEffect(() => {
     const object = state.app.selectedDefinitions.reduce((acc, key) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       acc[key] = true;
       return acc;
     }, {});

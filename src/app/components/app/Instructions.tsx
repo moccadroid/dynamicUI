@@ -9,9 +9,11 @@ import useCompletions from '@/state/useCompletions';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
+import { useLayout } from '@/state/useLayout';
 
 const Instructions = () => {
-  const { state, setState } = useStateContext();
+  const { state } = useStateContext();
+  const { setLayout } = useLayout();
   const [userPrompt, setUserPrompt] = useState<string>(state.app.currentPrompt);
   const [isLoading, setIsLoading] = useState(false);
   const { handleCompletion } = useCompletions();
@@ -33,12 +35,8 @@ const Instructions = () => {
 
     setIsLoading(true);
     const layoutAgent = LayoutAgentFactory.create({ params: promptParams });
-    const layout = await layoutAgent.run();
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      newState.layout = layout;
-      return newState;
-    });
+    const { layout } = await layoutAgent.run();
+    setLayout(layout);
     console.log('layout', layout);
     const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
     handleCompletion({ completion, additionalFields: { userPrompt } });
@@ -49,7 +47,7 @@ const Instructions = () => {
     <Stack direction="column">
       <Stack>
         <Text as="b">Instruction History:</Text>
-        <Textarea value={JSON.stringify(state.app.promptHistory.join('\n'))} onChange={() => {}} />
+        <Textarea value={state.app.promptHistory.join('\n')} onChange={() => {}} />
       </Stack>
       <Text as="b">Instructions:</Text>
       <Textarea value={userPrompt} onChange={handleChange}/>

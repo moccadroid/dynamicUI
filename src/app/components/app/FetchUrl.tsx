@@ -8,11 +8,13 @@ import ChatCompletion = OpenAI.ChatCompletion;
 import useCompletions from '@/state/useCompletions';
 import DataCleanupAgentFactory from '@/agents/dataCleanup/DataCleanupAgent';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
+import { useLayout } from '@/state/useLayout';
 
 const FetchUrl = () => {
   const [url, setUrl] = useState<string | null>(null);
   const [limit, setLimit] = useState<number>(1000);
   const { setState, state } = useStateContext();
+  const { setLayout } = useLayout();
   const [isLoading, setIsLoading] = useState(false);
   const { handleCompletion } = useCompletions();
 
@@ -37,6 +39,7 @@ const FetchUrl = () => {
       console.log('cleaned data', data);
       const layoutAgent = LayoutAgentFactory.create({ params: { exampleData: data, definitions: state.app.selectedDefinitions } });
       const { layout } = await layoutAgent.run();
+      setLayout(layout);
       console.log('layout', layout);
       const layoutCompletion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
       handleCompletion({ completion: layoutCompletion });
@@ -46,7 +49,6 @@ const FetchUrl = () => {
           const newState = { ...prevState };
           newState.data = fullData;
           newState.exampleData = data;
-          newState.layout = layout;
           return newState;
         });
       }

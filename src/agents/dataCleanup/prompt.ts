@@ -1,4 +1,4 @@
-export const generatePrompt = (data: any, length: number = 1000) => {
+export const generateDataCleanupPrompt = (data: any, length: number = 1000) => {
 
 
   const systemPrompt = `
