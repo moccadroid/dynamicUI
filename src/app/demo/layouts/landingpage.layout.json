@@ -12,35 +12,44 @@
               "id": "cardLayout",
               "components": [
                 {
-                  "type": "Image",
+                  "type": "FlexLayout",
                   "properties": {
-                    "id": "image",
-                    "fieldName": "heroImage",
-                    "alt": "Dynamic UI Hero Image"
-                  }
-                },
-                {
-                  "type": "Headline",
-                  "properties": {
-                    "id": "headline",
-                    "text": "Craft Your UI with Pure JSON",
-                    "level": 5
-                  }
-                },
-                {
-                  "type": "Text",
-                  "properties": {
-                    "id": "text",
-                    "fieldName": "description",
-                    "fontSize": "md"
-                  }
-                },
-                {
-                  "type": "Link",
-                  "properties": {
-                    "id": "link",
-                    "label": "Dive Into the Docs",
-                    "fieldName": "/documentation"
+                    "id": "flexLayout",
+                    "direction": "column",
+                    "components": [
+                      {
+                        "type": "Image",
+                        "properties": {
+                          "id": "image",
+                          "fieldName": "heroImage",
+                          "alt": "Dynamic UI Hero Image"
+                        }
+                      },
+                      {
+                        "type": "Headline",
+                        "properties": {
+                          "id": "headline",
+                          "text": "Craft Your UI with Pure JSON",
+                          "level": 3
+                        }
+                      },
+                      {
+                        "type": "Text",
+                        "properties": {
+                          "id": "text",
+                          "fieldName": "description",
+                          "fontSize": "md"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "label": "Dive Into the Docs",
+                          "fieldName": "/documentation"
+                        }
+                      }
+                    ]
                   }
                 }
               ]
@@ -204,57 +213,6 @@
               "id": "cardLayout",
               "components": [
                 {
-                  "type": "GridLayout",
-                  "properties": {
-                    "id": "grid",
-                    "gridSettings": {
-                      "templateColumns": "repeat(2, 1fr)"
-                    },
-                    "components": [
-                      {
-                        "type": "Link",
-                        "properties": {
-                          "id": "link",
-                          "fieldName": "footer.links[0].url",
-                          "label": "Documentation"
-                        }
-                      },
-                      {
-                        "type": "Link",
-                        "properties": {
-                          "id": "link",
-                          "fieldName": "footer.links[1].url",
-                          "label": "API Reference"
-                        }
-                      },
-                      {
-                        "type": "Link",
-                        "properties": {
-                          "id": "link",
-                          "fieldName": "footer.links[2].url",
-                          "label": "Support"
-                        }
-                      },
-                      {
-                        "type": "Link",
-                        "properties": {
-                          "id": "link",
-                          "fieldName": "footer.links[3].url",
-                          "label": "Privacy Policy"
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "type": "CardLayout",
-            "properties": {
-              "id": "cardLayout",
-              "components": [
-                {
                   "type": "FlexLayout",
                   "properties": {
                     "id": "flexLayout",
@@ -306,6 +264,57 @@
                               }
                             }
                           ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "CardLayout",
+            "properties": {
+              "id": "cardLayout",
+              "components": [
+                {
+                  "type": "GridLayout",
+                  "properties": {
+                    "id": "grid",
+                    "gridSettings": {
+                      "templateColumns": "repeat(2, 1fr)"
+                    },
+                    "components": [
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[0].url",
+                          "label": "Documentation"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[1].url",
+                          "label": "API Reference"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[2].url",
+                          "label": "Support"
+                        }
+                      },
+                      {
+                        "type": "Link",
+                        "properties": {
+                          "id": "link",
+                          "fieldName": "footer.links[3].url",
+                          "label": "Privacy Policy"
                         }
                       }
                     ]

@@ -38,7 +38,7 @@
     },
     "AdvancedInteractivity": {
       "headline": "Advanced Interactivity",
-      "description": "Explore how to add interactivity to your UI components using Dynamic UI. This includes handling user inputs, actions, and state management within the JSON configuration.",
+      "description": "Explore how to add interactivity to your UI components using Dynamic UI. This includes handling user inputs, state management, and validations within the JSON configuration.",
       "codeExample": "{ 'type': 'Form', 'properties': { 'formFields': ['username', 'password'], 'validation': { 'fields': { 'username': { 'type': 'string', 'validations': [ { 'type': 'required', 'args': { 'message': 'Username is required' } } ] }, 'password': { 'type': 'string', 'validations': [ { 'type': 'required', 'args': { 'message': 'Password is required' } } ] } } } } }"
     },
     "InteractiveExamples": {
