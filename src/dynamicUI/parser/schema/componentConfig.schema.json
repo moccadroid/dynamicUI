@@ -114,6 +114,14 @@
         },
         "action": {
           "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "password",
+            "number"
+          ]
         }
       },
       "required": [
@@ -224,6 +232,13 @@
         },
         "fieldName": {
           "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "json"
         }
       },
       "required": [

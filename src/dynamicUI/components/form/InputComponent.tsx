@@ -5,9 +5,9 @@ import type { FieldInputProps, FormikProps } from 'formik';
 import { Field } from 'formik';
 
 const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => {
-  const { label, fieldName, placeholder } = properties;
+  const { label, fieldName, placeholder, type } = properties;
   return (
-    <Field name={fieldName} placeholder={placeholder} label={label} component={InternalInput} />
+    <Field name={fieldName} type={type} placeholder={placeholder} label={label} component={InternalInput} />
   );
 };
 
@@ -16,7 +16,7 @@ const InternalInput: FC<InputProperties & { field: FieldInputProps<any>, form: F
     return (
       <FormControl variant="floating" isInvalid={!!(form.errors[field.name] && form.touched[field.name])}>
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-        <Input placeholder={placeholder} {...field} id={field.name}/>
+        <Input placeholder={placeholder} {...field} id={field.name} />
         <FormLabel>{label}</FormLabel>
         <FormErrorMessage>{form.errors[field.name] as any}</FormErrorMessage>
       </FormControl>

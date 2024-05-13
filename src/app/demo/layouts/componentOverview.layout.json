@@ -1,0 +1,197 @@
+{
+  "components": [
+    {
+      "type": "Headline",
+      "properties": {
+        "text": "DynamicUI Component Configurations",
+        "level": 3,
+        "id": "headline"
+      }
+    },
+    {
+      "type": "Text",
+      "properties": {
+        "fieldName": "description",
+        "fontSize": "md",
+        "id": "text"
+      }
+    },
+    {
+      "type": "List",
+      "properties": {
+        "fieldName": "layouts",
+        "layout": {
+          "components": [
+            {
+              "type": "CardLayout",
+              "properties": {
+                "components": [
+                  {
+                    "type": "Headline",
+                    "properties": {
+                      "id": "headline",
+                      "fieldName": "name",
+                      "level": 5
+                    }
+                  },
+                  {
+                    "type": "FlexLayout",
+                    "properties": {
+                      "id": "flexLayout",
+                      "direction": "column",
+                      "components": [
+                        {
+                          "type": "Text",
+                          "properties": {
+                            "fieldName": "description",
+                            "fontSize": "md",
+                            "id": "text"
+                          }
+                        },
+                        {
+                          "type": "Code",
+                          "properties": {
+                            "fieldName": "json",
+                            "type": "json",
+                            "id": "code"
+                          }
+                        },
+                        {
+                          "type": "Link",
+                          "properties": {
+                            "fieldName": "link",
+                            "id": "link"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "id": "cardLayout"
+              }
+            }
+          ]
+        },
+        "id": "list"
+      }
+    },
+    {
+      "type": "List",
+      "properties": {
+        "fieldName": "arrays",
+        "layout": {
+          "components": [
+            {
+              "type": "CardLayout",
+              "properties": {
+                "components": [
+                  {
+                    "type": "Headline",
+                    "properties": {
+                      "id": "headline",
+                      "fieldName": "name",
+                      "level": 5
+                    }
+                  },
+                  {
+                    "type": "FlexLayout",
+                    "properties": {
+                      "id": "flexLayout",
+                      "direction": "column",
+                      "components": [
+                        {
+                          "type": "Text",
+                          "properties": {
+                            "fieldName": "description",
+                            "fontSize": "md",
+                            "id": "text"
+                          }
+                        },
+                        {
+                          "type": "Code",
+                          "properties": {
+                            "fieldName": "json",
+                            "type": "json",
+                            "id": "code"
+                          }
+                        },
+                        {
+                          "type": "Link",
+                          "properties": {
+                            "fieldName": "link",
+                            "id": "link"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "id": "cardLayout"
+              }
+            }
+          ]
+        },
+        "id": "list"
+      }
+    },
+    {
+      "type": "List",
+      "properties": {
+        "fieldName": "components",
+        "layout": {
+          "components": [
+            {
+              "type": "CardLayout",
+              "properties": {
+                "components": [
+                  {
+                    "type": "Headline",
+                    "properties": {
+                      "id": "headline",
+                      "fieldName": "name",
+                      "level": 5
+                    }
+                  },
+                  {
+                    "type": "FlexLayout",
+                    "properties": {
+                      "id": "flexLayout",
+                      "direction": "column",
+                      "components": [
+                        {
+                          "type": "Text",
+                          "properties": {
+                            "fieldName": "description",
+                            "fontSize": "md",
+                            "id": "text"
+                          }
+                        },
+                        {
+                          "type": "Code",
+                          "properties": {
+                            "fieldName": "json",
+                            "type": "json",
+                            "id": "code"
+                          }
+                        },
+                        {
+                          "type": "Link",
+                          "properties": {
+                            "fieldName": "link",
+                            "id": "link"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "id": "cardLayout"
+              }
+            }
+          ]
+        },
+        "id": "list"
+      }
+    }
+  ]
+}

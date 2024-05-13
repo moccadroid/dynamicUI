@@ -7,8 +7,8 @@
     "GettingStarted": {
       "headline": "Getting Started",
       "description": "Learn how to set up Dynamic UI in your React project. This section covers the basics of installation and initial configuration.",
-      "installationCode": "npm install dynamic-ui-react",
-      "initialSetupCode": "import { DynamicUIRenderer } from 'dynamic-ui-react';"
+      "installationCode": "npm install dynamic-ui",
+      "initialSetupCode": "import { Section } from 'dynamic-ui-react';"
     },
     "FeatureComponentsRendering": {
       "headline": "Components Rendering",

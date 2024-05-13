@@ -6,7 +6,7 @@ import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 import { SectionDataProvider } from '../state/SectionDataProvider';
 import { PathProvider } from '@/dynamicUI/state/PathProvider';
 import schema from '@/dynamicUI/parser/schema/componentConfig.schema.json';
-import { validateJson } from '@/dynamicUI/parser/validateLayout';
+import { validateJson } from '@/dynamicUI/parser/layout/validateLayout';
 export interface SectionT {
   layout: LayoutConfig;
   data: any;

@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Grid, GridItem, List, Stack } from '@chakra-ui/react';
 import type { ListProperties } from '@/dynamicUI/components/ComponentConfig';
@@ -13,7 +13,6 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
   const list = getState<any[]>(fullPath) ?? [];
 
   if (as === 'grid') {
-    console.log('IMAGES');
     return useMemo(() => (
       <Grid gap={5} templateRows={gridSettings?.templateRows} templateColumns={gridSettings?.templateColumns}>
         { list.map((_, index) => {

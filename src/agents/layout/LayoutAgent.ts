@@ -4,6 +4,7 @@ import { POSTLayoutRequest } from '@/agents/layout/api';
 import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
+import { validateAndFixJson } from '@/dynamicUI/parser/layout/fixLayout';
 
 export interface LayoutAgentProperties {
   params: LayoutPromptParams
@@ -38,7 +39,9 @@ const LayoutAgentFactory = {
         const completion = await POSTLayoutRequest({ promptParams: properties.params });
         if (completion?.choices[0].message.content) {
           properties.lastCompletion = completion;
-          return { layout: JSON.parse(completion.choices[0].message.content) };
+          const content = completion.choices[0].message.content;
+          const layout = typeof content === 'string' ? JSON.parse(completion.choices[0].message.content) : content;
+          return { layout: validateAndFixJson(layout) };
         }
         console.log('something went wrong, no completion!');
       }

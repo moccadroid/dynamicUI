@@ -35,6 +35,7 @@ export interface InputProperties { // used for editable data
     placeholder?: string;
     fieldName: string;
     action?: string;
+    type?: 'text' | 'password' | 'number'; // defaults to text
 }
 
 export interface ImageProperties {
@@ -71,6 +72,8 @@ export interface LabeledTextProperties {
 export interface CodeProperties { // use this to display code related content
     id: 'code';
     fieldName: string;
+    description?: string; // short text describing the code snippet
+    type?: 'json'; // if the code snippet is in a format that can be read by JSON.parse use this.
 }
 
 export interface ConcatTextProperties { // used to concat multiple data fields into one text component

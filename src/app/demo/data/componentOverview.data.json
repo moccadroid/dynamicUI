@@ -1,0 +1,94 @@
+{
+  "headline": "DynamicUI Component Configurations",
+  "description": "Explore various DynamicUI components and their configurations.",
+  "layouts": [
+    {
+      "name": "GridLayout",
+      "json": "{ \"type\": \"GridLayout\", \"properties\": { \"id\": \"grid\", \"gridSettings\": { \"templateColumns\": \"1fr 2fr\", \"templateRows\": \"auto\" }, \"components\": [ { \"type\": \"Text\", \"properties\": { \"text\": \"Welcome to DynamicUI\" } }, { \"type\": \"Image\", \"properties\": { \"src\": \"https://example.com/image.png\", \"alt\": \"DynamicUI Image\" } } ] } }",
+      "description": "A grid layout component for organizing components.",
+      "link": "/demo/pages/documentation/components/gridlayout"
+    },
+    {
+      "name": "FlexLayout",
+      "json": "{ \"type\": \"FlexLayout\", \"properties\": { \"id\": \"flexLayout\", \"direction\": \"row\", \"justify\": \"center\", \"align\": \"center\", \"components\": [ { \"type\": \"Text\", \"properties\": { \"text\": \"DynamicUI FlexLayout Example\" } }, { \"type\": \"Button\", \"properties\": { \"text\": \"Submit\", \"type\": \"submit\" } } ] } }",
+      "description": "A flexible layout component for arranging components.",
+      "link": "/demo/pages/documentation/components/flexlayout"
+    }
+  ],
+  "arrays": [
+    {
+      "name": "List",
+      "json": "{ \"type\": \"List\", \"properties\": { \"id\": \"list\", \"fieldName\": \"users\", \"layout\": { \"type\": \"CardLayout\", \"properties\": {}, \"components\": [ { \"type\": \"Text\", \"properties\": { \"fieldName\": \"users.name\", \"fontSize\": \"md\" } }, { \"type\": \"Image\", \"properties\": { \"fieldName\": \"users.avatar\", \"alt\": \"User Avatar\" } } ] } } }",
+      "description": "A list component for displaying arrays of items.",
+      "link": "/demo/pages/documentation/components/list"
+    }
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "json": "{ \"type\": \"Button\", \"properties\": { \"id\": \"button\", \"text\": \"Submit\", \"format\": [\"UPPERCASE\", \"LOWERCASE\", \"CAPITALIZE\"] } }",
+      "description": "A button component used for triggering actions.",
+      "link": "/demo/pages/documentation/components/button"
+    },
+    {
+      "name": "Textarea",
+      "json": "{ \"type\": \"Textarea\", \"properties\": { \"id\": \"textarea\", \"label\": \"Your Message\", \"placeholder\": \"Enter your message\", \"fieldName\": \"user.message\" } }",
+      "description": "A textarea component for user input within a form.",
+      "link": "/demo/pages/documentation/components/textarea"
+    },
+    {
+      "name": "Headline",
+      "json": "{ \"type\": \"Headline\", \"properties\": { \"id\": \"headline\", \"text\": \"Welcome to DynamicUI\", \"level\": 1 } }",
+      "description": "A headline component used for displaying titles.",
+      "link": "/demo/pages/documentation/components/headline"
+    },
+    {
+      "name": "Input",
+      "json": "{ \"type\": \"Input\", \"properties\": { \"id\": \"input\", \"label\": \"Your Name\", \"placeholder\": \"Enter your name\", \"fieldName\": \"user.name\", \"type\": \"text\" } }",
+      "description": "An input field for user data entry within a form.",
+      "link": "/demo/pages/documentation/components/input"
+    },
+    {
+      "name": "Image",
+      "json": "{ \"type\": \"Image\", \"properties\": { \"id\": \"image\", \"fieldName\": \"user.avatar\", \"alt\": \"User Avatar\", \"size\": \"100px\" } }",
+      "description": "An image component for displaying images.",
+      "link": "/demo/pages/documentation/components/image"
+    },
+    {
+      "name": "Link",
+      "json": "{ \"type\": \"Link\", \"properties\": { \"id\": \"link\", \"fieldName\": \"url\", \"label\": \"Visit Website\" } }",
+      "description": "A link component for navigation.",
+      "link": "/demo/pages/documentation/components/link"
+    },
+    {
+      "name": "Text",
+      "json": "{ \"type\": \"Text\", \"properties\": { \"id\": \"text\", \"fieldName\": \"text\", \"fontSize\": \"md\" } }",
+      "description": "A text component for displaying text content.",
+      "link": "/demo/pages/documentation/components/text"
+    },
+    {
+      "name": "LabeledText",
+      "json": "{ \"type\": \"LabeledText\", \"properties\": { \"id\": \"labeledText\", \"fieldName\": \"field\", \"label\": \"Label\", \"separator\": \":\", \"fontSize\": \"md\" } }",
+      "description": "A labeled text component for displaying labeled information.",
+      "link": "/demo/pages/documentation/components/labeledtext"
+    },
+    {
+      "name": "Code",
+      "json": "{ \"type\": \"Code\", \"properties\": { \"id\": \"code\", \"fieldName\": \"codeSnippet\", \"description\": \"Example code snippet\", \"type\": \"json\" } }",
+      "description": "A code component for displaying code snippets.",
+      "link": "/demo/pages/documentation/components/code"
+    },
+    {
+      "name": "ConcatText",
+      "json": "{ \"type\": \"ConcatText\", \"properties\": { \"id\": \"concatText\", \"fields\": [\"field1\", \"field2\"], \"separator\": \" \", \"fontSize\": \"md\" } }",
+      "description": "A concatenated text component for combining multiple data fields.",
+      "link": "/demo/pages/documentation/components/concattext"
+    },
+    {
+      "name": "Form",
+      "json": "{ \"type\": \"Form\", \"properties\": { \"id\": \"form\", \"fieldName\": \"form\", \"formFields\": [\"field1\", \"field2\"], \"components\": [ { \"type\": \"Input\", \"properties\": { \"label\": \"Field 1\", \"fieldName\": \"form.field1\", \"type\": \"text\" } }, { \"type\": \"Input\", \"properties\": { \"label\": \"Field 2\", \"fieldName\": \"form.field2\", \"type\": \"text\" } }, { \"type\": \"Button\", \"properties\": { \"text\": \"Submit\", \"type\": \"submit\" } } ] } }",
+      "description": "A form component for collecting user information.",
+      "link": "/demo/pages/documentation/components/form"
+    }
+  ]
+}
