@@ -4,8 +4,8 @@
       "type": "Headline",
       "properties": {
         "id": "headline",
-        "text": "Welcome to Our Library Demo",
-        "level": 3
+        "label": "Welcome to Our Library Demo",
+        "level": 1
       }
     },
     {
@@ -21,8 +21,7 @@
       "type": "Link",
       "properties": {
         "id": "link",
-        "fieldName": "introduction.learnMoreLink",
-        "labelField": "introduction.learnMoreLinkText"
+        "fieldName": "introduction.learnMoreLink"
       }
     },
     {
@@ -34,8 +33,8 @@
             "type": "Headline",
             "properties": {
               "id": "headline",
-              "text": "Check Out Our Gallery",
-              "level": 5
+              "label": "Check Out Our Gallery",
+              "level": 2
             }
           },
           {
@@ -83,8 +82,8 @@
             "type": "Headline",
             "properties": {
               "id": "headline",
-              "text": "Key Features",
-              "level": 5
+              "label": "Key Features",
+              "level": 2
             }
           },
           {
@@ -140,8 +139,8 @@
             "type": "Headline",
             "properties": {
               "id": "headline",
-              "text": "What Our Users Say",
-              "level": 5
+              "label": "What Our Users Say",
+              "level": 2
             }
           },
           {
@@ -197,8 +196,7 @@
                     "type": "Link",
                     "properties": {
                       "id": "link",
-                      "fieldName": "url",
-                      "labelField": "text"
+                      "fieldName": "url"
                     }
                   }
                 ]

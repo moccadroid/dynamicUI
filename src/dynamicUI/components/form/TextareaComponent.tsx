@@ -6,7 +6,7 @@ import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 const TextareaComponent: FC<{ properties: TextareaProperties }> = ({ properties }) => {
 
-  const { label, fieldName, placeholder } = properties;
+  const { fieldName, placeholder, label } = properties;
   const { fullPath } = useFullPath(fieldName);
   const { getState, setState } = useSectionDataContext();
   const value = getState<string>(fullPath);

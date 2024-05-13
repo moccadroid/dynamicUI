@@ -94,7 +94,8 @@
         "type",
         "properties"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "CONFIGS (the actual components)"
     },
     "InputProperties": {
       "type": "object",
@@ -103,16 +104,13 @@
           "type": "string",
           "const": "input"
         },
+        "fieldName": {
+          "type": "string"
+        },
         "label": {
           "type": "string"
         },
         "placeholder": {
-          "type": "string"
-        },
-        "fieldName": {
-          "type": "string"
-        },
-        "action": {
           "type": "string"
         },
         "type": {
@@ -126,8 +124,8 @@
       },
       "required": [
         "id",
-        "label",
-        "fieldName"
+        "fieldName",
+        "label"
       ],
       "additionalProperties": false
     },
@@ -138,7 +136,10 @@
           "type": "string",
           "const": "button"
         },
-        "text": {
+        "fieldName": {
+          "type": "string"
+        },
+        "label": {
           "type": "string"
         },
         "type": {
@@ -159,9 +160,7 @@
         }
       },
       "required": [
-        "id",
-        "text",
-        "type"
+        "id"
       ],
       "additionalProperties": false
     },
@@ -172,10 +171,10 @@
           "type": "string",
           "const": "headline"
         },
-        "text": {
+        "fieldName": {
           "type": "string"
         },
-        "fieldName": {
+        "label": {
           "type": "string"
         },
         "level": {
@@ -194,7 +193,8 @@
         "id",
         "level"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "TEXT"
     },
     "TextareaProperties": {
       "type": "object",
@@ -203,23 +203,20 @@
           "type": "string",
           "const": "textarea"
         },
+        "fieldName": {
+          "type": "string"
+        },
         "label": {
           "type": "string"
         },
         "placeholder": {
           "type": "string"
-        },
-        "fieldName": {
-          "type": "string"
-        },
-        "action": {
-          "type": "string"
         }
       },
       "required": [
         "id",
-        "label",
-        "fieldName"
+        "fieldName",
+        "label"
       ],
       "additionalProperties": false
     },
@@ -303,7 +300,8 @@
         "fieldName",
         "alt"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "MEDIA"
     },
     "CardLayoutProperties": {
       "type": "object",
@@ -424,6 +422,9 @@
           "type": "string",
           "const": "list"
         },
+        "fieldName": {
+          "type": "string"
+        },
         "direction": {
           "type": "string",
           "enum": [
@@ -443,27 +444,9 @@
             },
             "templateColumns": {
               "type": "string"
-            },
-            "childSettings": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "rowSpan": {
-                    "type": "number"
-                  },
-                  "colSpan": {
-                    "type": "number"
-                  }
-                },
-                "additionalProperties": false
-              }
             }
           },
           "additionalProperties": false
-        },
-        "fieldName": {
-          "type": "string"
         },
         "layout": {
           "$ref": "#/definitions/LayoutConfig"
@@ -474,7 +457,8 @@
         "fieldName",
         "layout"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "ARRAYS used to display arrays"
     },
     "LinkProperties": {
       "type": "object",
@@ -483,13 +467,13 @@
           "type": "string",
           "const": "link"
         },
+        "fieldName": {
+          "type": "string"
+        },
         "label": {
           "type": "string"
         },
-        "labelField": {
-          "type": "string"
-        },
-        "fieldName": {
+        "labelFieldName": {
           "type": "string"
         }
       },
@@ -577,7 +561,8 @@
         "id",
         "validation"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "FORM form wraps input components"
     },
     "GridLayoutProperties": {
       "type": "object",
@@ -600,21 +585,6 @@
             },
             "templateColumns": {
               "type": "string"
-            },
-            "childSettings": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "rowSpan": {
-                    "type": "number"
-                  },
-                  "colSpan": {
-                    "type": "number"
-                  }
-                },
-                "additionalProperties": false
-              }
             }
           },
           "additionalProperties": false
@@ -625,7 +595,8 @@
         "gridSettings",
         "id"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "LAYOUTS used to layout data objects that are not arrays. Have child components."
     }
   }
 }

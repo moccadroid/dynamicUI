@@ -3,7 +3,7 @@
     {
       "type": "Headline",
       "properties": {
-        "text": "DynamicUI Component Configurations",
+        "label": "DynamicUI Component Configurations",
         "level": 3,
         "id": "headline"
       }

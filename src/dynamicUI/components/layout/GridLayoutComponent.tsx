@@ -4,7 +4,6 @@ import { Grid } from '@chakra-ui/react';
 
 const GridLayoutComponent: FC<{ children: ReactNode ,properties: GridLayoutProperties}> = ({ children, properties }) => {
   const { gridSettings } = properties;
-  console.log(gridSettings);
 
   return (
     <Grid>

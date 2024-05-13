@@ -61,11 +61,12 @@ export async function POSTLayoutRequest({ promptParams }: POSTLayoutRequestParam
     console.log('\n');
     return openai.chat.completions.create({
       messages,
-      tools: validationFunctions as any,
-      tool_choice: 'auto',
+      //tools: validationFunctions as any,
+      //tool_choice: 'auto',
       response_format: { type: 'json_object' },
       //model: 'gpt-4-turbo',
       model: 'gpt-3.5-turbo-0125',
+      //model: 'gpt-4o',
     });
   };
 
