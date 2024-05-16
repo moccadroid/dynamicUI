@@ -28,7 +28,7 @@ const Navbar = () => {
       definitions: appState.app.selectedDefinitions
     };
     setIsLoading(true);
-    const layoutAgent = LayoutAgentFactory.create({ params: promptParams,  });
+    const layoutAgent = LayoutAgentFactory.create({ params: promptParams, model: 'OPENAI' });
     const { layout } = await layoutAgent.run();
     setLayout(layout);
     const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');

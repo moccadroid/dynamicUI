@@ -117,6 +117,7 @@ export const generateLayoutPrompt = (params: LayoutPromptParams) => {
     Every layout starts with LayoutConfig. 
     Every component is a ComponentConfig specified by its type and properties.
     Every property has an id, that is the ComponentConfig type in camelcase.
+    Every property has a name, which is unique in the layout.
     All properties that aren't optional always have to be set.
     
     Databinding:

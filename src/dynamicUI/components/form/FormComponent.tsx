@@ -18,10 +18,9 @@ const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = (
   let validationSchema = null;
   try {
     if (validation && validation !== '')
-      console.log('val', validation);
-    validationSchema = createYupSchema(validation as SchemaSpec);
+      validationSchema = createYupSchema(validation as SchemaSpec);
   } catch (e) {
-    console.error('Validation could not be parsed', validation);
+    console.log('Validation could not be parsed', validation);
   }
 
   const createInitialValues = () => {

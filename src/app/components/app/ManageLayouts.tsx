@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/modal';
 import { useLayout } from '@/state/useLayout';
 import { useData } from '@/state/useData';
+import { validateAndFixJson } from '@/dynamicUI/parser/layout/fixLayout';
 
 export interface StorageLayout { name: string; layout: string, data: string }
 
@@ -42,7 +43,7 @@ const ManageLayouts = () => {
     } else {
       onClose();
       if (layout) {
-        saveLayout(layout, name);
+        saveLayout(layout as LayoutConfig, name as string);
       }
     }
   };
@@ -66,7 +67,8 @@ const ManageLayouts = () => {
     const selectedName = event.target.value;
     const selectedLayout = storageLayouts.find(sl => sl.name === selectedName);
     if (selectedLayout) {
-      setLayout(JSON.parse(selectedLayout.layout) as LayoutConfig);
+      const layout = validateAndFixJson(JSON.parse(selectedLayout.layout));
+      setLayout(layout);
       setLayoutName(selectedLayout.name);
       setName(selectedLayout.name);
       setData(JSON.parse(selectedLayout.data));

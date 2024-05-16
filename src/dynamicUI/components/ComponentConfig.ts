@@ -19,6 +19,7 @@ export interface ActionProperties {
  */
 export interface HeadlineProperties {
     id: 'headline';
+    name: string;
     fieldName?: string; // dynamic text
     label?: string; // static text
     level: 1 | 2 | 3 | 4 | 5 | 6; // higher numbers are more useful
@@ -26,6 +27,7 @@ export interface HeadlineProperties {
 
 export interface LinkProperties {
     id: 'link';
+    name: string;
     fieldName: string; // src
     label?: string;
     labelFieldName?: string; // if the data provides a label for the link
@@ -33,6 +35,7 @@ export interface LinkProperties {
 
 export interface TextProperties { // used for plain text
     id: 'text';
+    name: string;
     fieldName: string;
     fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     align?: string;
@@ -41,6 +44,7 @@ export interface TextProperties { // used for plain text
 
 export interface LabeledTextProperties {
     id: 'labeledText';
+    name: string;
     fieldName: string;
     label: string;
     separator: ':';
@@ -50,6 +54,7 @@ export interface LabeledTextProperties {
 
 export interface CodeProperties {
     id: 'code';
+    name: string;
     fieldName: string;
     description?: string;
     type?: 'json';
@@ -57,6 +62,7 @@ export interface CodeProperties {
 
 export interface ConcatTextProperties { // used to concat multiple data fields into one text component
     id: 'concatText';
+    name: string;
     fields: string[];  // Array of field paths
     separator: string;
     fontSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -68,6 +74,7 @@ export interface ConcatTextProperties { // used to concat multiple data fields i
  */
 export interface ImageProperties {
     id: 'image';
+    name: string;
     fieldName: string;
     alt: string;
     size?: string; // size in px "100px"
@@ -78,6 +85,7 @@ export interface ImageProperties {
  */
 export interface FormProperties extends LayoutConfig { // wraps input components
     id: 'form';
+    name: string;
     fieldName: string;
     formFields: string[];
     onSubmit: string;
@@ -87,6 +95,7 @@ export interface FormProperties extends LayoutConfig { // wraps input components
 
 export interface InputProperties {
     id: 'input';
+    name: string;
     fieldName: string;
     label: string;
     placeholder?: string;
@@ -95,6 +104,7 @@ export interface InputProperties {
 
 export interface TextareaProperties {
     id: 'textarea';
+    name: string;
     fieldName: string;
     label: string;
     placeholder?: string;
@@ -103,6 +113,7 @@ export interface TextareaProperties {
 
 export interface ButtonProperties {
     id: 'button';
+    name: string;
     fieldName?: string;
     label?: string;
     type?: ButtonType;
@@ -111,6 +122,7 @@ export interface ButtonProperties {
 
 export interface SelectProperties {
     id: 'select';
+    name: string;
     fieldName?: string;
     label: string;
 }
@@ -120,6 +132,7 @@ export interface SelectProperties {
  */
 export interface ListProperties {
     id: 'list';
+    name: string;
     fieldName: string;
     direction?: 'row' | 'column';
     as?: 'grid'; // uses a grid layout internally to layout the elements. use this if you want to show an array in a grid.
@@ -132,12 +145,14 @@ export interface ListProperties {
  */
 export interface GridLayoutProperties extends LayoutConfig {
     id: 'grid';
+    name: string;
     gridSettings: GridSettings;
     components: ComponentConfig[];
 }
 
 export interface FlexLayoutProperties extends LayoutConfig { // can be nested
     id: 'flexLayout';
+    name: string;
     direction: 'row' | 'column';
     justify?: string;
     align?: string;
@@ -146,6 +161,7 @@ export interface FlexLayoutProperties extends LayoutConfig { // can be nested
 
 export interface CardLayoutProperties extends LayoutConfig { // can be nested
     id: 'cardLayout';
+    name: string;
     components: ComponentConfig[]; // the body of the card
 }
 

@@ -1,4 +1,5 @@
 import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
+import { generateRandomString } from '@/dynamicUI/utils/generateRandom';
 
 interface Properties {
   id?: string;
@@ -30,6 +31,9 @@ function ensureComponentIds(components: Component[]): void {
     if (!component.properties.id) {
       component.properties.id = toCamelCase(component.type);
       console.log('fixed id: ', component.properties.id);
+    }
+    if (component.properties && !component.properties.name) {
+      component.properties.name = generateRandomString(4);
     }
     // Check for nested components
     if (component.properties.components) {

@@ -108,6 +108,9 @@
           "type": "string",
           "const": "input"
         },
+        "name": {
+          "type": "string"
+        },
         "fieldName": {
           "type": "string"
         },
@@ -129,6 +132,7 @@
       },
       "required": [
         "id",
+        "name",
         "fieldName",
         "label"
       ],
@@ -140,6 +144,9 @@
         "id": {
           "type": "string",
           "const": "button"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -154,21 +161,25 @@
         "format": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "UPPERCASE",
-              "LOWERCASE",
-              "CAPITALIZE",
-              "REMOVE_UNDERSCORES",
-              "JSON_STRINGIFY"
-            ]
+            "$ref": "#/definitions/TextFormatter"
           }
         }
       },
       "required": [
-        "id"
+        "id",
+        "name"
       ],
       "additionalProperties": false
+    },
+    "TextFormatter": {
+      "type": "string",
+      "enum": [
+        "UPPERCASE",
+        "LOWERCASE",
+        "CAPITALIZE",
+        "REMOVE_UNDERSCORES",
+        "JSON_STRINGIFY"
+      ]
     },
     "HeadlineProperties": {
       "type": "object",
@@ -176,6 +187,9 @@
         "id": {
           "type": "string",
           "const": "headline"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -197,6 +211,7 @@
       },
       "required": [
         "id",
+        "name",
         "level"
       ],
       "additionalProperties": false,
@@ -208,6 +223,9 @@
         "id": {
           "type": "string",
           "const": "textarea"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -221,19 +239,13 @@
         "format": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "UPPERCASE",
-              "LOWERCASE",
-              "CAPITALIZE",
-              "REMOVE_UNDERSCORES",
-              "JSON_STRINGIFY"
-            ]
+            "$ref": "#/definitions/TextFormatter"
           }
         }
       },
       "required": [
         "id",
+        "name",
         "fieldName",
         "label"
       ],
@@ -245,6 +257,9 @@
         "id": {
           "type": "string",
           "const": "code"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -259,6 +274,7 @@
       },
       "required": [
         "id",
+        "name",
         "fieldName"
       ],
       "additionalProperties": false
@@ -275,6 +291,9 @@
         "id": {
           "type": "string",
           "const": "flexLayout"
+        },
+        "name": {
+          "type": "string"
         },
         "direction": {
           "type": "string",
@@ -293,7 +312,8 @@
       "required": [
         "components",
         "direction",
-        "id"
+        "id",
+        "name"
       ],
       "additionalProperties": false
     },
@@ -303,6 +323,9 @@
         "id": {
           "type": "string",
           "const": "image"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -316,6 +339,7 @@
       },
       "required": [
         "id",
+        "name",
         "fieldName",
         "alt"
       ],
@@ -334,11 +358,15 @@
         "id": {
           "type": "string",
           "const": "cardLayout"
+        },
+        "name": {
+          "type": "string"
         }
       },
       "required": [
         "components",
-        "id"
+        "id",
+        "name"
       ],
       "additionalProperties": false
     },
@@ -348,6 +376,9 @@
         "id": {
           "type": "string",
           "const": "text"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -368,19 +399,13 @@
         "format": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "UPPERCASE",
-              "LOWERCASE",
-              "CAPITALIZE",
-              "REMOVE_UNDERSCORES",
-              "JSON_STRINGIFY"
-            ]
+            "$ref": "#/definitions/TextFormatter"
           }
         }
       },
       "required": [
         "id",
+        "name",
         "fieldName",
         "fontSize"
       ],
@@ -392,6 +417,9 @@
         "id": {
           "type": "string",
           "const": "labeledText"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -416,19 +444,13 @@
         "format": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "UPPERCASE",
-              "LOWERCASE",
-              "CAPITALIZE",
-              "REMOVE_UNDERSCORES",
-              "JSON_STRINGIFY"
-            ]
+            "$ref": "#/definitions/TextFormatter"
           }
         }
       },
       "required": [
         "id",
+        "name",
         "fieldName",
         "label",
         "separator",
@@ -442,6 +464,9 @@
         "id": {
           "type": "string",
           "const": "list"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -475,6 +500,7 @@
       },
       "required": [
         "id",
+        "name",
         "fieldName",
         "layout"
       ],
@@ -488,6 +514,9 @@
           "type": "string",
           "const": "link"
         },
+        "name": {
+          "type": "string"
+        },
         "fieldName": {
           "type": "string"
         },
@@ -500,6 +529,7 @@
       },
       "required": [
         "id",
+        "name",
         "fieldName"
       ],
       "additionalProperties": false
@@ -510,6 +540,9 @@
         "id": {
           "type": "string",
           "const": "concatText"
+        },
+        "name": {
+          "type": "string"
         },
         "fields": {
           "type": "array",
@@ -533,19 +566,13 @@
         "format": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "UPPERCASE",
-              "LOWERCASE",
-              "CAPITALIZE",
-              "REMOVE_UNDERSCORES",
-              "JSON_STRINGIFY"
-            ]
+            "$ref": "#/definitions/TextFormatter"
           }
         }
       },
       "required": [
         "id",
+        "name",
         "fields",
         "separator",
         "fontSize"
@@ -564,6 +591,9 @@
         "id": {
           "type": "string",
           "const": "form"
+        },
+        "name": {
+          "type": "string"
         },
         "fieldName": {
           "type": "string"
@@ -584,6 +614,7 @@
         "fieldName",
         "formFields",
         "id",
+        "name",
         "onSubmit",
         "validation"
       ],
@@ -603,6 +634,9 @@
           "type": "string",
           "const": "grid"
         },
+        "name": {
+          "type": "string"
+        },
         "gridSettings": {
           "type": "object",
           "properties": {
@@ -619,7 +653,8 @@
       "required": [
         "components",
         "gridSettings",
-        "id"
+        "id",
+        "name"
       ],
       "additionalProperties": false,
       "description": "LAYOUTS used to layout data objects that are not arrays. Have child components."
@@ -631,6 +666,9 @@
           "type": "string",
           "const": "select"
         },
+        "name": {
+          "type": "string"
+        },
         "fieldName": {
           "type": "string"
         },
@@ -640,6 +678,7 @@
       },
       "required": [
         "id",
+        "name",
         "label"
       ],
       "additionalProperties": false
