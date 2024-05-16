@@ -1,11 +1,11 @@
 'use client';
 
 import type { State } from '@/state/Provider';
-import { StateProvider } from '@/state/Provider';
 import { ChakraProviders } from './providers';
 import type { ReactNode } from 'react';
 import { userData } from '@/api/db/dataAndLayouts';
 import componentConfig from '@/dynamicUI/ai/definitions/componentConfig.json';
+import { AppStateProvider } from '@/dynamicUI/state/AppStateProvider';
 
 const initialState: State = {
   app: {
@@ -14,6 +14,7 @@ const initialState: State = {
     promptHistory: [],
     currentPrompt: '',
     selectedDefinitions: Object.keys(componentConfig),
+    screenshot: undefined,
   },
   layout: undefined,
   layoutName: undefined,
@@ -32,9 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang='en'>
       <body>
         <ChakraProviders>
-          <StateProvider initialState={initialState}>
+          <AppStateProvider initialState={initialState}>
             {children}
-          </StateProvider>
+          </AppStateProvider>
         </ChakraProviders>
       </body>
     </html>

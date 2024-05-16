@@ -12,11 +12,11 @@ const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => 
 };
 
 const InternalInput: FC<InputProperties & { field: FieldInputProps<any>, form: FormikProps<any> }> =
-  ({ field, form, label, placeholder }) => {
+  ({ field, type,  form, label, placeholder }) => {
     return (
       <FormControl variant="floating" isInvalid={!!(form.errors[field.name] && form.touched[field.name])}>
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-        <Input placeholder={placeholder} {...field} id={field.name} />
+        <Input placeholder={placeholder} type={type} {...field} id={field.name} />
         <FormLabel>{label}</FormLabel>
         <FormErrorMessage>{form.errors[field.name] as any}</FormErrorMessage>
       </FormControl>

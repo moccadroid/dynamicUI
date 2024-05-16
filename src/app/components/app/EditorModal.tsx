@@ -12,8 +12,8 @@ import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
-import { useStateContext } from '@/state/Provider';
 import { Editor } from '@monaco-editor/react';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 export interface EditorModalProps {
   value: any;
@@ -22,7 +22,7 @@ export interface EditorModalProps {
 }
 
 export const EditorModal: FC<EditorModalProps> = ({ value, onSave, schema }) => {
-  const { state } = useStateContext();
+  const { appState } = useAppState();
   const [isOpen, setIsOpen] = useState(false);
   const [editorState, setEditorState] = useState<string |undefined>(undefined);
 
@@ -37,7 +37,7 @@ export const EditorModal: FC<EditorModalProps> = ({ value, onSave, schema }) => 
     if (value) {
       setEditorState(JSON.stringify(value, null, '\t'));
     }
-  }, [state.layout]);
+  }, [appState.layout]);
 
   const handleOnOpen = () => {
     setIsOpen(true);

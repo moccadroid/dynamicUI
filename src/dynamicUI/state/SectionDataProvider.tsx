@@ -16,6 +16,7 @@ export interface SectionDataProviderProps {
 }
 
 interface SectionDataContextType {
+  state: SectionContextState,
   setState: (path: string, value: unknown) => void;
   getState: <T,>(path: string) => T | undefined;  // You can specify a return type more specific than `any`
 }
@@ -68,7 +69,8 @@ export const SectionDataProvider = ({ children, initialData }: SectionDataProvid
 
   const value = useMemo(() => ({
     setState: setStateAtPath,
-    getState: getStateFromPath
+    getState: getStateFromPath,
+    state
   }), [state]);
 
   return (

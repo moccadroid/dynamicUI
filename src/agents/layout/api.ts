@@ -25,11 +25,11 @@ export interface LayoutPromptParams {
   definitions: string[];
 }
 
-export interface POSTLayoutRequestParams {
+export interface LayoutRequest {
   promptParams: LayoutPromptParams
 }
 
-export async function POSTLayoutRequest({ promptParams }: POSTLayoutRequestParams) {
+export async function OPENAILayoutRequest({ promptParams }: LayoutRequest) {
   'use server';
 
   console.log('POSTLayoutRequest');
@@ -97,3 +97,70 @@ export async function POSTLayoutRequest({ promptParams }: POSTLayoutRequestParam
   console.log('completion finished', message.content);
   return completion;
 }
+
+/*
+ * Install the Generative AI SDK
+ *
+ * $ npm install @google/generative-ai
+ *
+ * See the getting started guide for more information
+ * https://ai.google.dev/gemini-api/docs/get-started/node
+ */
+
+import {
+  GoogleGenerativeAI,
+  HarmCategory,
+  HarmBlockThreshold,
+} from '@google/generative-ai';
+
+const apiKey = process.env.GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey as string);
+
+export async function GEMINILayoutRequest({ promptParams }: LayoutRequest) {
+  const { systemPrompt, userPrompt } = generateLayoutPrompt(promptParams);
+
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-1.5-flash-latest',
+    systemInstruction: systemPrompt
+  });
+
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 64,
+    maxOutputTokens: 8192,
+    responseMimeType: 'application/json',
+  };
+
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+  ];
+
+  const chatSession = model.startChat({
+    generationConfig,
+    safetySettings,
+    history: [
+    ],
+  });
+
+  const result = await chatSession.sendMessage(userPrompt);
+  console.log(result.response.text());
+
+}
+
+

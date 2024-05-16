@@ -1,27 +1,40 @@
-import type { TextareaProperties } from '@/dynamicUI/components/ComponentConfig';
-import type { ChangeEvent, FC } from 'react';
-import { FormControl, FormLabel, Textarea } from '@chakra-ui/react';
-import { useFullPath } from '@/dynamicUI/state/PathProvider';
-import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
+import type { InputProperties, TextareaProperties, TextFormatter } from '@/dynamicUI/components/ComponentConfig';
+import type { FC } from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import { FormControl, FormErrorMessage, FormLabel, Textarea } from '@chakra-ui/react';
+import type { FieldInputProps, FormikProps } from 'formik';
+import { Field } from 'formik';
+import useFormat from '@/dynamicUI/actions/format';
 
 const TextareaComponent: FC<{ properties: TextareaProperties }> = ({ properties }) => {
-
-  const { fieldName, placeholder, label } = properties;
-  const { fullPath } = useFullPath(fieldName);
-  const { getState, setState } = useSectionDataContext();
-  const value = getState<string>(fullPath);
-
-  const updateAction = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setState(fullPath, event.target.value);
-  };
+  const { fieldName, placeholder, label, format } = properties;
 
   return (
-    <FormControl variant="floating">
-      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-      <Textarea placeholder={placeholder} value={value} onChange={updateAction}/>
-      <FormLabel>{label}</FormLabel>
-    </FormControl>
+    <Field name={fieldName} format={format} placeholder={placeholder} label={label} component={InternalInput} />
   );
 };
+
+const InternalInput: FC<InputProperties & { field: FieldInputProps<any>,  format: TextFormatter[] | undefined, form: FormikProps<any> }> =
+    ({ field,  form, format, label, placeholder }) => {
+      const hasFormattedInitialValue = useRef(false);
+      const formatText = useFormat(format);
+
+      useEffect(() => {
+        if (format && field.value && !hasFormattedInitialValue.current) {
+          void form.setFieldValue(field.name, formatText(field.value as string));
+          hasFormattedInitialValue.current = true;
+        }
+      }, [field]);
+
+      return (
+        <FormControl variant="floating" isInvalid={!!(form.errors[field.name] && form.touched[field.name])}>
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+          <Textarea placeholder={placeholder} {...field} id={field.name} />
+          <FormLabel>{label}</FormLabel>
+          <FormErrorMessage>{form.errors[field.name] as any}</FormErrorMessage>
+        </FormControl>
+      );
+    };
 
 export default TextareaComponent;

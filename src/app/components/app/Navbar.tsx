@@ -1,26 +1,31 @@
 'use client';
 
-import { Box, Flex, Text, Button, Spinner, Stack } from '@chakra-ui/react';
+import { Flex, Text, Button, Spinner, Stack } from '@chakra-ui/react';
+import type { CSSProperties } from 'react';
 import { useState } from 'react';
 import DrawerComponent from '@/app/components/app/DrawerComponent';
-import { useStateContext } from '@/state/Provider';
 import useCompletions from '@/state/useCompletions';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
 import { useLayout } from '@/state/useLayout';
+import Sidebar from '@/app/components/app/Sidebar';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 const Navbar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { handleCompletion } = useCompletions();
-  const { state } = useStateContext();
+  const { appState } = useAppState();
   const { setLayout } = useLayout();
+  const [hideNavbar, setHideNavbar] = useState(false);
+
+
 
   const handleRandomize = async () => {
     const promptParams = {
-      exampleData: state.exampleData,
-      definitions: state.app.selectedDefinitions
+      exampleData: appState.exampleData,
+      definitions: appState.app.selectedDefinitions
     };
     setIsLoading(true);
     const layoutAgent = LayoutAgentFactory.create({ params: promptParams,  });
@@ -35,15 +40,28 @@ const Navbar = () => {
     setIsDrawerOpen(prev => !prev);
   };
 
+  const handleOnScreenshot = (state: string) => {
+    if (state === 'before') {
+      setIsDrawerOpen(false);
+      setHideNavbar(true);
+    }
+    if (state === 'after') {
+      setIsDrawerOpen(true);
+      setHideNavbar(false);
+    }
+  };
+
+  const navStyle = hideNavbar ? { position: 'absolute', top: '-500px' } as CSSProperties : undefined;
+
   return (
-    <Flex as="nav" align="center" justify="space-between" wrap="wrap" padding="1.5rem" bg="#778899">
+    <Flex as="nav" align="center" justify="space-between" wrap="wrap" padding="1.5rem" bg="#778899" style={navStyle}>
       <Flex align="center" mr={5}>
         <Stack direction={'row'}>
           <Text fontSize="lg" fontWeight="bold">dynamicUI</Text>
           <Stack>
-            <Text fontSize="xs">inputToken: {state.stats.inputToken}</Text>
-            <Text fontSize="xs">outputToken: {state.stats.outputToken}</Text>
-            <Text fontSize="xs">totalToken: {state.stats.totalToken}</Text>
+            <Text fontSize="xs">inputToken: {appState.stats.inputToken}</Text>
+            <Text fontSize="xs">outputToken: {appState.stats.outputToken}</Text>
+            <Text fontSize="xs">totalToken: {appState.stats.totalToken}</Text>
           </Stack>
         </Stack>
       </Flex>
@@ -51,10 +69,11 @@ const Navbar = () => {
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <Button onClick={handleRandomize}>{isLoading ? <Spinner /> : 'Try your luck' }</Button>
       </Flex>
-      <Box display="flex" width="auto" alignItems="center">
-        <Button onClick={handleOpenDrawer} variant="outline" _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}>Sidebar</Button>
-      </Box>
-      <DrawerComponent isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}/>
+      <Stack>
+        <Button onClick={handleOpenDrawer} variant="outline" _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}>Drawer</Button>
+        <Sidebar />
+      </Stack>
+      <DrawerComponent isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} onScreenshot={handleOnScreenshot}/>
     </Flex>
   );
 };

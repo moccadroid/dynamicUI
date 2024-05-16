@@ -8,8 +8,8 @@ const ButtonComponent: FC<{ properties: ButtonProperties }> = ({ properties }) =
   const { getFullPath } = useFullPath();
   const { getState } = useSectionDataContext();
   const { label, fieldName, type } = properties;
-
   const value = fieldName ? getState<string>(getFullPath(fieldName)) : (label ?? 'undefined');
+
   return <Button type={type}>{value}</Button>;
 };
 

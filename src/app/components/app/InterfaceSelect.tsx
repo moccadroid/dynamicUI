@@ -7,34 +7,31 @@ import {
   Stack,
   Text
 } from '@chakra-ui/react';
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
 import { useEffect, useState } from 'react';
 import componentConfig from '@/dynamicUI/ai/definitions/componentConfig.json';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 const InterfaceSelect = () => {
-  const { setState, state } = useStateContext();
+  const { appState, setAppState } = useAppState();
   const [definitions, setDefinitions] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const object = state.app.selectedDefinitions.reduce((acc, key) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      acc[key] = true;
-      return acc;
-    }, {});
-    setDefinitions(object);
-  }, []);
+    const selectedDefinitions: any[] = appState.app?.selectedDefinitions;
+
+    if (Array.isArray(selectedDefinitions)) {
+      const object = selectedDefinitions.reduce<Record<string, boolean>>((acc, key) => {
+        acc[key] = true;
+        return acc;
+      }, {});
+      setDefinitions(object);
+    }
+  }, [appState]);
 
   const handleSelect = (key: string) => () => {
     const selection = { ...definitions, [key]: !definitions[key] };
     setDefinitions(selection);
     const selectedDefinitions = Object.entries(selection).filter(([_, value]) => value).map(([key, _]) => key);
-    setState(((prevState: State) => {
-      const newState = { ...prevState };
-      newState.app.selectedDefinitions = selectedDefinitions;
-      return newState;
-    }));
+    setAppState('app.selectedDefinitions', selectedDefinitions);
   };
 
   return (

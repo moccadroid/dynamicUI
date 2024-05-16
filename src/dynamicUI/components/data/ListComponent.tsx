@@ -17,10 +17,8 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
       <Grid gap={5} templateRows={gridSettings?.templateRows} templateColumns={gridSettings?.templateColumns}>
         { list.map((_, index) => {
           const entryPath = `${fullPath}[${index}]`;
-          const rowSpan = gridSettings?.childSettings?.[index]?.rowSpan;
-          const colSpan = gridSettings?.childSettings?.[index]?.colSpan;
           return (
-            <GridItem rowSpan={rowSpan} colSpan={colSpan} key={entryPath}>
+            <GridItem key={entryPath}>
               <PathProvider path={entryPath}>
                 <ParsedLayout config={layout} />
               </PathProvider>
@@ -31,7 +29,7 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
     ), [list]);
   }
 
-  return useMemo(() => (
+  return (
     <List>
       <Stack direction={direction} gap={5}>
         { list.map((_, index) => {
@@ -43,7 +41,8 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
         })}
       </Stack>
     </List>
-  ), [list]);
+  );
+  //}, [list]);
 };
 
 export default ListComponent;

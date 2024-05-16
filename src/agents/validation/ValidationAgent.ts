@@ -4,7 +4,7 @@ import ChatCompletion = OpenAI.ChatCompletion;
 import { POSTValidationRequest } from '@/agents/validation/api';
 
 export interface ValidationAgentProperties {
-  schema: any;
+  schema: string;
   data: any;
   prompt: string;
   lastCompletion?: ChatCompletion

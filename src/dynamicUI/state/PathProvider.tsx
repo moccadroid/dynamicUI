@@ -25,7 +25,7 @@ export const usePathContext = () => {
 
 export const useFullPath = (fieldName?: string) => {
   const parentPath = useContext(PathContext);
-  const fullPath = fieldName
+  const fullPath = fieldName || fieldName === ''
     ? parentPath ? `${parentPath}.${fieldName}` : fieldName
     : '';
 

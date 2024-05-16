@@ -1,19 +1,18 @@
 import { Button, FormControl, FormLabel, Input, Spinner, Stack, Text } from '@chakra-ui/react';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
 import useCompletions from '@/state/useCompletions';
 import DataCleanupAgentFactory from '@/agents/dataCleanup/DataCleanupAgent';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
 import { useLayout } from '@/state/useLayout';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 const FetchUrl = () => {
   const [url, setUrl] = useState<string | null>(null);
   const [limit, setLimit] = useState<number>(1000);
-  const { setState, state } = useStateContext();
+  const { appState, setAppState } = useAppState();
   const { setLayout } = useLayout();
   const [isLoading, setIsLoading] = useState(false);
   const { handleCompletion } = useCompletions();
@@ -37,7 +36,7 @@ const FetchUrl = () => {
       const dataCleanupCompletion = dataCleanupAgent.getProperty<ChatCompletion>('lastCompletion');
       handleCompletion({ completion: dataCleanupCompletion });
       console.log('cleaned data', data);
-      const layoutAgent = LayoutAgentFactory.create({ params: { exampleData: data, definitions: state.app.selectedDefinitions } });
+      const layoutAgent = LayoutAgentFactory.create({ params: { exampleData: data, definitions: appState.app.selectedDefinitions } });
       const { layout } = await layoutAgent.run();
       setLayout(layout);
       console.log('layout', layout);
@@ -45,12 +44,8 @@ const FetchUrl = () => {
       handleCompletion({ completion: layoutCompletion });
 
       if (fullData) {
-        setState((prevState: State) => {
-          const newState = { ...prevState };
-          newState.data = fullData;
-          newState.exampleData = data;
-          return newState;
-        });
+        setAppState('data', fullData);
+        setAppState('exampleData', data);
       }
       setIsLoading(false);
     }

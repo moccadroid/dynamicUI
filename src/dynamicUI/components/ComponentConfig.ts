@@ -1,9 +1,17 @@
-type TextFormatter = 'UPPERCASE' | 'LOWERCASE' | 'CAPITALIZE' | 'REMOVE_UNDERSCORES';
+export type TextFormatter = 'UPPERCASE' | 'LOWERCASE' | 'CAPITALIZE' | 'REMOVE_UNDERSCORES' | 'JSON_STRINGIFY';
 type ButtonType = 'submit';
 
 type GridSettings = {
     templateRows?: string;
     templateColumns?: string;
+}
+
+/**
+ * ACTIONS
+ */
+export interface ActionProperties {
+    name: string;
+    params: string[];
 }
 
 /**
@@ -21,7 +29,6 @@ export interface LinkProperties {
     fieldName: string; // src
     label?: string;
     labelFieldName?: string; // if the data provides a label for the link
-
 }
 
 export interface TextProperties { // used for plain text
@@ -73,6 +80,7 @@ export interface FormProperties extends LayoutConfig { // wraps input components
     id: 'form';
     fieldName: string;
     formFields: string[];
+    onSubmit: string;
     validation: any;
     components: ComponentConfig[];
 }
@@ -82,7 +90,7 @@ export interface InputProperties {
     fieldName: string;
     label: string;
     placeholder?: string;
-    type?: 'text' | 'password' | 'number'; // defaults to text
+    type?: 'text' | 'password' | 'number' | 'email'; // defaults to text
 }
 
 export interface TextareaProperties {
@@ -90,6 +98,7 @@ export interface TextareaProperties {
     fieldName: string;
     label: string;
     placeholder?: string;
+    format?: TextFormatter[];
 }
 
 export interface ButtonProperties {
@@ -98,6 +107,12 @@ export interface ButtonProperties {
     label?: string;
     type?: ButtonType;
     format?: TextFormatter[]; // Array of formatter keys
+}
+
+export interface SelectProperties {
+    id: 'select';
+    fieldName?: string;
+    label: string;
 }
 
 /**
@@ -140,10 +155,10 @@ export interface CardLayoutProperties extends LayoutConfig { // can be nested
  */
 export interface ComponentConfig { // describes the above components
     type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout' | 'Code'
-      | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form' | 'GridLayout';
+      | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form' | 'GridLayout' | 'Select';
     properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties | CodeProperties
       | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties
-      | ListProperties | LinkProperties | ConcatTextProperties | FormProperties | GridLayoutProperties;
+      | ListProperties | LinkProperties | ConcatTextProperties | FormProperties | GridLayoutProperties | SelectProperties;
 }
 
 export interface LayoutConfig { // the root of the components

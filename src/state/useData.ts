@@ -1,17 +1,12 @@
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 export const useData = () => {
-  const { state, setState } = useStateContext();
+  const { appState, setAppState } = useAppState();
 
   const setData = (data?: any) => {
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      newState.data = data;
-      newState.exampleData = data;
-      return newState;
-    });
+    setAppState('data', data);
+    setAppState('exampleData', data);
   };
 
-  return { setData, data: state.data };
+  return { setData, data: appState.data };
 };

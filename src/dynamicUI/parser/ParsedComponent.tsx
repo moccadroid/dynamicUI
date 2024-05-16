@@ -2,7 +2,7 @@ import type {
   ButtonProperties, CardLayoutProperties, CodeProperties,
   ComponentConfig, ConcatTextProperties, FlexLayoutProperties, FormProperties, GridLayoutProperties,
   HeadlineProperties, ImageProperties,
-  InputProperties, LabeledTextProperties, LinkProperties, ListProperties,
+  InputProperties, LabeledTextProperties, LinkProperties, ListProperties, SelectProperties,
   TextareaProperties, TextProperties
 } from '@/dynamicUI/components/ComponentConfig';
 import HeadlineComponent from '@/dynamicUI/components/data/HeadlineComponent';
@@ -22,6 +22,7 @@ import ConcatTextComponent from '@/dynamicUI/components/data/ConcatTextComponent
 import FormComponent from '@/dynamicUI/components/form/FormComponent';
 import GridLayoutComponent from '@/dynamicUI/components/layout/GridLayoutComponent';
 import CodeComponent from '@/dynamicUI/components/data/CodeComponent';
+import SelectComponent from '@/dynamicUI/components/form/SelectComponent';
 
 const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
 
@@ -42,6 +43,8 @@ const ParsedComponent: FC<{ config:  ComponentConfig}> = ({ config }) => {
       );
     case 'Button':
       return <ButtonComponent properties={properties as ButtonProperties} />;
+    case 'Select':
+      return <SelectComponent properties={properties as SelectProperties} />;
     case 'FlexLayout':
       return (
         <FlexLayoutComponent properties={properties as FlexLayoutProperties}>

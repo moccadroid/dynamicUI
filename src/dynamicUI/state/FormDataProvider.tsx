@@ -65,15 +65,8 @@ export const FormDataProvider = ({ children, initialData }: FormDataProviderProp
       (lastObj as Record<string, unknown>)[lastKey] = value;
     }
 
-    // Trigger a state update with a new object for immutability
     setState({ ...state });
   }, [state]);
-
-  /*
-  const getForm = useCallback(() => {
-    return savedForm;
-  }, [form]);
-  */
 
   const value = useMemo(() => ({
     setState: setStateAtPath,

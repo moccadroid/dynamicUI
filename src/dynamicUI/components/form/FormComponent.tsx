@@ -3,19 +3,22 @@ import { useMemo } from 'react';
 import type { FormProperties } from '@/dynamicUI/components/ComponentConfig';
 import { Form, Formik } from 'formik';
 import { PathProvider, useFullPath } from '@/dynamicUI/state/PathProvider';
-import { createYupSchema } from '@/dynamicUI/parser/validation/createYupSchema';
-import type { SchemaSpec } from '@/dynamicUI/parser/validation/types';
-import { FormDataProvider } from '@/dynamicUI/state/FormDataProvider';
 import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 import { Stack } from '@chakra-ui/react';
+import { useActions } from '@/dynamicUI/hooks/useActions';
+import { createYupSchema } from '@/dynamicUI/parser/validation/createYupSchema';
+import type { SchemaSpec } from '@/dynamicUI/parser/validation/types';
 
 const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = ({ children, properties }) => {
-  const { fieldName, validation } = properties;
+  const { fieldName, validation, onSubmit } = properties;
   const { fullPath } = useFullPath(fieldName);
-  const { getState } = useSectionDataContext();
+  const { state, getState } = useSectionDataContext();
+  const actions = useActions();
 
   let validationSchema = null;
   try {
+    if (validation && validation !== '')
+      console.log('val', validation);
     validationSchema = createYupSchema(validation as SchemaSpec);
   } catch (e) {
     console.error('Validation could not be parsed', validation);
@@ -45,27 +48,32 @@ const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = (
     });
     return initialValues;
   };
+  const initialValues = useMemo(() => createInitialValues(), [state]);
+
 
   const handleOnSubmit = (values: any) => {
+    const action = actions[onSubmit];
+    if (action) {
+      action(values);
+    }
     console.log('formValues', values);
   };
 
-  const initialValues = useMemo(() => createInitialValues(), []);
+
   return (
     <PathProvider path={''}>
-      <FormDataProvider initialData={initialValues}>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleOnSubmit}
-          validationSchema={validationSchema}
-        >
-          <Form>
-            <Stack spacing={4}>
-              { children }
-            </Stack>
-          </Form>
-        </Formik>
-      </FormDataProvider>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleOnSubmit}
+        validationSchema={validationSchema}
+        enableReinitialize
+      >
+        <Form>
+          <Stack spacing={4}>
+            { children }
+          </Stack>
+        </Form>
+      </Formik>
     </PathProvider>
   );
 };

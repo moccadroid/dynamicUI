@@ -13,7 +13,7 @@ import {
 import { useLayout } from '@/state/useLayout';
 import { useData } from '@/state/useData';
 
-interface StorageLayout { name: string; layout: string, data: string }
+export interface StorageLayout { name: string; layout: string, data: string }
 
 const ManageLayouts = () => {
   const { layout, setLayout, layoutName, setLayoutName } = useLayout();

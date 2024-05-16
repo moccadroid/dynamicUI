@@ -1,33 +1,24 @@
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
 import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 export const useLayout = () => {
-  const { state, setState } = useStateContext();
+  const { appState, setAppState } = useAppState();
 
   const setLayout = (layout?: LayoutConfig) => {
-    const history = state.app.layoutHistory;
-    let index = state.app.layoutHistoryIndex;
+    const history = appState.app.layoutHistory;
+    let index = appState.app.layoutHistoryIndex;
     if (layout) {
       history.push(layout);
       index = history.length - 1;
     }
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      newState.layout = layout;
-      newState.app.layoutHistory = history;
-      newState.app.layoutHistoryIndex = index;
-      return newState;
-    });
+    setAppState('layout', layout);
+    setAppState('layoutHistory', history);
+    setAppState('app.layoutHistoryIndex', index);
   };
 
   const setLayoutName = (layoutName?: string) => {
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      newState.layoutName = layoutName;
-      return newState;
-    });
+    setAppState('layoutName', layoutName);
   };
 
-  return { layout: state.layout, setLayout, layoutName: state.layoutName, setLayoutName };
+  return { layout: appState.layout, setLayout, layoutName: appState.layoutName, setLayoutName };
 };

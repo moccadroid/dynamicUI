@@ -37,7 +37,8 @@
             "Link",
             "ConcatText",
             "Form",
-            "GridLayout"
+            "GridLayout",
+            "Select"
           ]
         },
         "properties": {
@@ -86,6 +87,9 @@
             },
             {
               "$ref": "#/definitions/GridLayoutProperties"
+            },
+            {
+              "$ref": "#/definitions/SelectProperties"
             }
           ]
         }
@@ -118,7 +122,8 @@
           "enum": [
             "text",
             "password",
-            "number"
+            "number",
+            "email"
           ]
         }
       },
@@ -154,7 +159,8 @@
               "UPPERCASE",
               "LOWERCASE",
               "CAPITALIZE",
-              "REMOVE_UNDERSCORES"
+              "REMOVE_UNDERSCORES",
+              "JSON_STRINGIFY"
             ]
           }
         }
@@ -211,6 +217,19 @@
         },
         "placeholder": {
           "type": "string"
+        },
+        "format": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UPPERCASE",
+              "LOWERCASE",
+              "CAPITALIZE",
+              "REMOVE_UNDERSCORES",
+              "JSON_STRINGIFY"
+            ]
+          }
         }
       },
       "required": [
@@ -354,7 +373,8 @@
               "UPPERCASE",
               "LOWERCASE",
               "CAPITALIZE",
-              "REMOVE_UNDERSCORES"
+              "REMOVE_UNDERSCORES",
+              "JSON_STRINGIFY"
             ]
           }
         }
@@ -401,7 +421,8 @@
               "UPPERCASE",
               "LOWERCASE",
               "CAPITALIZE",
-              "REMOVE_UNDERSCORES"
+              "REMOVE_UNDERSCORES",
+              "JSON_STRINGIFY"
             ]
           }
         }
@@ -517,7 +538,8 @@
               "UPPERCASE",
               "LOWERCASE",
               "CAPITALIZE",
-              "REMOVE_UNDERSCORES"
+              "REMOVE_UNDERSCORES",
+              "JSON_STRINGIFY"
             ]
           }
         }
@@ -552,6 +574,9 @@
             "type": "string"
           }
         },
+        "onSubmit": {
+          "type": "string"
+        },
         "validation": {}
       },
       "required": [
@@ -559,6 +584,7 @@
         "fieldName",
         "formFields",
         "id",
+        "onSubmit",
         "validation"
       ],
       "additionalProperties": false,
@@ -597,6 +623,26 @@
       ],
       "additionalProperties": false,
       "description": "LAYOUTS used to layout data objects that are not arrays. Have child components."
+    },
+    "SelectProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "const": "select"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "additionalProperties": false
     }
   }
 }

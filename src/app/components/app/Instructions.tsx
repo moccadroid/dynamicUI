@@ -3,18 +3,18 @@
 import { Text, Button, Spinner, Stack, Textarea } from '@chakra-ui/react';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
 import useCompletions from '@/state/useCompletions';
 import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
 import OpenAI from 'openai';
 import ChatCompletion = OpenAI.ChatCompletion;
 import { useLayout } from '@/state/useLayout';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 const Instructions = () => {
-  const { state } = useStateContext();
+  const { appState, getAppState } = useAppState();
   const { setLayout } = useLayout();
-  const [userPrompt, setUserPrompt] = useState<string>(state.app.currentPrompt);
+  const currentPrompt = getAppState<string>('currentPrompt') ?? '';
+  const [userPrompt, setUserPrompt] = useState<string>(currentPrompt);
   const [isLoading, setIsLoading] = useState(false);
   const { handleCompletion } = useCompletions();
 
@@ -28,16 +28,16 @@ const Instructions = () => {
     const promptParams = {
       userMessage: userPrompt,
       sendAll: true,
-      layout: state.layout,
-      exampleData: state.exampleData,
-      definitions: state.app.selectedDefinitions,
+      layout: appState.layout,
+      exampleData: appState.exampleData,
+      definitions: appState.app.selectedDefinitions
     };
 
     setIsLoading(true);
-    const layoutAgent = LayoutAgentFactory.create({ params: promptParams });
+    const layoutAgent = LayoutAgentFactory.create({ params: promptParams, model: 'OPENAI' });
     const { layout } = await layoutAgent.run();
     setLayout(layout);
-    console.log('layout', layout);
+    //console.log('layout', layout);
     const completion = layoutAgent.getProperty<ChatCompletion>('lastCompletion');
     handleCompletion({ completion, additionalFields: { userPrompt } });
     setIsLoading(false);
@@ -47,7 +47,7 @@ const Instructions = () => {
     <Stack direction="column">
       <Stack>
         <Text as="b">Instruction History:</Text>
-        <Textarea value={state.app.promptHistory.join('\n')} onChange={() => {}} />
+        <Textarea value={appState.app.promptHistory.join('\n')} onChange={() => {}} />
       </Stack>
       <Text as="b">Instructions:</Text>
       <Textarea value={userPrompt} onChange={handleChange}/>

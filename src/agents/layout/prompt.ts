@@ -1,8 +1,6 @@
 import type { LayoutPromptParams } from '@/agents/layout/api';
 import { getDefinitions } from '@/dynamicUI/ai/definitions/getDefinitions';
 import { textFormatters } from '@/dynamicUI/actions/format';
-import { buttonActions } from '@/dynamicUI/actions/buttonActions';
-import { ValidationPromptParams } from '@/agents/validation/api';
 
 
 export const systemInstructions = {
@@ -145,7 +143,7 @@ export const generateLayoutPrompt = (params: LayoutPromptParams) => {
     You can use things like repeat(3, 1fr);
     
     Forms:
-    Input, Textarea ALWAYS have to be inside a Form component. 
+    Input, Textarea, Select ALWAYS have to be inside a Form component. 
     Button is the exception but with type: "submit" should be inside a form.
     FormFields contains the controlled fields. The path depends on the fieldName of the form.
     { user: { name: { first: "foo", last: "bar" }, location: { street: "lorem", city: "ipsum"}}}
@@ -180,7 +178,7 @@ export const generateLayoutPrompt = (params: LayoutPromptParams) => {
 
     ${params.userMessage ? `
       // USER INSTRUCTIONS
-      ${params.userMessage}` : ''}
+      ${params.userMessage}` : 'Generate a beautiful layout.'}
   `;
 
   return { userPrompt, systemPrompt };

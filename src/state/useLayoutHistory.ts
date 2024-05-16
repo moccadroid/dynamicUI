@@ -1,32 +1,23 @@
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 export const useLayoutHistory = () => {
-  const { state, setState } = useStateContext();
+  const { appState, setAppState } = useAppState();
 
   const goForward = () => {
-    const index = state.app.layoutHistoryIndex + 1;
-    if (index < state.app.layoutHistory.length) {
-      const layout = state.app.layoutHistory[index];
-      setState((prevState: State) => {
-        const newState = { ...prevState };
-        newState.layout = layout;
-        newState.app.layoutHistoryIndex = index;
-        return newState;
-      });
+    const index = appState.app.layoutHistoryIndex + 1;
+    if (index < appState.app.layoutHistory.length) {
+      const layout = appState.app.layoutHistory[index];
+      setAppState('layout', layout);
+      setAppState('app.layoutHistoryIndex', index);
     }
   };
 
   const goBack = () => {
-    const index = state.app.layoutHistoryIndex - 1;
+    const index = appState.app.layoutHistoryIndex - 1;
     if (index > 0) {
-      const layout = state.app.layoutHistory[index];
-      setState((prevState: State) => {
-        const newState = { ...prevState };
-        newState.layout = layout;
-        newState.app.layoutHistoryIndex = index;
-        return newState;
-      });
+      const layout = appState.app.layoutHistory[index];
+      setAppState('layout', layout);
+      setAppState('app.layoutHistoryIndex', index);
     }
   };
 

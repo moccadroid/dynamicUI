@@ -9,8 +9,6 @@ import {
 } from '@chakra-ui/react';
 import Instructions from '@/app/components/app/Instructions';
 import LayoutSelect from '@/app/components/app/LayoutSelect';
-import type { State } from '@/state/Provider';
-import { useStateContext } from '@/state/Provider';
 import type { ChangeEvent } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -20,30 +18,34 @@ import { EditorModal } from '@/app/components/app/EditorModal';
 import layoutSchema from '@/dynamicUI/parser/schema/componentConfig.schema.json';
 import ManageLayouts from '@/app/components/app/ManageLayouts';
 import { useLayoutHistory } from '@/state/useLayoutHistory';
+import Screenshot from '@/app/components/app/ScreenShot';
+import { useAppState } from '@/dynamicUI/state/AppStateProvider';
+import Validation from '@/app/components/app/Validation';
 
 export interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  onScreenshot: (state: string) => void;
 }
 
-const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
-  const { state, setState } = useStateContext();
-  const [data, setData] = useState(JSON.stringify(state.exampleData));
-  const [layout, setLayout] = useState(JSON.stringify(state.layout));
+const DrawerComponent = ({ isOpen, onClose, onScreenshot }: DrawerProps) => {
+  const { appState, setAppState } = useAppState();
+  const [data, setData] = useState(JSON.stringify(appState.exampleData));
+  const [layout, setLayout] = useState(JSON.stringify(appState.layout));
   const { goBack, goForward } = useLayoutHistory();
 
   useEffect(() => {
-    if (state.layout) {
-      setLayout(JSON.stringify(state.layout));
+    if (appState.layout) {
+      setLayout(JSON.stringify(appState.layout));
     } else {
       setLayout('');
     }
-    if (state.exampleData) {
-      setData(JSON.stringify(state.exampleData));
+    if (appState.exampleData) {
+      setData(JSON.stringify(appState.exampleData));
     } else {
       setData('');
     }
-  }, [state.exampleData, state.layout, state.data]);
+  }, [appState.exampleData, appState.layout, appState.data]);
 
   const handleSetData = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setData(event.target.value);
@@ -54,39 +56,27 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
   };
 
   const handleDataChange = () => {
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      newState.exampleData = JSON.parse(data);
-      newState.data = JSON.parse(data);
-      return newState;
-    });
+    setAppState('exampleData', JSON.parse(data));
+    setAppState('data', JSON.parse(data));
   };
 
   const handleLayoutChange = () => {
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      newState.layout = JSON.parse(layout);
-      return newState;
-    });
+    setAppState('layout', JSON.parse(layout));
   };
 
   const handleModalSave = (fieldName: string) => (value: string | undefined) => {
     if (!value) return;
 
-    setState((prevState: State) => {
-      const newState = { ...prevState };
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        newState[fieldName] = JSON.parse(value);
-      } catch (e) {
-        console.error('Could not parse editorState', e);
-      }
-      return newState;
-    });
+    const editorState = JSON.parse(value);
+    setAppState(fieldName, editorState);
+  };
+
+  const handleOnScreenshot = (state: string) => {
+    onScreenshot(state);
   };
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} size="lg">
+    <Drawer isOpen={isOpen} onClose={onClose} size="xl">
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -95,16 +85,18 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
         </DrawerHeader>
         <DrawerBody>
           <Stack>
+            <Screenshot onScreenshot={handleOnScreenshot}/>
             <LayoutSelect />
             <ManageLayouts />
             <Instructions />
             <InterfaceSelect />
+            <Validation />
             <Stack>
               <Text as="b">Current Layout</Text>
               <Textarea value={layout} onChange={handleSetLayout} />
               <Stack direction="row">
                 <Button onClick={handleLayoutChange}>Set new Layout</Button>
-                <EditorModal onSave={handleModalSave('layout')} value={state.layout} schema={layoutSchema}/>
+                <EditorModal onSave={handleModalSave('layout')} value={appState.layout} schema={layoutSchema}/>
                 <Button onClick={goBack}>Go Back</Button>
                 <Button onClick={goForward}>Go Forward</Button>
               </Stack>
@@ -114,7 +106,7 @@ const DrawerComponent = ({ isOpen, onClose }: DrawerProps) => {
               <Textarea value={data} onChange={handleSetData}/>
               <Stack direction="row">
                 <Button onClick={handleDataChange}>Set new data</Button>
-                <EditorModal onSave={handleModalSave('data')} value={state.exampleData}/>
+                <EditorModal onSave={handleModalSave('data')} value={appState.exampleData}/>
               </Stack>
             </Stack>
             <FetchUrl />

@@ -22,6 +22,7 @@ export interface State {
     currentPrompt: string;
     completion?: ChatCompletion;
     selectedDefinitions: string[];
+    screenshot: string | undefined;
   },
   data: any;
   exampleData: any;

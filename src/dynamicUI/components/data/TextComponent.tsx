@@ -9,7 +9,6 @@ const TextComponent: FC<{ properties: TextProperties }> = ({ properties }) => {
   const { fieldName, format: formats, fontSize, align } = properties;
   const { getState } = useSectionDataContext();
   const { fullPath } = useFullPath(fieldName);
-
   const textValue = getState<string>(fullPath) ?? '';
   const format = useFormat(formats);
 

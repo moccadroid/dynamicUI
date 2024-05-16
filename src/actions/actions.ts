@@ -1,4 +1,4 @@
-// buttonActions.ts
+
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import type { ComponentConfig } from '@/dynamicUI/components/ComponentConfig';
 import type { ActionParams, Actions, SubmitFormParams, UpdateFieldParams } from '@/interfaces/actions/ActionConfig';
