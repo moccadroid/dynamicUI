@@ -6,9 +6,9 @@ import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 const CodeComponent: FC<{ properties: CodeProperties}> = ({ properties }) => {
   const { fieldName, description, type } = properties;
-  const { getState } = useSectionDataContext();
+  const { getSectionState } = useSectionDataContext();
   const { fullPath } = useFullPath(fieldName);
-  const code = getState<string>(fullPath);
+  const code = getSectionState<string>(fullPath);
 
   if (code && type === 'json') {
     try {

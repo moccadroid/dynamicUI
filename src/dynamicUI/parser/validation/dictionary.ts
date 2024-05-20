@@ -18,6 +18,7 @@ export const validationsDictionary: { [key: string]: ValidationFunction } = {
   },
   equalTo: (schema, args) => {
     if (args && 'referenceField' in args) {
+      console.log(args);
       schema.oneOf([Yup.ref(args.referenceField as string), null], args.message);
     }
     return schema;

@@ -1,29 +1,19 @@
 import { useAppState } from '@/dynamicUI/state/AppStateProvider';
-import { createActions } from '@/dynamicUI/actions/actions';
-import { useEffect, useMemo } from 'react';
-import type { ActionProperties } from '@/dynamicUI/components/ComponentConfig';
+import { useMemo } from 'react';
+import type { ActionMap } from '@/dynamicUI/actions/actions';
+import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 export const useActions = () => {
-  const { getAppState, setAppState } = useAppState();
+  const { getAppState, setAppState, loadingStates, setLoading } = useAppState();
+  const { sectionActions } = useSectionDataContext();
 
-  return useMemo(() => createActions(setAppState, getAppState), [setAppState, getAppState]);
-};
+  return useMemo(() => {
+    const boundActions: ActionMap = {};
 
-export const useActionProperties = (actionList?: ActionProperties[], name?: string) => {
-  const actions = useActions();
+    for (const key in sectionActions) {
+      boundActions[key] = sectionActions[key]({ setAppState, getAppState, loadingStates, setLoading });
+    }
 
-  if (!actionList || !name) {
-    return;
-  }
-
-  useEffect(() => {
-    actionList.forEach(actionProperties => {
-      const action = actions[actionProperties.name];
-      if (action) {
-        action(name);
-      }
-    });
-  }, []);
-
-
+    return boundActions;
+  }, [setAppState, getAppState, sectionActions]);
 };

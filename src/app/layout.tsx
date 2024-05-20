@@ -18,7 +18,6 @@ const initialState: State = {
   },
   layout: undefined,
   layoutName: undefined,
-  exampleData: userData.data,
   data: userData.data,
   stats: {
     inputToken: 0,

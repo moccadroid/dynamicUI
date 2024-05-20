@@ -1,12 +1,19 @@
 import type { SelectProperties } from '@/dynamicUI/components/ComponentConfig';
 import type { FC } from 'react';
 import type { FieldInputProps } from 'formik';
+import { useFormikContext } from 'formik';
 import { Field, type FormikProps } from 'formik';
 import { FormControl, FormErrorMessage, FormLabel, Select } from '@chakra-ui/react';
 
 const SelectComponent: FC<{ properties: SelectProperties}> = ({ properties }) => {
   const { fieldName, label } = properties;
 
+  const formikContext = useFormikContext();
+
+  if (!formikContext) {
+    console.error('SelectComponent must be used within a Formik context.');
+    return null;
+  }
   /*
   if (!fieldName) {
     return (

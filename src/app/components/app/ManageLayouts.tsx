@@ -61,6 +61,7 @@ const ManageLayouts = () => {
     setLayout(undefined);
     setData(undefined);
     setLayoutName(undefined);
+    console.log('all reset');
   };
 
   const handleSelect = (event: any) => {

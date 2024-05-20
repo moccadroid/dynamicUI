@@ -27,6 +27,8 @@ const DataCleanupAgentFactory = {
       if (properties) {
         if (name in properties) {
           return properties[name] as T;
+        } else {
+          console.warn(`DataCleanupAgent: Property ${name} not found.`);
         }
       }
       return undefined;

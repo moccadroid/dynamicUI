@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { useMemo } from 'react';
 import type { FormProperties } from '@/dynamicUI/components/ComponentConfig';
 import { Form, Formik } from 'formik';
@@ -8,20 +9,24 @@ import { Stack } from '@chakra-ui/react';
 import { useActions } from '@/dynamicUI/hooks/useActions';
 import { createYupSchema } from '@/dynamicUI/parser/validation/createYupSchema';
 import type { SchemaSpec } from '@/dynamicUI/parser/validation/types';
+import type { AnySchema } from 'yup';
 
 const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = ({ children, properties }) => {
-  const { fieldName, validation, onSubmit } = properties;
+  const { name, fieldName, validation, onSubmit } = properties;
   const { fullPath } = useFullPath(fieldName);
-  const { state, getState } = useSectionDataContext();
+  const { sectionState, getSectionState } = useSectionDataContext();
   const actions = useActions();
+  const [validationSchema, setValidationSchema] = useState<AnySchema>();
 
-  let validationSchema = null;
-  try {
-    if (validation && validation !== '')
-      validationSchema = createYupSchema(validation as SchemaSpec);
-  } catch (e) {
-    console.log('Validation could not be parsed', validation);
-  }
+  useEffect(() => {
+    try {
+      if (validation && validation !== '')
+        setValidationSchema(createYupSchema(validation as SchemaSpec));
+
+    } catch (e) {
+      console.log('Validation could not be parsed', validation);
+    }
+  }, [validation]);
 
   const createInitialValues = () => {
 
@@ -40,20 +45,19 @@ const FormComponent: FC<{ children: ReactNode, properties: FormProperties }> = (
     const initialValues = {};
     properties.formFields.forEach(field => {
       const path = fullPath !== '' ? `${fullPath}.${field}` : field;
-      const value = getState(path);
+      const value = getSectionState(path);
       if (value !== undefined) { // Ensure the value exists before setting it
         setNestedValue(initialValues, field, value);
       }
     });
     return initialValues;
   };
-  const initialValues = useMemo(() => createInitialValues(), [state]);
+  const initialValues = useMemo(() => createInitialValues(), [sectionState]);
 
-
-  const handleOnSubmit = (values: any) => {
+  const handleOnSubmit = async (values: any) => {
     const action = actions[onSubmit];
     if (action) {
-      action(values);
+      await action(name, values);
     }
     console.log('formValues', values);
   };

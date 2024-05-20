@@ -18,19 +18,20 @@ export interface POSTUrlRequestParams {
 export async function POSTUrlRequest({ promptParams }: POSTUrlRequestParams) {
   'use server';
 
-  console.log(promptParams);
-
   const { url } = promptParams;
   const response = await fetch(url);
   const data = await response.json();
-  const prompt = generateUrlPrompt(promptParams, data);
+  const { userPrompt, systemPrompt } = generateUrlPrompt(promptParams, data);
 
   console.log('POSTUrlRequest');
 
   const completion = await openai.chat.completions.create({
     messages: [{
+      role: 'system',
+      content: systemPrompt
+    }, {
       role: 'user',
-      content: prompt
+      content: userPrompt
     }],
     response_format: { type: 'json_object' },
     //model: 'gpt-4-turbo',

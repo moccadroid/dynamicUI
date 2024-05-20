@@ -30,6 +30,7 @@
             "FlexLayout",
             "CardLayout",
             "Code",
+            "ContainerLayout",
             "Image",
             "Text",
             "LabeledText",
@@ -63,6 +64,9 @@
             },
             {
               "$ref": "#/definitions/CodeProperties"
+            },
+            {
+              "$ref": "#/definitions/ContainerLayoutProperties"
             },
             {
               "$ref": "#/definitions/ImageProperties"
@@ -194,6 +198,9 @@
         "fieldName": {
           "type": "string"
         },
+        "align": {
+          "type": "string"
+        },
         "label": {
           "type": "string"
         },
@@ -279,6 +286,39 @@
       ],
       "additionalProperties": false
     },
+    "ContainerLayoutProperties": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          }
+        },
+        "id": {
+          "type": "string",
+          "const": "containerLayout"
+        },
+        "maxWidth": {
+          "type": "string"
+        },
+        "maxHeight": {
+          "type": "string"
+        },
+        "centerContent": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "components",
+        "id",
+        "name"
+      ],
+      "additionalProperties": false
+    },
     "FlexLayoutProperties": {
       "type": "object",
       "properties": {
@@ -301,6 +341,9 @@
             "row",
             "column"
           ]
+        },
+        "gap": {
+          "type": "string"
         },
         "justify": {
           "type": "string"

@@ -4,40 +4,73 @@ import { useMemo } from 'react';
 import { createContext } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
+import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 
 const AppStateContext = createContext<AppStateContextType | undefined>(undefined);
 
 export interface AppState {
-    [key: string]: any;
+  loadingStates: { [key: string]: boolean };
+  [key: string]: any;
 }
 
 export interface AppStateProps {
-    children: ReactNode;
-    initialState: AppState;
+  children: ReactNode;
+  initialState: AppState;
 }
 
 export type SetAppState = (path: string, value: unknown) => void;
 export type GetAppState = <T,>(path: string) => T | undefined;
 
 export interface AppStateContextType {
-    appState: AppState;
-    setAppState: SetAppState;
-    getAppState: GetAppState;
+  appState: AppState;
+  setAppState: SetAppState;
+  getAppState: GetAppState;
+  loadingStates: { [key: string]: boolean };
+  setLoading: (key: string, state: boolean) => void;
 }
 
 export const AppStateProvider: FC<AppStateProps> = ({ children, initialState }) => {
   const [state, setState] = useState<AppState>(initialState ?? {});
+  const [loadingStates, setLoadingStates] = useState<{ [key: string]: boolean }>({});
+
+  console.log('appState', state);
+
+  const setLoading = (key: string, state: boolean) => {
+    setLoadingStates(prev => ({ ...prev, [key]: state }));
+  };
 
   const setAppState = useCallback((field: string, value: any) => {
-    setState(prevState => setNestedValue(prevState, field, value));
+    if (field === 'layout') {
+      setLayout(value as LayoutConfig);
+    } else {
+      setState(prevState => setNestedValue(prevState, field, value));
+    }
   }, []);
 
   const getAppState = useCallback(<T,>(field: string) => {
     return getNestedValue<T>(state, field);
   }, [state]);
 
+  const setLayout = (layout?: LayoutConfig) => {
+    const history = state.app.layoutHistory;
+    let index = state.app.layoutHistoryIndex;
+    if (layout) {
+      history.push(layout);
+      index = history.length - 1;
+    }
+    setState(prevState => setNestedValue(prevState, 'layout', layout));
+    setAppState('layoutHistory', history);
+    setAppState('app.layoutHistoryIndex', index);
+  };
+
   const value: AppStateContextType = useMemo((): AppStateContextType  => {
-    return { setAppState, getAppState, appState: state };
+    return {
+      setAppState,
+      getAppState,
+      appState: state,
+      loadingStates,
+      setLoading,
+    };
   }, [state]);
 
   return (

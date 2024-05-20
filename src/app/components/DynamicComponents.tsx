@@ -12,7 +12,7 @@ const DynamicComponents = () => {
   return (
     <Container maxW="container.lg" marginBottom={50}>
       <Stack spacing={5}>
-        <Section layout={appState.layout as LayoutConfig} data={appState.data}/>
+        <Section layout={appState.layout as LayoutConfig} data={appState.data} debug={appState.debug} />
       </Stack>
     </Container>
   );

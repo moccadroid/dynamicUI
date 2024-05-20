@@ -25,7 +25,6 @@ export interface State {
     screenshot: string | undefined;
   },
   data: any;
-  exampleData: any;
   stats: {
     inputToken: number;
     outputToken: number;

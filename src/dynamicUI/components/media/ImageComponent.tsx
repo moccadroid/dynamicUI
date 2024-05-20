@@ -6,9 +6,9 @@ import { useFullPath } from '@/dynamicUI/state/PathProvider';
 
 const ImageComponent: FC<{properties: ImageProperties}> = ({ properties }) => {
   const { fieldName, alt, size } = properties;
-  const { getState } = useSectionDataContext();
+  const { getSectionState } = useSectionDataContext();
   const { fullPath } = useFullPath(fieldName);
-  const src = getState<string>(fullPath);
+  const src = getSectionState<string>(fullPath);
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

@@ -1,27 +1,31 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import ParsedLayout from '@/dynamicUI/parser/ParsedLayout';
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Text } from '@chakra-ui/react';
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Stack, Text } from '@chakra-ui/react';
 import type { LayoutConfig } from '@/dynamicUI/components/ComponentConfig';
 import { SectionDataProvider } from '../state/SectionDataProvider';
 import { PathProvider } from '@/dynamicUI/state/PathProvider';
 import schema from '@/dynamicUI/parser/schema/componentConfig.schema.json';
 import { validateJson } from '@/dynamicUI/parser/layout/validateLayout';
+import { EditorModal } from '@/app/components/app/EditorModal';
+import type { Actions } from '@/dynamicUI/actions/actions';
+
 export interface SectionT {
   layout: LayoutConfig;
   data: any;
+  actions?: Actions;
+  debug?: boolean;
 }
 
-const Section: FC<SectionT> = ({ layout, data }) => {
-
+const Section: FC<SectionT> = ({ layout, data, actions, debug = false }) => {
   return useMemo(() => {
     if (layout) {
       const errors = validateJson(layout, schema);
       if (!errors) {
         return (
-          <SectionDataProvider initialData={data}>
+          <SectionDataProvider initialData={data} actions={actions}>
             <PathProvider>
-              <ParsedLayout config={layout}/>
+              <ParsedLayout config={layout} debug={debug}/>
             </PathProvider>
           </SectionDataProvider>
         );
@@ -34,8 +38,11 @@ const Section: FC<SectionT> = ({ layout, data }) => {
             alignItems='center'
             justifyContent='center'
           >
-            <AlertIcon boxSize='40px' />
-            <AlertTitle>Layout JSON is invalid!</AlertTitle>
+            <Stack width="100%" direction="row" justify="space-between">
+              <AlertIcon boxSize='40px' />
+              <AlertTitle>Layout JSON is invalid!</AlertTitle>
+              <EditorModal label="" value={layout} schema={schema} onSave={() => {}} />
+            </Stack>
             <AlertDescription>
               {errors.map((error: any, index: number) => {
                 return (
@@ -49,6 +56,6 @@ const Section: FC<SectionT> = ({ layout, data }) => {
       }
     }
     return <Text>Please generate or select a layout</Text>;
-  }, [layout, data]);
+  }, [layout, data, debug]);
 };
 export default Section;

@@ -1,42 +1,39 @@
 import type { GetAppState, SetAppState } from '@/dynamicUI/state/AppStateProvider';
-import LayoutAgentFactory from '@/agents/layout/LayoutAgent';
+
+export interface ActionParams {
+  setAppState: SetAppState;
+  getAppState: GetAppState;
+  setLoading: (key: string, state: boolean) => void;
+  loadingStates: { [key: string]: boolean };
+}
 
 export interface Action {
-    (...args: any[]): void;
+  (params: ActionParams): (name: string, ...args: any[]) => Promise<void>;
+}
+
+export interface ActionMap {
+  [key: string]: (name: string, ...args: any[]) => Promise<void>;
 }
 
 export interface Actions {
   [key: string]: Action;
 }
 
-export function createActions(setAppState: SetAppState, getAppState: GetAppState) {
-
-  const sendInstructions: Action = (values: any) => {
-    console.log(values);
-
-    const promptParams = {
-      userMessage: values.currentPrompt,
-      sendAll: true,
-      layout: values.layout,
-      exampleData: values.exampleData,
-      definitions: values.selectedDefinitions,
-    };
-
-    const promptHistory = getAppState<string[]>('app.promptHistory') ?? [];
-    promptHistory.push(values.currentPrompt as string);
-    setAppState('app.promptHistory', promptHistory);
-    setAppState('app.currentPrompt', '');
-
-
-    const layoutAgent = LayoutAgentFactory.create({ params: promptParams });
-    layoutAgent.run().then(({ layout }) => {
-      setAppState('layout', layout);
-    }).catch(error => console.error(error));
+export const createAction = (action: (params: ActionParams) => (name: string, ...args: any[]) => Promise<void>): Action => {
+  return ({ setAppState, getAppState, setLoading, loadingStates }) => async (name: string, ...args: any[]) => {
+    setLoading(name, true);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      await action({ setAppState, getAppState, setLoading, loadingStates })(name, ...args);
+    } finally {
+      setLoading(name, false);
+    }
   };
+};
 
-  return {
-    sendInstructions
-  } as Actions;
-}
+export const internalActions : Actions = {
+
+
+};
 
 

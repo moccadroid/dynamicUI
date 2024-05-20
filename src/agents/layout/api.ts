@@ -2,7 +2,6 @@
 
 import OpenAI from 'openai';
 import { generateLayoutPrompt } from '@/agents/layout/prompt';
-import { validationFunctions } from '@/agents/validation/functions';
 import type { ValidationAgentProperties } from '@/agents/validation/ValidationAgent';
 import ValidationAgentFactory from '@/agents/validation/ValidationAgent';
 import validationSchema from '@/dynamicUI/parser/schema/validation.schema.json';

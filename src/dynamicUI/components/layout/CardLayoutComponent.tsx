@@ -5,7 +5,7 @@ import { Card, CardBody } from '@chakra-ui/card';
 const CardLayoutComponent: FC<{ children: ReactNode, properties: CardLayoutProperties }> = ({ children, properties }) => {
 
   return (
-    <Card>
+    <Card width="100%">
       <CardBody>
         {children}
       </CardBody>

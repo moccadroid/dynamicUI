@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "type": "Form",
+      "properties": {
+        "id": "form",
+        "name": "form",
+        "fieldName": "",
+        "onSubmit": "sendInstructions",
+        "formFields": [
+          "promptHistory",
+          "currentPrompt",
+          "layout",
+          "data",
+          "selectedDefinitions"
+        ],
+        "validation": {},
+        "components": [
+          {
+            "type": "ContainerLayout",
+            "properties": {
+              "id": "containerLayout",
+              "name": "promptHistoryContainer",
+              "maxHeight": "70px",
+              "components": [
+                {
+                  "type": "List",
+                  "properties": {
+                    "id": "list",
+                    "name": "list",
+                    "fieldName": "promptHistory",
+                    "layout": {
+                      "components": [
+                        {
+                          "type": "Text",
+                          "properties": {
+                            "id": "text",
+                            "name": "prompt",
+                            "fontSize": "md",
+                            "fieldName": ""
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "Textarea",
+            "properties": {
+              "id": "textarea",
+              "name": "currentPrompt",
+              "fieldName": "currentPrompt",
+              "label": "Your prompt"
+            }
+          },
+          {
+            "type": "Button",
+            "properties": {
+              "id": "button",
+              "name": "submit",
+              "type": "submit",
+              "label": "Send instructions"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

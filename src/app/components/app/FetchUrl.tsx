@@ -36,7 +36,7 @@ const FetchUrl = () => {
       const dataCleanupCompletion = dataCleanupAgent.getProperty<ChatCompletion>('lastCompletion');
       handleCompletion({ completion: dataCleanupCompletion });
       console.log('cleaned data', data);
-      const layoutAgent = LayoutAgentFactory.create({ params: { exampleData: data, definitions: appState.app.selectedDefinitions } });
+      const layoutAgent = LayoutAgentFactory.create({ params: { exampleData: data, definitions: appState.app.selectedDefinitions }, model: 'OPENAI' });
       const { layout } = await layoutAgent.run();
       setLayout(layout);
       console.log('layout', layout);

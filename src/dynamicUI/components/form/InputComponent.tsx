@@ -2,10 +2,19 @@ import type { InputProperties } from '@/dynamicUI/components/ComponentConfig';
 import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import type { FC } from 'react';
 import type { FieldInputProps, FormikProps } from 'formik';
+import { useFormikContext } from 'formik';
 import { Field } from 'formik';
 
 const InputComponent: FC<{ properties: InputProperties }> = ({ properties }) => {
   const { label, fieldName, placeholder, type } = properties;
+
+  const formikContext = useFormikContext();
+
+  if (!formikContext) {
+    console.error('InputComponent must be used within a Formik context.');
+    return null;
+  }
+
   return (
     <Field name={fieldName} type={type} placeholder={placeholder} label={label} component={InternalInput} />
   );

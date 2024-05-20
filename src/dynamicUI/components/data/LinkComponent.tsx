@@ -8,9 +8,9 @@ import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 const LinkComponent: FC<{ properties: LinkProperties }> = ({ properties }) => {
   const { fieldName, label, labelFieldName } = properties;
   const { fullPath, getFullPath } = useFullPath(fieldName);
-  const { getState } = useSectionDataContext();
-  const href = getState<string>(fullPath);
-  const text = labelFieldName ? getState<string>(getFullPath(labelFieldName)) : (label ?? href);
+  const { getSectionState } = useSectionDataContext();
+  const href = getSectionState<string>(fullPath);
+  const text = labelFieldName ? getSectionState<string>(getFullPath(labelFieldName)) : (label ?? href);
 
   return (
     <Link target="_blank" rel="noopener noreferrer" as={NextLink} href={typeof href === 'string' ? href : ''}>{text}</Link>

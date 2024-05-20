@@ -40,6 +40,8 @@ export const createYupSchema = (schemaSpec: SchemaSpec) => {
   const schemaObject: SchemaObject = {};
   Object.keys(schemaSpec.fields).forEach(fullFieldName => {
     const field = schemaSpec.fields[fullFieldName];
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     let schema = Yup[field.type]();
     field.validations.forEach(validation => {
       if (validation.type === 'conditional') {
@@ -49,6 +51,7 @@ export const createYupSchema = (schemaSpec: SchemaSpec) => {
       } else {
         const validationFunction = validationsDictionary[validation.type];
         if (validationFunction) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           schema = validationFunction(schema, validation.args);
         }
       }
@@ -63,6 +66,7 @@ export const createYupSchema = (schemaSpec: SchemaSpec) => {
     return Yup.object().shape(
       Object.keys(obj).reduce((acc: Record<string, any>, key: string) => {
         // Check if the value at the key is already a Yup schema
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         acc[key] = Yup.isSchema(obj[key]) ? obj[key] : convertToYupObject(obj[key]);
         return acc;
       }, {})

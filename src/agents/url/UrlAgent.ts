@@ -24,6 +24,8 @@ const UrlAgentFactory = {
     const getProperty = <T extends keyof UrlAgentProperties>(name: string): any => {
       if (name in properties) {
         return properties[name] as T;
+      } else {
+        console.warn(`UrlAgent: Property ${name} not found.`);
       }
       return undefined;
     };

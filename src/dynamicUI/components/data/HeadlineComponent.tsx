@@ -5,9 +5,9 @@ import { useFullPath } from '@/dynamicUI/state/PathProvider';
 import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 
 const HeadlineComponent: FC<{ properties: HeadlineProperties}> = ({ properties }) => {
-  const { level, label, fieldName } = properties;
+  const { level, label, fieldName, align } = properties;
   const { getFullPath } = useFullPath();
-  const { getState } = useSectionDataContext();
+  const { getSectionState } = useSectionDataContext();
 
   const headingSizes = {
     1: '4xl',
@@ -20,8 +20,8 @@ const HeadlineComponent: FC<{ properties: HeadlineProperties}> = ({ properties }
     8: 'xs'
   };
 
-  const value = fieldName ? getState<string>(getFullPath(fieldName)) : (label ?? 'undefined');
-  return <Heading as={`h${level}`} size={headingSizes[level]} marginBottom={2}>{value}</Heading>;
+  const value = fieldName ? getSectionState<string>(getFullPath(fieldName)) : (label ?? 'undefined');
+  return <Heading textAlign={align as any} as={`h${level}`} size={headingSizes[level]} marginBottom={2}>{value}</Heading>;
 };
 
 export default HeadlineComponent;

@@ -26,6 +26,8 @@ const ValidationAgentFactory = {
     const getProperty = <T extends keyof ValidationAgentProperties>(name: string): any => {
       if (name in properties) {
         return properties[name] as T;
+      } else {
+        console.warn(`ValidationAgent: Property ${name} not found.`);
       }
       return undefined;
     };

@@ -7,13 +7,13 @@ import useFormat from '@/dynamicUI/actions/format';
 
 const TextComponent: FC<{ properties: TextProperties }> = ({ properties }) => {
   const { fieldName, format: formats, fontSize, align } = properties;
-  const { getState } = useSectionDataContext();
+  const { getSectionState } = useSectionDataContext();
   const { fullPath } = useFullPath(fieldName);
-  const textValue = getState<string>(fullPath) ?? '';
+  const textValue = getSectionState<string>(fullPath) ?? '';
   const format = useFormat(formats);
 
   return (
-    <Text fontSize={fontSize}>{format(textValue)}</Text>
+    <Text textAlign={align as any} fontSize={fontSize}>{format(textValue)}</Text>
   );
 };
 

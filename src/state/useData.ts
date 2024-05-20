@@ -5,7 +5,6 @@ export const useData = () => {
 
   const setData = (data?: any) => {
     setAppState('data', data);
-    setAppState('exampleData', data);
   };
 
   return { setData, data: appState.data };

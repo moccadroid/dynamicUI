@@ -4,17 +4,17 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { getUUIDv4 } from '@/utils/getUUIDv4';
 
-const ParsedLayout: FC<{ config: LayoutConfig}> = ({ config }) => {
+const ParsedLayout: FC<{ config: LayoutConfig, debug?: boolean }> = ({ config, debug = false }) => {
 
   return useMemo(() => {
     if (Array.isArray(config?.components)) {
       return config.components.map((componentConfig: ComponentConfig) => {
-        return <ParsedComponent key={getUUIDv4()} config={componentConfig}/>;
+        return <ParsedComponent key={getUUIDv4()} config={componentConfig} debug={debug}/>;
       });
     } else {
       console.log('illegal config', config);
     }
-  }, [config]);
+  }, [config, debug]);
 };
 
 export default ParsedLayout;

@@ -11,44 +11,33 @@ import {
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, useDisclosure } from '@chakra-ui/react';
 import { Editor } from '@monaco-editor/react';
-import { useAppState } from '@/dynamicUI/state/AppStateProvider';
 
 export interface EditorModalProps {
+  label: string;
   value: any;
   schema?: any;
   onSave?: (value: string) => void;
 }
 
-export const EditorModal: FC<EditorModalProps> = ({ value, onSave, schema }) => {
-  const { appState } = useAppState();
-  const [isOpen, setIsOpen] = useState(false);
+export const EditorModal: FC<EditorModalProps> = ({ label, value, onSave, schema }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [editorState, setEditorState] = useState<string |undefined>(undefined);
+
+  useEffect(() => {
+    if (value) {
+      setEditorState(JSON.stringify(value, null, '\t'));
+    } else {
+      setEditorState('');
+    }
+  }, [value]);
 
   const handleOnSave = () => {
     if (onSave) {
       onSave(editorState ?? '');
     }
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (value) {
-      setEditorState(JSON.stringify(value, null, '\t'));
-    }
-  }, [appState.layout]);
-
-  const handleOnOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleOnCancel = () => {
-    setIsOpen(false);
-  };
-
-  const handleOnEditorChange = (value: string | undefined) => {
-    setEditorState(value);
+    onClose();
   };
 
   const handleOnMount = (editor: any, monaco: any) => {
@@ -65,9 +54,9 @@ export const EditorModal: FC<EditorModalProps> = ({ value, onSave, schema }) => 
 
   return (
     <Box>
-      <Button onClick={handleOnOpen}>Open in Editor</Button>
+      <Button onClick={onOpen}>{label}</Button>
 
-      <Modal isOpen={isOpen} onClose={handleOnCancel} size="full">
+      <Modal isOpen={isOpen} onClose={onClose} size="full">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Layout Schema</ModalHeader>
@@ -78,13 +67,13 @@ export const EditorModal: FC<EditorModalProps> = ({ value, onSave, schema }) => 
               width="90vw"
               defaultLanguage="json"
               value={editorState}
-              onChange={handleOnEditorChange}
+              onChange={setEditorState}
               onMount={handleOnMount}
             />
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={handleOnSave}>Save</Button>
-            <Button variant="ghost" onClick={handleOnCancel}>Cancel</Button>
+            <Button variant="ghost" onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

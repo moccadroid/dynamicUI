@@ -4,11 +4,19 @@ import { useRef } from 'react';
 import { useEffect } from 'react';
 import { FormControl, FormErrorMessage, FormLabel, Textarea } from '@chakra-ui/react';
 import type { FieldInputProps, FormikProps } from 'formik';
+import { useFormikContext } from 'formik';
 import { Field } from 'formik';
 import useFormat from '@/dynamicUI/actions/format';
 
 const TextareaComponent: FC<{ properties: TextareaProperties }> = ({ properties }) => {
   const { fieldName, placeholder, label, format } = properties;
+
+  const formikContext = useFormikContext();
+
+  if (!formikContext) {
+    console.error('TextareaComponent must be used within a Formik context.');
+    return null;
+  }
 
   return (
     <Field name={fieldName} format={format} placeholder={placeholder} label={label} component={InternalInput} />

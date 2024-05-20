@@ -31,6 +31,8 @@ const LayoutAgentFactory = {
       if (properties) {
         if (name in properties) {
           return properties[name] as T;
+        } else {
+          console.warn(`LayoutAgent: Property ${name} not found.`);
         }
       }
       return undefined;

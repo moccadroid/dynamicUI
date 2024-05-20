@@ -38,25 +38,6 @@ export const dataInstructions = {
   `
 };
 
-const example = {
-  components: [{
-    type: 'FlexLayout',
-    properties: {
-      direction: 'column',
-      components: [{
-        type: 'Input',
-        properties: {
-          // input properties
-        }
-      }],
-    }
-  }]
-};
-
-const getTextFormatters = () => {
-  return Object.keys(textFormatters).join(', ');
-};
-
 export const generateLayoutPrompt = (params: LayoutPromptParams) => {
 
   /*
@@ -110,7 +91,7 @@ export const generateLayoutPrompt = (params: LayoutPromptParams) => {
   `;
 */
   const systemPrompt = `
-    You're job is to create a JSON representation of the supplied DATA by following the rules in INTERFACES.
+    You're job is to create a UI in JSON as a representation of the supplied DATA by following the rules in INTERFACES.
     
     General explanations:
     Only return valid LayoutConfig with sub components as JSON.
@@ -142,6 +123,7 @@ export const generateLayoutPrompt = (params: LayoutPromptParams) => {
     Use headlines with high levels (5,6) to describe grouped data.
     In the grid layout, GridSettings templateRows and templateColumns correspond the html properties.
     You can use things like repeat(3, 1fr);
+    Use ContainerLayout to wrap layouts that need a width and/or be centered.
     
     Forms:
     Input, Textarea, Select ALWAYS have to be inside a Form component. 
@@ -153,6 +135,8 @@ export const generateLayoutPrompt = (params: LayoutPromptParams) => {
     If the form also controls location, its root is "user". The children's paths use that as root.
     form fieldName: "user" -> firstName fieldName: "name.first". -> city fieldName: "location.city"
     If one of the controlled fields is at the root of the data, the form fieldName is empty. fieldName: ""
+    If you add a component that is not bound to a field in the data, include their fieldNames in the form's formFields
+    so they are controlled by formik.
     
     Data:
     The created layout represents the data.

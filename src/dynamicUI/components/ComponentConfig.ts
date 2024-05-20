@@ -21,6 +21,7 @@ export interface HeadlineProperties {
     id: 'headline';
     name: string;
     fieldName?: string; // dynamic text
+    align?: string; // text-align
     label?: string; // static text
     level: 1 | 2 | 3 | 4 | 5 | 6; // higher numbers are more useful
 }
@@ -154,6 +155,7 @@ export interface FlexLayoutProperties extends LayoutConfig { // can be nested
     id: 'flexLayout';
     name: string;
     direction: 'row' | 'column';
+    gap?: string; // in px
     justify?: string;
     align?: string;
     components: ComponentConfig[];
@@ -165,14 +167,23 @@ export interface CardLayoutProperties extends LayoutConfig { // can be nested
     components: ComponentConfig[]; // the body of the card
 }
 
+export interface ContainerLayoutProperties extends LayoutConfig {
+    id: 'containerLayout';
+    maxWidth?: string; // 'xs' | 'sm' | 'md' | 'lg' | 'xl' or css width value
+    maxHeight?: string; // in px
+    centerContent?: boolean;
+    name: string;
+    components: ComponentConfig[];
+}
+
 
 /**
  * CONFIGS (the actual components)
  */
 export interface ComponentConfig { // describes the above components
-    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout' | 'Code'
+    type: 'Input' | 'Button' | 'Headline' | 'Textarea' | 'FlexLayout' | 'CardLayout' | 'Code' | 'ContainerLayout'
       | 'Image' | 'Text' | 'LabeledText' | 'List' | 'Link' | 'ConcatText' | 'Form' | 'GridLayout' | 'Select';
-    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties | CodeProperties
+    properties: InputProperties | ButtonProperties | HeadlineProperties | TextareaProperties | CodeProperties | ContainerLayoutProperties
       | FlexLayoutProperties | ImageProperties | CardLayoutProperties | TextProperties | LabeledTextProperties
       | ListProperties | LinkProperties | ConcatTextProperties | FormProperties | GridLayoutProperties | SelectProperties;
 }

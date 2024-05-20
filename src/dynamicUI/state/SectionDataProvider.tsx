@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useContext } from 'react';
 import { createContext, useState, useMemo } from 'react';
+import type { Actions } from '@/dynamicUI/actions/actions';
+import { internalActions } from '@/dynamicUI/actions/actions';
 
 const SectionDataContext = createContext<SectionDataContextType | undefined>(undefined);
 
@@ -13,16 +15,19 @@ interface SectionContextState {
 export interface SectionDataProviderProps {
   children: ReactNode,
   initialData: SectionContextState;
+  actions?: Actions;
 }
 
 interface SectionDataContextType {
-  state: SectionContextState,
-  setState: (path: string, value: unknown) => void;
-  getState: <T,>(path: string) => T | undefined;  // You can specify a return type more specific than `any`
+  sectionActions: Actions,
+  sectionState: SectionContextState,
+  setSectionState: (path: string, value: unknown) => void;
+  getSectionState: <T,>(path: string) => T | undefined;  // You can specify a return type more specific than `any`
 }
 
-export const SectionDataProvider = ({ children, initialData }: SectionDataProviderProps) => {
+export const SectionDataProvider = ({ children, initialData, actions }: SectionDataProviderProps) => {
   const [state, setState] = useState<SectionContextState>(initialData);
+  const sectionActions = { ...internalActions, ...actions };
 
   useEffect(() => {
     setState(initialData);
@@ -68,9 +73,10 @@ export const SectionDataProvider = ({ children, initialData }: SectionDataProvid
   }, [state]);
 
   const value = useMemo(() => ({
-    setState: setStateAtPath,
-    getState: getStateFromPath,
-    state
+    setSectionState: setStateAtPath,
+    getSectionState: getStateFromPath,
+    sectionState: state,
+    sectionActions: sectionActions
   }), [state]);
 
   return (

@@ -6,11 +6,11 @@ import ParsedLayout from '@/dynamicUI/parser/ParsedLayout';
 import { useSectionDataContext } from '@/dynamicUI/state/SectionDataProvider';
 import { PathProvider, useFullPath } from '@/dynamicUI/state/PathProvider';
 
-const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
+const ListComponent: FC<{ properties: ListProperties, debug: boolean}> = ({ properties, debug = false }) => {
   const { fieldName, direction, layout, as, gridSettings } = properties;
-  const { getState } = useSectionDataContext();
+  const { getSectionState } = useSectionDataContext();
   const { fullPath } = useFullPath(fieldName);
-  const list = getState<any[]>(fullPath) ?? [];
+  const list = getSectionState<any[]>(fullPath) ?? [];
 
   if (as === 'grid') {
     return useMemo(() => (
@@ -20,7 +20,7 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
           return (
             <GridItem key={entryPath}>
               <PathProvider path={entryPath}>
-                <ParsedLayout config={layout} />
+                <ParsedLayout config={layout} debug={debug}/>
               </PathProvider>
             </GridItem>
           );
@@ -36,7 +36,7 @@ const ListComponent: FC<{ properties: ListProperties}> = ({ properties }) => {
           const entryPath = `${fullPath}[${index}]`;
           return (
             <PathProvider path={entryPath} key={entryPath}>
-              <ParsedLayout config={layout} />
+              <ParsedLayout config={layout} debug={debug}/>
             </PathProvider>);
         })}
       </Stack>

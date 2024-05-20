@@ -22,10 +22,12 @@ import { extractFormObjects } from '@/dynamicUI/parser/validation/extractForms';
 import validationSchema from '@/dynamicUI/parser/schema/validation.schema.json';
 import ValidationAgentFactory from '@/agents/validation/ValidationAgent';
 import { updateFormValidation } from '@/dynamicUI/parser/validation/updateFormValidation';
+import { useLayout } from '@/state/useLayout';
 
 const Validation = () => {
   const [extractedForms, setExtractedForms] = useState<FormType[]>([]);
-  const { appState, getAppState, setAppState } = useAppState();
+  const { appState, getAppState } = useAppState();
+  const { setLayout } = useLayout();
   const [selectedForm, setSelectedForm] = useState<FormType>();
   const [prompt, setPrompt] = useState<string>('');
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,7 +65,7 @@ const Validation = () => {
       const updatedLayout = updateFormValidation(
         (appState.layout as LayoutConfig), selectedForm.properties.name, JSON.parse(currentValidation));
       console.log(updatedLayout);
-      setAppState('layout', updatedLayout);
+      setLayout(updatedLayout);
       onClose();
     }
   };
@@ -136,7 +138,8 @@ const Validation = () => {
                     onChange={(event) => setPrompt(event.target.value)} />
                   <Stack>
                     <Button colorScheme="green" onClick={handleSaveValidation}>Save Validation</Button>
-                    <Button onClick={void createValidation}>Create Validation</Button>
+                    {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+                    <Button onClick={createValidation}>Create Validation</Button>
                   </Stack>
                 </Stack>
               </GridItem>

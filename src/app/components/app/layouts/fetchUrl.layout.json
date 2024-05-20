@@ -1,0 +1,69 @@
+{
+  "components": [
+    {
+      "type": "Headline",
+      "properties": {
+        "id": "headline",
+        "name": "title",
+        "label": "Fetch data from URL",
+        "level": 6
+      }
+    },
+    {
+      "type": "Form",
+      "properties": {
+        "id": "form",
+        "name": "fetchDataForm",
+        "fieldName": "",
+        "formFields": [
+          "url",
+          "maxCharacters"
+        ],
+        "onSubmit": "fetchUrl",
+        "validation": {},
+        "components": [
+          {
+            "type": "FlexLayout",
+            "properties": {
+              "id": "flexLayout",
+              "name": "inputsLayout",
+              "direction": "row",
+              "components": [
+                {
+                  "type": "Input",
+                  "properties": {
+                    "id": "input",
+                    "name": "urlInput",
+                    "fieldName": "url",
+                    "label": "URL",
+                    "type": "text"
+                  }
+                },
+                {
+                  "type": "Input",
+                  "properties": {
+                    "id": "input",
+                    "name": "maxCharInput",
+                    "fieldName": "maxCharacters",
+                    "label": "Max Characters",
+                    "type": "number"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "properties": {
+                    "id": "button",
+                    "name": "fetchDataButton",
+                    "label": "Fetch data",
+                    "type": "submit"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+
+  ]
+}
