@@ -4,6 +4,7 @@
       "type": "Headline",
       "properties": {
         "id": "headline",
+        "name": "welcomeHeadline",
         "label": "Welcome to Our Library Demo",
         "level": 1
       }
@@ -12,6 +13,7 @@
       "type": "Text",
       "properties": {
         "id": "text",
+        "name": "introductionText",
         "fieldName": "introduction.text",
         "fontSize": "md",
         "format": []
@@ -21,6 +23,7 @@
       "type": "Link",
       "properties": {
         "id": "link",
+        "name": "introductionLearnMoreLink",
         "fieldName": "introduction.learnMoreLink"
       }
     },
@@ -28,11 +31,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "galleryCard",
         "components": [
           {
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "galleryHeadline",
               "label": "Check Out Our Gallery",
               "level": 2
             }
@@ -41,12 +46,14 @@
             "type": "FlexLayout",
             "properties": {
               "id": "flexLayout",
+              "name": "galleryFlexLayout",
               "direction": "row",
               "components": [
                 {
                   "type": "List",
                   "properties": {
                     "id": "list",
+                    "name": "imageGalleryList",
                     "direction": "row",
                     "as": "grid",
                     "gridSettings": {
@@ -59,6 +66,7 @@
                           "type": "Image",
                           "properties": {
                             "id": "image",
+                            "name": "galleryImage",
                             "fieldName": "src",
                             "alt": "alt"
                           }
@@ -77,11 +85,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "featuresCard",
         "components": [
           {
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "featuresHeadline",
               "label": "Key Features",
               "level": 2
             }
@@ -90,12 +100,14 @@
             "type": "FlexLayout",
             "properties": {
               "id": "flexLayout",
+              "name": "featuresFlexLayout",
               "direction": "column",
               "components": [
                 {
                   "type": "List",
                   "properties": {
                     "id": "list",
+                    "name": "featuresList",
                     "direction": "row",
                     "fieldName": "features.list",
                     "layout": {
@@ -104,11 +116,13 @@
                           "type": "CardLayout",
                           "properties": {
                             "id": "cardLayout",
+                            "name": "featureItemCard",
                             "components": [
                               {
                                 "type": "ConcatText",
                                 "properties": {
                                   "id": "concatText",
+                                  "name": "featureConcatText",
                                   "fields": [
                                     "feature",
                                     "description"
@@ -134,11 +148,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "testimonialsCard",
         "components": [
           {
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "testimonialsHeadline",
               "label": "What Our Users Say",
               "level": 2
             }
@@ -147,6 +163,7 @@
             "type": "List",
             "properties": {
               "id": "list",
+              "name": "testimonialsList",
               "direction": "column",
               "fieldName": "testimonials.entries",
               "layout": {
@@ -155,6 +172,7 @@
                     "type": "ConcatText",
                     "properties": {
                       "id": "concatText",
+                      "name": "testimonialConcatText",
                       "fields": [
                         "quote",
                         "author"
@@ -174,11 +192,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "footerCard",
         "components": [
           {
             "type": "Text",
             "properties": {
               "id": "text",
+              "name": "footerText",
               "fieldName": "footer.text",
               "fontSize": "sm",
               "format": []
@@ -188,6 +208,7 @@
             "type": "List",
             "properties": {
               "id": "list",
+              "name": "footerLinksList",
               "direction": "column",
               "fieldName": "footer.links",
               "layout": {
@@ -196,6 +217,7 @@
                     "type": "Link",
                     "properties": {
                       "id": "link",
+                      "name": "footerLink",
                       "fieldName": "url"
                     }
                   }

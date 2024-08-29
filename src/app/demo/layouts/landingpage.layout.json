@@ -4,11 +4,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "heroCard",
         "components": [
           {
             "type": "Image",
             "properties": {
               "id": "image",
+              "name": "heroImage",
               "fieldName": "heroImage",
               "alt": "Dynamic UI Hero Image"
             }
@@ -17,6 +19,7 @@
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "heroHeadline",
               "label": "Craft Your UI with Pure JSON",
               "level": 3
             }
@@ -25,6 +28,7 @@
             "type": "Text",
             "properties": {
               "id": "text",
+              "name": "heroDescription",
               "fieldName": "description",
               "fontSize": "md"
             }
@@ -33,6 +37,7 @@
             "type": "Link",
             "properties": {
               "id": "link",
+              "name": "documentationLink",
               "label": "Dive Into the Docs",
               "fieldName": "/documentation"
             }
@@ -44,11 +49,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "flexibilityCard",
         "components": [
           {
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "flexibilityHeadline",
               "label": "Utter Flexibility",
               "level": 3
             }
@@ -57,12 +64,14 @@
             "type": "FlexLayout",
             "properties": {
               "id": "flexLayout",
+              "name": "flexibilityLayout",
               "direction": "row",
               "components": [
                 {
                   "type": "Image",
                   "properties": {
                     "id": "image",
+                    "name": "flexibilityIcon",
                     "fieldName": "features[0].icon",
                     "alt": "Utter Flexibility Icon",
                     "size": "100px"
@@ -72,6 +81,7 @@
                   "type": "Text",
                   "properties": {
                     "id": "text",
+                    "name": "flexibilityDescription",
                     "fieldName": "features[0].description",
                     "fontSize": "md"
                   }
@@ -86,11 +96,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "developmentCard",
         "components": [
           {
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "developmentHeadline",
               "label": "Rapid Development",
               "level": 3
             }
@@ -99,12 +111,14 @@
             "type": "FlexLayout",
             "properties": {
               "id": "flexLayout",
+              "name": "developmentLayout",
               "direction": "row",
               "components": [
                 {
                   "type": "Image",
                   "properties": {
                     "id": "image",
+                    "name": "developmentIcon",
                     "fieldName": "features[1].icon",
                     "alt": "Rapid Development Icon",
                     "size": "100px"
@@ -114,6 +128,7 @@
                   "type": "Text",
                   "properties": {
                     "id": "text",
+                    "name": "developmentDescription",
                     "fieldName": "features[1].description",
                     "fontSize": "md"
                   }
@@ -128,11 +143,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "compatibilityCard",
         "components": [
           {
             "type": "Headline",
             "properties": {
               "id": "headline",
+              "name": "compatibilityHeadline",
               "label": "Broad Compatibility",
               "level": 3
             }
@@ -141,12 +158,14 @@
             "type": "FlexLayout",
             "properties": {
               "id": "flexLayout",
+              "name": "compatibilityLayout",
               "direction": "row",
               "components": [
                 {
                   "type": "Image",
                   "properties": {
                     "id": "image",
+                    "name": "compatibilityIcon",
                     "fieldName": "features[2].icon",
                     "alt": "Broad Compatibility Icon",
                     "size": "100px"
@@ -156,6 +175,7 @@
                   "type": "Text",
                   "properties": {
                     "id": "text",
+                    "name": "compatibilityDescription",
                     "fieldName": "features[2].description",
                     "fontSize": "md"
                   }
@@ -170,11 +190,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "testimonialCard",
         "components": [
           {
             "type": "Text",
             "properties": {
               "id": "text",
+              "name": "testimonialQuote",
               "fieldName": "testimonial.quote",
               "fontSize": "md"
             }
@@ -183,6 +205,7 @@
             "type": "LabeledText",
             "properties": {
               "id": "labeledText",
+              "name": "testimonialAuthor",
               "fieldName": "testimonial.author",
               "label": "Author",
               "separator": ":",
@@ -196,11 +219,13 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "footerCard",
         "components": [
           {
             "type": "GridLayout",
             "properties": {
               "id": "grid",
+              "name": "footerGrid",
               "gridSettings": {
                 "templateColumns": "repeat(2, 1fr)"
               },
@@ -209,6 +234,7 @@
                   "type": "Link",
                   "properties": {
                     "id": "link",
+                    "name": "footerDocumentationLink",
                     "fieldName": "footer.links[0].url",
                     "label": "Documentation"
                   }
@@ -217,6 +243,7 @@
                   "type": "Link",
                   "properties": {
                     "id": "link",
+                    "name": "footerApiReferenceLink",
                     "fieldName": "footer.links[1].url",
                     "label": "API Reference"
                   }
@@ -225,6 +252,7 @@
                   "type": "Link",
                   "properties": {
                     "id": "link",
+                    "name": "footerSupportLink",
                     "fieldName": "footer.links[2].url",
                     "label": "Support"
                   }
@@ -233,6 +261,7 @@
                   "type": "Link",
                   "properties": {
                     "id": "link",
+                    "name": "footerPrivacyPolicyLink",
                     "fieldName": "footer.links[3].url",
                     "label": "Privacy Policy"
                   }
@@ -247,22 +276,26 @@
       "type": "CardLayout",
       "properties": {
         "id": "cardLayout",
+        "name": "galleryCard",
         "components": [
           {
             "type": "FlexLayout",
             "properties": {
               "id": "flexLayout",
+              "name": "galleryFlexLayout",
               "direction": "row",
               "components": [
                 {
                   "type": "CardLayout",
                   "properties": {
                     "id": "cardLayout",
+                    "name": "galleryItemCard1",
                     "components": [
                       {
                         "type": "Image",
                         "properties": {
                           "id": "image",
+                          "name": "galleryImage1",
                           "fieldName": "gallery[0].src",
                           "alt": "Complex UI Layout Preview"
                         }
@@ -271,6 +304,7 @@
                         "type": "Text",
                         "properties": {
                           "id": "text",
+                          "name": "galleryAltText1",
                           "fieldName": "gallery[0].alt",
                           "fontSize": "sm"
                         }
@@ -282,11 +316,13 @@
                   "type": "CardLayout",
                   "properties": {
                     "id": "cardLayout",
+                    "name": "galleryItemCard2",
                     "components": [
                       {
                         "type": "Image",
                         "properties": {
                           "id": "image",
+                          "name": "galleryImage2",
                           "fieldName": "gallery[1].src",
                           "alt": "Mobile and Desktop Responsive View"
                         }
@@ -295,6 +331,7 @@
                         "type": "Text",
                         "properties": {
                           "id": "text",
+                          "name": "galleryAltText2",
                           "fieldName": "gallery[1].alt",
                           "fontSize": "sm"
                         }

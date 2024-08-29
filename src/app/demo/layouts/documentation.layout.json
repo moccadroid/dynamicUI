@@ -5,6 +5,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "introductionTitleHeadline",
           "fieldName": "title",
           "level": 1
         }
@@ -13,6 +14,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "introductionHeadline",
           "fieldName": "headline",
           "level": 5
         }
@@ -21,6 +23,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "introductionDescriptionText",
           "fieldName": "description",
           "fontSize": "md",
           "format": []
@@ -34,17 +37,20 @@
         "type": "CardLayout",
         "properties": {
           "id": "cardLayout",
+          "name": "gettingStartedCard",
           "components": [
             {
               "type": "FlexLayout",
               "properties": {
                 "id": "flexLayout",
+                "name": "gettingStartedFlexLayout",
                 "direction": "column",
                 "components": [
                   {
                     "type": "Headline",
                     "properties": {
                       "id": "headline",
+                      "name": "gettingStartedDescriptionHeadline",
                       "label": "Description",
                       "level": 5,
                       "fieldName": "headline"
@@ -54,6 +60,7 @@
                     "type": "Text",
                     "properties": {
                       "id": "text",
+                      "name": "gettingStartedDescriptionText",
                       "fieldName": "description",
                       "fontSize": "md"
                     }
@@ -62,6 +69,7 @@
                     "type": "Headline",
                     "properties": {
                       "id": "headline",
+                      "name": "gettingStartedInstallationCodeHeadline",
                       "label": "Installation Code",
                       "level": 6
                     }
@@ -70,6 +78,7 @@
                     "type": "Code",
                     "properties": {
                       "id": "code",
+                      "name": "gettingStartedInstallationCode",
                       "fieldName": "installationCode"
                     }
                   },
@@ -77,6 +86,7 @@
                     "type": "Headline",
                     "properties": {
                       "id": "headline",
+                      "name": "gettingStartedInitialSetupCodeHeadline",
                       "label": "Initial Setup Code",
                       "level": 6
                     }
@@ -85,6 +95,7 @@
                     "type": "Code",
                     "properties": {
                       "id": "code",
+                      "name": "gettingStartedInitialSetupCode",
                       "fieldName": "initialSetupCode"
                     }
                   }
@@ -102,6 +113,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "componentsRenderingHeadline",
           "label": "Components Rendering",
           "level": 3
         }
@@ -110,6 +122,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "componentsRenderingDescriptionText",
           "fieldName": "description",
           "fontSize": "md"
         }
@@ -118,6 +131,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "exampleButtonHeadline",
           "label": "Example: Button",
           "level": 5
         }
@@ -126,12 +140,14 @@
         "type": "FlexLayout",
         "properties": {
           "id": "flexLayout",
+          "name": "exampleButtonFlexLayout",
           "direction": "row",
           "components": [
             {
               "type": "Code",
               "properties": {
                 "id": "code",
+                "name": "exampleButtonCode",
                 "fieldName": "examples.Button.json"
               }
             },
@@ -139,6 +155,7 @@
               "type": "Button",
               "properties": {
                 "id": "button",
+                "name": "exampleButton",
                 "label": "Click Me",
                 "type": "submit",
                 "format": []
@@ -151,6 +168,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "exampleButtonDescriptionText",
           "fieldName": "examples.Button.description",
           "fontSize": "md"
         }
@@ -159,6 +177,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "exampleInputFieldHeadline",
           "label": "Example: InputField",
           "level": 5
         }
@@ -167,19 +186,23 @@
         "type": "FlexLayout",
         "properties": {
           "id": "flexLayout",
+          "name": "exampleInputFieldFlexLayout",
           "direction": "row",
           "components": [
             {
               "type": "Code",
               "properties": {
                 "id": "code",
+                "name": "exampleInputFieldCode",
                 "fieldName": "examples.InputField.json"
               }
             },
             {
               "type": "Form",
               "properties": {
+                "onSubmit": "",
                 "id": "form",
+                "name": "exampleInputFieldForm",
                 "fieldName": "user.name",
                 "formFields": [
                   "user.name"
@@ -193,6 +216,7 @@
                     "type": "Input",
                     "properties": {
                       "id": "input",
+                      "name": "exampleInputField",
                       "label": "Your Name",
                       "fieldName": "user.name",
                       "placeholder": ""
@@ -208,6 +232,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "exampleInputFieldDescriptionText",
           "fieldName": "examples.InputField.description",
           "fontSize": "md"
         }
@@ -220,6 +245,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "layoutFlexibilityHeadline",
           "label": "Layout Flexibility",
           "level": 3
         }
@@ -228,6 +254,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "layoutFlexibilityDescriptionText",
           "fieldName": "description",
           "fontSize": "md"
         }
@@ -236,6 +263,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "exampleFlexLayoutHeadline",
           "label": "Example Flex Layout",
           "level": 5
         }
@@ -244,6 +272,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "exampleFlexLayoutDescriptionText",
           "fieldName": "exampleFlexLayout.description",
           "fontSize": "sm"
         }
@@ -252,6 +281,7 @@
         "type": "Code",
         "properties": {
           "id": "code",
+          "name": "exampleFlexLayoutCode",
           "fieldName": "exampleFlexLayout.json"
         }
       },
@@ -259,6 +289,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "exampleGridLayoutHeadline",
           "label": "Example Grid Layout",
           "level": 5
         }
@@ -267,6 +298,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "exampleGridLayoutDescriptionText",
           "fieldName": "exampleGridLayout.description",
           "fontSize": "sm"
         }
@@ -275,6 +307,7 @@
         "type": "Code",
         "properties": {
           "id": "code",
+          "name": "exampleGridLayoutCode",
           "fieldName": "exampleGridLayout.json"
         }
       }
@@ -286,6 +319,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "advancedInteractivityHeadline",
           "label": "Advanced Interactivity",
           "level": 1
         }
@@ -294,6 +328,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "advancedInteractivityDescriptionText",
           "fieldName": "description",
           "fontSize": "md"
         }
@@ -302,6 +337,7 @@
         "type": "Code",
         "properties": {
           "id": "code",
+          "name": "advancedInteractivityCodeExample",
           "fieldName": "codeExample"
         }
       },
@@ -309,11 +345,13 @@
         "type": "Form",
         "properties": {
           "id": "form",
+          "name": "advancedInteractivityForm",
           "fieldName": "",
           "formFields": [
             "username",
             "password"
           ],
+          "onSubmit": "",
           "validation": {
             "fields": {
               "username": {
@@ -345,6 +383,7 @@
               "type": "Input",
               "properties": {
                 "id": "input",
+                "name": "advancedInteractivityUsernameInput",
                 "label": "Username",
                 "fieldName": "username"
               }
@@ -353,6 +392,7 @@
               "type": "Input",
               "properties": {
                 "id": "input",
+                "name": "advancedInteractivityPasswordInput",
                 "label": "Password",
                 "fieldName": "password"
               }
@@ -361,6 +401,7 @@
               "type": "Button",
               "properties": {
                 "id": "button",
+                "name": "advancedInteractivitySubmitButton",
                 "label": "Submit",
                 "type": "submit"
               }
@@ -376,6 +417,7 @@
         "type": "Headline",
         "properties": {
           "id": "headline",
+          "name": "interactiveExamplesHeadline",
           "label": "Interactive Examples",
           "level": 1
         }
@@ -384,6 +426,7 @@
         "type": "Text",
         "properties": {
           "id": "text",
+          "name": "interactiveExamplesDescriptionText",
           "fieldName": "description",
           "fontSize": "md"
         }
@@ -392,6 +435,7 @@
         "type": "Link",
         "properties": {
           "id": "link",
+          "name": "interactiveExamplesLink",
           "fieldName": "/examples",
           "label": "Go to Interactive Examples"
         }
