@@ -6,16 +6,17 @@ import { useFullPath } from '@/dynamicUI/state/PathProvider';
 import useFormat from '@/dynamicUI/actions/format';
 
 const LabeledTextComponent: FC<{ properties: LabeledTextProperties }> = ({ properties }) => {
+  const { fieldName, separator, label, fontSize } = properties;
   const { getSectionState } = useSectionDataContext();
-  const { fullPath } = useFullPath(properties.fieldName);
+  const { fullPath } = useFullPath(fieldName);
   const textValue = getSectionState<string>(fullPath) ?? '';
   const format = useFormat(properties.format);
 
   return (
     <Flex>
-      <Text as='b' fontSize={properties.fontSize}>{format(properties.label ?? '')}</Text>
-      <span style={{ marginLeft: '5px', marginRight: '5px' }}>{properties.separator}</span>
-      <Text fontSize={properties.fontSize}>{format(textValue)}</Text>
+      <Text as='b' fontSize={fontSize}>{format(label ?? '')}</Text>
+      <span style={{ marginLeft: '5px', marginRight: '5px' }}>{separator}</span>
+      <Text fontSize={fontSize}>{format(textValue)}</Text>
     </Flex>
   );
 };
